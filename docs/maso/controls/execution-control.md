@@ -1,7 +1,7 @@
 # MASO Control Domain: Execution Control
 
 > Part of the [MASO Framework](../README.md) · Control Specifications
-> Covers: ASI02 (Tool Misuse) · ASI05 (Unexpected Code Execution) · ASI08 (Cascading Failures) · LLM05 (Improper Output Handling)
+> Covers: ASI02 (Tool Misuse) · ASI05 (Unexpected Code Execution) · ASI08 (Cascading Failures) · LLM05 (Improper Output Handling) · ASI07 (Insecure Inter-Agent Comms — structural validation)
 > Also covers: CR-01 (Deadlock/Livelock) · CR-02 (Oscillation) · SM-01 (Cumulative Harm) · GV-02 (Metric Gaming) · OP-02 (Latency) · OP-03 (Partial Failure) · OP-04 (Agent Unavailability) · OP-05 (Irreversible Action Chains)
 
 ---
@@ -28,6 +28,8 @@ Execution control is where the PACE resilience methodology meets real-time opera
 
 **Irreversible actions compound across agent chains (OP-05).** Agent A sends an email. Agent B deletes a record. Agent C makes an API call to a third party. Each action was individually approved, but the chain is collectively irreversible. When Agent D detects that Agent A's email was based on hallucinated data, the downstream actions cannot be undone. Reversibility must be assessed for the chain, not just per-action, and compensating controls must exist for actions that cannot be recalled.
 
+**Data integrity failures are silent and cumulative.** Security guardrails catch injections. Content filters catch harmful output. But when Agent A returns a JSON object with a missing field and Agent B silently treats that field as `null`, the resulting action is wrong - not malicious, just wrong. In production multi-agent systems, the majority of runtime failures come not from security violations but from structural data integrity failures between components: malformed tool outputs, unexpected types, truncated responses, hallucinated field names, and partial results presented as complete. These failures are harder to detect than security violations because they don't trigger guardrails - the output is syntactically valid but semantically broken.
+
 ---
 
 ## Controls by Tier
@@ -43,6 +45,7 @@ Execution control is where the PACE resilience methodology meets real-time opera
 | **EC-1.5** Interaction timeout | All agent negotiation sequences have a maximum turn count | Recommended: 10 turns. Exceeding cap triggers deterministic resolution (orchestrator decides or task escalates to human). Prevents deadlock and livelock (CR-01). |
 | **EC-1.6** Reversibility assessment | Every action is classified as reversible, time-bounded reversible, or irreversible before execution | Irreversible actions require human approval (reinforces EC-1.1). Time-bounded reversible actions carry a reversal window (e.g., "email can be recalled within 60 seconds"). Classification is logged with each action (OP-05). |
 | **EC-1.7** Agent health check | Each agent's availability is verified before task assignment | Orchestrator confirms agent is responsive before delegating. If unavailable, task is queued or routed to an alternative. Prevents silent failure from assigning work to a dead agent (OP-04). |
+| **EC-1.8** Output format verification | Agent outputs checked against expected format before delivery to the next component or human reviewer | Basic validation: is the response valid JSON if JSON was expected? Are required top-level fields present? Is the response non-empty? Malformed outputs are rejected and the task retried or escalated - not silently passed downstream. |
 
 ### Tier 2 - Managed
 
@@ -62,6 +65,9 @@ All Tier 1 controls remain active, plus:
 | **EC-2.10** Agent failover | Critical agents have a defined failover path: backup agent, graceful degradation, or controlled halt | Failover activates automatically on health check failure (EC-1.7). Backup agents operate with the same NHI scope and tool allow-list as the primary. Orchestration continues in degraded mode if non-critical agents are unavailable; halts if critical agents are unavailable with no backup (OP-04). |
 | **EC-2.11** Chain reversibility assessment | For multi-step plans, the Judge evaluates aggregate reversibility before execution begins | If the plan contains irreversible actions, the Judge flags the irreversibility point and requires explicit human acknowledgement. Compensating actions must be defined for each irreversible step (e.g., correction email, reversal transaction, notification to affected party) (OP-05). |
 | **EC-2.12** Multimodal boundary validation | When multimodal data (images, audio, video, documents) crosses an agent boundary, modality-specific guardrails are applied at the receiving agent | Text-in-image injection, steganographic payloads, inaudible audio commands, and embedded document instructions are checked at each agent boundary, not just at system input. Cross-ref [Multimodal Controls](../../core/multimodal-controls.md). |
+| **EC-2.13** Output schema enforcement | Every agent declares the schema of its output; outputs are validated against this schema before delivery | JSON Schema, Pydantic models, or equivalent. Validation checks: required fields present, types correct, enums within allowed values, string lengths within bounds, nested structures conform. Schema failures produce a structured error - not a silent pass with missing fields. Schemas are versioned and published in the agent manifest alongside tool declarations. |
+| **EC-2.14** Inter-agent data contracts | Every agent-to-agent data transfer is validated against a declared contract at the receiving agent's boundary | The contract specifies the expected input schema, required fields, acceptable value ranges, and maximum payload size. The receiving agent validates inbound data before processing - not the sending agent alone. This is the structural equivalent of zero-trust: **trust nothing, parse strictly, validate everything.** Contracts are enforced at the message bus or gateway layer, not by the agents themselves. |
+| **EC-2.15** Serialisation boundary validation | Structured outputs (JSON, XML, function call arguments) are parsed with strict-mode deserialisation; no lenient parsing | Strict mode: reject unknown fields, reject type mismatches (string where number expected), reject `null` for required fields, reject malformed escape sequences. No silent coercion. Deserialised objects are validated against the output schema (EC-2.13) immediately after parsing. Path traversal patterns in string fields (e.g., `../../etc/passwd`) are caught by parameter constraints, not by the parser - but the parser must not silently accept them. |
 
 ### Tier 3 - Autonomous
 
@@ -74,6 +80,7 @@ All Tier 2 controls remain active, plus:
 | **EC-3.3** Multi-model cross-validation | High-consequence actions validated by LLM-as-Judge AND an independent second model | Disagreement between validators triggers human escalation. |
 | **EC-3.4** Time-boxing | Every autonomous task has a maximum execution time | Task not completed within time box → agent paused, state captured, task escalated. Prevents indefinite autonomous operation on drifted tasks. |
 | **EC-3.5** Automated rollback scope | When integrity compromise is detected, automated rollback covers the compromised agent and all downstream actions that depended on its output | Rollback scope is determined by the decision chain (OB-2.1). Downstream agents are notified. Actions that cannot be rolled back trigger compensating actions automatically. Human is notified of the rollback scope and any irreversible residual. |
+| **EC-3.6** Transformation integrity chain | Data validated after each processing step in a multi-agent pipeline; cumulative integrity tracked end-to-end | Each agent in a pipeline attests to the structural validity of its output. The attestation chain travels with the data (analogous to DP-3.4 data provenance but for structural integrity). If any agent in the chain produces output that fails schema validation, downstream processing halts immediately - not after the malformed data has been transformed two more times. Integrity violations are correlated with the specific pipeline step that introduced the corruption. |
 
 ---
 
@@ -121,6 +128,7 @@ The action classification engine is the core mechanism that replaces per-action 
 | EC-T1.7 | Operator challenge rate | Present operators with outputs containing deliberate errors. Measure challenge rate. Target: > 80% detection. (Amendment: HF-01) |
 | EC-T1.8 | Reversibility classification | Submit a reversible action, a time-bounded reversible action, and an irreversible action. Verify each is classified correctly and the irreversible action requires human approval. |
 | EC-T1.9 | Agent health check | Take an agent offline. Assign it a task. Verify the orchestrator detects unavailability and routes the task to an alternative or queues it. |
+| EC-T1.10 | Output format verification | Agent returns malformed JSON (e.g., unclosed bracket, missing required field). Verify the output is rejected before reaching the next component or human reviewer. Retry or escalation triggered. |
 
 ### Tier 2 Tests
 
@@ -139,6 +147,9 @@ The action classification engine is the core mechanism that replaces per-action 
 | EC-T2.11 | Agent failover | Take a critical agent offline. Verify backup agent activates and the orchestration continues in degraded mode. Verify a non-critical agent failure allows the orchestration to complete without the missing agent. |
 | EC-T2.12 | Chain reversibility | Submit a multi-step plan containing an irreversible action at step 3 of 5. Judge flags the irreversibility point before execution begins and requires human acknowledgement. |
 | EC-T2.13 | Multimodal boundary | Send an image containing text-in-image injection from Agent A to Agent B. Verify Agent B's boundary guardrails detect the injection before processing. |
+| EC-T2.14 | Output schema enforcement | Agent produces output missing a required field. Verify schema validation catches the violation before delivery. Agent produces output with a wrong type (string where integer expected). Verify rejection. Agent produces valid output conforming to schema. Verify acceptance. |
+| EC-T2.15 | Inter-agent data contract | Agent A sends Agent B a payload missing a required field defined in B's input contract. Verify B rejects the payload at the boundary before processing begins. Agent A sends a payload exceeding the declared maximum size. Verify rejection. |
+| EC-T2.16 | Serialisation safety | Inject malformed JSON with: (a) type mismatch (string `"42"` where integer `42` expected), (b) null for required field, (c) unknown/extra fields, (d) malformed escape sequence. Verify strict-mode parser rejects all four. No silent coercion. |
 
 ### Tier 3 Tests
 
@@ -150,6 +161,7 @@ The action classification engine is the core mechanism that replaces per-action 
 | EC-T3.4 | Cross-validation disagreement | Submit an action where one validator approves and the other rejects. Confirm human escalation. |
 | EC-T3.5 | Time-box expiry | Start a task with a tight time box. Let it expire. Confirm pause, state capture, and escalation. |
 | EC-T3.6 | Automated rollback scope | Inject a hallucination at Agent A that propagates to Agents B and C. Trigger integrity detection. Verify automated rollback covers Agent A's action and all downstream work from B and C. Verify irreversible residual is reported to the human. |
+| EC-T3.7 | Transformation integrity chain | In a three-agent pipeline (A → B → C), Agent B produces output with a schema violation. Verify: (a) Agent C does not receive the malformed data, (b) the violation is attributed to Agent B's processing step specifically, (c) the integrity chain log identifies the exact point of corruption. |
 
 ---
 
@@ -186,6 +198,10 @@ The action classification engine is the core mechanism that replaces per-action 
 **No failover for the agent everyone depends on.** The most critical agent in the orchestration is often the one with no backup - because it was deployed as a singleton and nobody defined what happens when it's unavailable. Agent criticality should be assessed at design time, and critical agents must have a failover path: backup agent, graceful degradation, or controlled halt. "The orchestration waits indefinitely" is not a failover strategy.
 
 **Applying text guardrails to multimodal inter-agent data.** When an image, audio file, or document crosses an agent boundary, text-based DLP and injection detection are insufficient. Each modality requires modality-specific validation at the receiving agent's boundary - not just at the system's external input layer.
+
+**Validating content safety but not data structure.** Guardrails catch prompt injection and PII. The LLM-as-Judge catches policy violations and goal drift. But neither catches a model output that returns `{"status": "complete", "result": null}` when downstream agents expect `result` to be a non-empty object. Structural validation - schema conformance, type correctness, field completeness - is a distinct concern from content safety and must be enforced separately at every agent boundary. Without it, parsing failures, type coercion bugs, and silent data corruption become the dominant failure mode in production multi-agent systems.
+
+**Treating serialisation as a solved problem.** When an agent returns structured output (JSON, XML, function call arguments), the output is a string that must be parsed. Strict-mode parsing should be the default. Lenient parsers that silently coerce types, accept trailing commas, or ignore extra fields mask data integrity failures and can introduce injection vectors when untrusted content is deserialised into executable structures.
 
 ---
 
