@@ -51,6 +51,9 @@ theme:
 plugins:
   - search
   - meta
+  - sitemap:
+      changefreq: weekly
+      priority: 0.8
 
 markdown_extensions:
   - tables

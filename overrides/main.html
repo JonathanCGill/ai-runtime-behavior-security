@@ -10,6 +10,62 @@
   gtag('js', new Date());
   gtag('config', 'G-BNXDE3EJ7E');
 </script>
+<!-- JSON-LD structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "{{ config.site_name }}",
+      "url": "{{ config.site_url }}",
+      "description": "{{ config.site_description }}",
+      "author": {
+        "@type": "Person",
+        "name": "{{ config.site_author }}",
+        "url": "https://www.linkedin.com/in/jonathancgill/",
+        "sameAs": [
+          "https://github.com/JonathanCGill",
+          "https://www.linkedin.com/in/jonathancgill/"
+        ]
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "{{ config.site_author }}"
+      },
+      "inLanguage": "en",
+      "license": "https://opensource.org/licenses/MIT"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "{{ config.site_url }}"
+        }{% if page and page.parent %},
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "{{ page.parent.title }}",
+          "item": "{{ config.site_url }}{{ page.parent.url }}"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "{{ page.title }}"
+        }{% elif page and page.title != config.site_name %},
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "{{ page.title }}"
+        }{% endif %}
+      ]
+    }
+  ]
+}
+</script>
 {% if page and page.meta %}
   <!-- Open Graph / LinkedIn -->
   <meta property="og:type" content="website" />
