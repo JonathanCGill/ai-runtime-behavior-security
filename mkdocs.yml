@@ -247,6 +247,7 @@ nav:
         - PACE Resilience: insights/PACE-RESILIENCE.md
         - Security as Enablement: insights/security-as-enablement.md
         - Automated Risk Tiering: insights/automated-risk-tiering.md
+        - Graph-Based Agent Monitoring: insights/graph-based-agent-monitoring.md
         - Beyond Security: insights/beyond-security.md
 
   - Downloads: downloads.md

@@ -94,6 +94,7 @@ Deeper examinations of where the framework meets production reality - what works
 | [PACE Resilience](PACE-RESILIENCE.md) | How the three-layer architecture achieves operational resilience through layered, independent control redundancy |
 | [Security as Enablement, Not Commentary](security-as-enablement.md) | Security frameworks create value when delivered as platform infrastructure, not as narrative that diagnoses teams from the sidelines |
 | [Automated Risk Tiering](automated-risk-tiering.md) | Classification should take two minutes, produce an immediate result, and auto-apply the controls that make the risk manageable |
+| [Graph-Based Agent Monitoring](graph-based-agent-monitoring.md) | Using an in-memory graph database to model agent interactions as a live graph, detect anomalous behaviour through temporal graph analysis, and feed results into PACE escalation in near real-time |
 | [Beyond Security](beyond-security.md) | The framework's architecture - layered independence, tiering, PACE, quantitative compounding - transfers to drift, fairness, explainability, and reliability |
 
 ---
