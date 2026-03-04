@@ -160,18 +160,18 @@ img[src$=".svg"] {
   }
 }
 
-/* ── Navbar: blend with page background ── */
+/* ── Navbar: seamless with page background ── */
 .md-header {
   background-color: var(--md-default-bg-color);
   color: var(--md-default-fg-color);
   box-shadow: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
 }
 
 .md-header__topic,
 .md-header-nav__topic,
 .md-header .md-header__title {
   color: var(--md-default-fg-color);
+  font-family: var(--md-text-font);
 }
 
 .md-header .md-logo img,
@@ -184,10 +184,18 @@ img[src$=".svg"] {
   color: var(--md-default-fg-color);
 }
 
-/* Tabs bar: match navbar */
+/* Tabs bar: centred, seamless, matching font */
 .md-tabs {
   background-color: var(--md-default-bg-color);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  font-family: var(--md-text-font);
+}
+
+.md-tabs__list {
+  justify-content: center;
+}
+
+.md-tabs__link {
+  font-family: var(--md-text-font);
 }
 
 /* Footer: subtle, matching the light theme */
