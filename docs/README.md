@@ -1,6 +1,7 @@
 ---
 title: AI Runtime Behaviour Security
 description: A practical, open-source framework for securing AI systems at runtime - where prompt injection, model manipulation, and agent drift actually happen.
+template: home.html
 hide:
   - toc
   - path
@@ -10,6 +11,14 @@ comments: false
 ---
 
 # AI Runtime Behaviour Security
+
+<div class="home-subtitle" markdown>
+
+**The risk is not what the model can do. It is what the model does do, at runtime, in production.**
+
+</div>
+
+---
 
 ## Why This Matters
 
@@ -45,10 +54,40 @@ Banking supervisors, data protection authorities, and AI regulators are all conv
 
 This framework maps directly to EU AI Act requirements for high-risk AI systems, NIST AI RMF functions, ISO 42001 controls, and sector-specific expectations from banking regulators. It is not a compliance checkbox. It is an operational architecture that produces the evidence compliance requires. The controls are the compliance. That is the point.
 
+---
+
 ### Where to go from here
 
-If you are responsible for AI governance or risk: [**Stakeholder Views**](stakeholders/) explains what this framework means for CISOs, architects, risk teams, and operators.
+<div class="home-paths" markdown>
 
-If you are building or securing AI systems: [**Architecture Overview**](ARCHITECTURE.md) covers the technical control model and how it integrates with existing cloud and platform security.
+<div class="home-path" markdown>
 
-If you are dealing with multi-agent systems: [**MASO Framework**](maso/) addresses the specific challenges of securing autonomous agent coordination.
+#### Stakeholder Views
+
+What this framework means for CISOs, architects, risk teams, and operators.
+
+[Stakeholder Views](stakeholders/){ .md-button }
+
+</div>
+
+<div class="home-path" markdown>
+
+#### Architecture Overview
+
+The technical control model and how it integrates with existing cloud and platform security.
+
+[Architecture Overview](ARCHITECTURE.md){ .md-button }
+
+</div>
+
+<div class="home-path" markdown>
+
+#### MASO Framework
+
+Securing autonomous agent coordination in multi-agent systems.
+
+[MASO Framework](maso/){ .md-button }
+
+</div>
+
+</div>

@@ -4,6 +4,8 @@ description: Architecture overview - layered runtime controls for single-agent a
 
 # Architecture Overview
 
+![Three-layer runtime security: Guardrails, LLM-as-Judge, Human Oversight](images/three-layer-simple.svg){ .arch-diagram }
+
 The industry is converging on the same answer independently. NVIDIA NeMo, AWS Bedrock, Azure AI, LangChain, Guardrails AI - all implement variants of the same pattern:
 
 | Layer | What It Does | Speed |

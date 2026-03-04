@@ -1,12 +1,29 @@
-/* Font: Inter for all text including headings */
+/* ── Colour scheme: dark navy primary, muted teal accent ── */
+:root {
+  --md-primary-fg-color: #1a1a2e;
+  --md-primary-fg-color--light: #2d2d4a;
+  --md-primary-fg-color--dark: #0f0f1e;
+  --md-accent-fg-color: #2a9d8f;
+  --md-accent-fg-color--transparent: rgba(42, 157, 143, 0.1);
+}
+
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #1a1a2e;
+  --md-primary-fg-color--light: #2d2d4a;
+  --md-primary-fg-color--dark: #0f0f1e;
+  --md-accent-fg-color: #2a9d8f;
+  --md-accent-fg-color--transparent: rgba(42, 157, 143, 0.1);
+}
+
+/* ── Typography: 18px body, 720px max width ── */
 :root {
   --md-text-font: "Inter", sans-serif;
   --md-code-font: "Roboto Mono", monospace;
 }
 
 .md-typeset {
-  font-size: 17px;
-  line-height: 1.5;
+  font-size: 18px;
+  line-height: 1.6;
 }
 
 h1, h2, h3, h4, h5, h6,
@@ -19,11 +36,9 @@ h1, h2, h3, h4, h5, h6,
   font-family: "Inter", sans-serif;
 }
 
-/* Centre content on pages with hidden sidebars (e.g. homepage).
-   On inner pages the sidebars already constrain the width,
-   so this max-width has no visible effect there. */
+/* Max content width: 720px */
 .md-content__inner {
-  max-width: 42rem;
+  max-width: 45rem;
   margin-left: auto;
   margin-right: auto;
   padding-top: 0.5rem;
@@ -51,17 +66,9 @@ img[src$=".svg"] {
   height: auto;
 }
 
-/* Hero concept diagram: compact, centred, minimal vertical spacing */
-.md-typeset img[src*="runtime-layers"] {
-  display: block;
-  margin: 0.15rem auto 0.15rem;
-  max-width: 26rem !important;
-}
+/* ── Homepage styles ── */
 
-/* Homepage only: hide h1 (site name already in navbar) and edit/view icons.
-   The homepage is the only page that hides navigation, so when there is no
-   left sidebar the main grid shifts - we detect that via :only-child on
-   the content area within .md-main__inner. */
+/* Homepage only: hide h1 (site name already in navbar) and edit/view icons */
 .md-main__inner > .md-content:only-child .md-content__inner > h1:first-child {
   display: none;
 }
@@ -69,57 +76,68 @@ img[src$=".svg"] {
   display: none;
 }
 
-/* Landing page: 3-card grid layout with subgrid alignment */
-.landing-cards {
+/* Homepage hero area */
+.home-hero .md-content__inner {
+  max-width: 45rem;
+}
+
+/* Subtitle line under hidden h1 */
+.home-subtitle {
+  text-align: center;
+  font-size: 1.15rem;
+  color: var(--md-default-fg-color--light);
+  margin-bottom: 1.5rem;
+}
+
+/* Three clickable paths at bottom of homepage */
+.home-paths {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.2rem;
-  margin: 1.5rem 0;
+  gap: 1.5rem;
+  margin: 2rem 0 1rem;
 }
 
-.landing-card {
-  display: grid;
-  grid-template-rows: subgrid;
-  grid-row: span 4;        /* h3, bold quote, description, button */
+.home-path {
   border: 1px solid var(--md-default-fg-color--lightest);
-  border-radius: 0.4rem;
-  padding: 1.2rem 1.4rem;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
   background: var(--md-code-bg-color);
+  display: flex;
+  flex-direction: column;
 }
 
-.landing-card > p:last-child {
-  align-self: end;
-}
-
-.landing-card h3 {
+.home-path h4 {
   margin-top: 0 !important;
   font-size: 1.05rem;
+  color: var(--md-accent-fg-color);
 }
 
-.landing-card p:last-of-type {
+.home-path p:last-of-type {
   margin-bottom: 0.5rem;
+  flex-grow: 1;
 }
 
-/* Stack cards on mobile */
 @media (max-width: 768px) {
-  .landing-cards {
+  .home-paths {
     grid-template-columns: 1fr;
   }
-  .landing-card {
-    grid-row: span 1;
-    display: flex;
-    flex-direction: column;
-  }
 }
 
-/* Credibility strip: subtle, centred */
-.credibility-strip {
-  text-align: center;
-  font-size: 0.88rem;
-  color: var(--md-default-fg-color--light);
+/* ── Architecture diagram on overview page ── */
+.arch-diagram {
+  display: block;
+  margin: 1.5rem auto;
+  max-width: 38rem;
 }
 
-/* Mobile: tighten tables so 3-4 column tables remain readable */
+/* Hero concept diagram: compact, centred, minimal vertical spacing */
+.md-typeset img[src*="runtime-layers"] {
+  display: block;
+  margin: 0.15rem auto 0.15rem;
+  max-width: 26rem !important;
+}
+
+/* ── Mobile: tighten tables ── */
 @media (max-width: 768px) {
   .md-typeset table:not([class]) {
     font-size: 0.8rem;
@@ -131,7 +149,6 @@ img[src$=".svg"] {
   }
 }
 
-/* Small phones: further reduce for 5-column tables */
 @media (max-width: 480px) {
   .md-typeset table:not([class]) {
     font-size: 0.72rem;
