@@ -85,6 +85,7 @@ Constrain the maximum depth of delegation chains to prevent unbounded recursive 
 | **Maximum depth** | Define a maximum delegation depth per risk tier. Recommended defaults: Tier 1 - delegation not permitted. Tier 2 - maximum depth of 2 (original agent + one delegate). Tier 3 - maximum depth of 3, with human approval required for chains exceeding depth 2. |
 | **Gateway enforcement** | The authorisation gateway tracks delegation depth via the chain context. When a delegation request would exceed the maximum depth, the gateway denies it. |
 | **No circumvention** | Agents cannot circumvent depth limits by initiating a new chain - the gateway detects and denies attempts to start a fresh chain for the same task context. |
+| **Circular delegation detection** | The gateway tracks the full chain path and denies any delegation that would create a cycle (e.g., A→B→C→A). The chain context carries the set of agents already participating; re-delegation to any agent in the active set is blocked. |
 | **Depth visibility** | The current depth and maximum depth are available in the chain context for logging and monitoring, but are not exposed to the agent's context window (to prevent manipulation). |
 | **Override process** | If a legitimate use case requires deeper delegation, the depth limit can be increased through the standard change management process, not at runtime. |
 

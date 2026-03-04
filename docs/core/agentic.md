@@ -109,6 +109,8 @@ Validate every action independently. Don't trust agent reasoning.
 
 ![Action Validator Flow](../images/action-validator-flow.svg)
 
+**Dry-run / simulation mode:** For high-risk or first-time actions, execute in simulation mode before committing. The gateway routes the action to a sandbox or staging environment, captures the result, and presents it for review. Only after validation does the action execute against production systems. This is especially valuable during initial deployment when behavioural baselines have not yet been established.
+
 ### 3. Tool Output Sanitisation
 
 Tool outputs are injection vectors. Treat as untrusted.
@@ -130,6 +132,7 @@ Make approval meaningful, not rubber-stamp.
 | Approve/Deny only | Approve / Deny / Modify / Escalate |
 | Same approver for all | Different approvers by action type |
 | No expiry | Approval expires, must re-request |
+| No review deadline | Oversight SLA: maximum time before human review required, configurable by risk tier |
 
 ### 5. Circuit Breakers
 

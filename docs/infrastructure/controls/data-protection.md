@@ -155,6 +155,17 @@ All data within the AI system must be encrypted at rest and in transit.
 - mTLS for service-to-service communication within Zone 2 (Runtime) for Tier 3+ systems.
 - No plaintext API calls between any components, including internal.
 
+### Data Residency
+
+For regulated deployments, enforce data residency constraints:
+
+- Agent tool calls and model inference must route through endpoints in compliant regions.
+- The egress proxy (NET-04) enforces that no data leaves the approved geographic boundary.
+- RAG retrieval and vector store queries must connect to region-local instances.
+- Logs and evaluation data must be stored in compliant regions per the data classification (DAT-01).
+
+Data residency is enforced at the network layer (egress proxy, API gateway routing) rather than by agent configuration. Agents cannot choose non-compliant endpoints because non-compliant endpoints are unreachable.
+
 ---
 
 ## DAT-06: Response Leakage Prevention
