@@ -175,6 +175,7 @@ nav:
       - ISO 42001 Alignment: extensions/regulatory/iso-42001-alignment.md
       - LLM-as-Judge Implementation: extensions/technical/llm-as-judge-implementation.md
       - Judge Model Selection: extensions/technical/judge-model-selection.md
+      - Agentic Controls Catalogue: extensions/technical/agentic-controls-catalogue.md
       - RAG Security: extensions/technical/rag-security.md
       - Cost & Latency: extensions/technical/cost-and-latency.md
       - SOC Integration: extensions/technical/soc-integration.md

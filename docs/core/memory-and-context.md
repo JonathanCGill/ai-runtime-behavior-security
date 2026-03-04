@@ -62,6 +62,7 @@ For systems that maintain memory across sessions (user preferences, conversation
 | **Memory audit trail** | Log what's written to and read from persistent memory |
 | **User memory controls** | Users can view, edit, and delete their stored memories |
 | **Memory injection prevention** | Validate that persistent memories are genuine (from real conversations) not injected |
+| **Semantic deduplication** | Detect and prevent accumulation of near-duplicate memory entries that could indicate poisoning; semantically similar entries are merged or flagged for review before storage |
 
 ### 4. Accumulated Context Evaluation
 

@@ -28,6 +28,10 @@ Organisations deploying self-hosted open-weight models inherit control responsib
 
 The Judge layer is itself an LLM, and LLMs are susceptible to manipulation. The Bengio report documents models distinguishing between evaluation and deployment contexts - a capability that, if directed at the Judge, could undermine the entire detection layer. The Judge needs its own threat model. See [When the Judge Can Be Fooled](when-the-judge-can-be-fooled.md) for analysis and mitigations.
 
+### Capability Sealing
+
+A formal declaration of what a model version can and cannot do, enforced at runtime through a cryptographically signed capability envelope. The framework currently approximates this through TOOL-01 (machine-readable manifests that declare permitted tools and operations) and SUP-01 (model version pinning with hash verification). True capability sealing would extend this to a provider-signed declaration of model capabilities - not just what the agent is *permitted* to do, but what the model *can* do - with runtime enforcement that prevents the model from exercising undeclared capabilities even if tool permissions would allow it. This depends on model providers offering capability declarations in a standardised, machine-readable format, which does not yet exist at industry scale.
+
 ### Small Model and Edge Deployments
 
 Small language models running on desktops, mobile devices, and edge infrastructure create a control environment that this framework doesn't yet address. Compute constraints limit what guardrails can run locally. Network constraints may prevent Judge evaluation entirely. Observability tooling may not exist for the deployment platform.

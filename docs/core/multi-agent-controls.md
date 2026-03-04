@@ -43,6 +43,8 @@ Every agent-to-agent request must be governed by an explicit delegation policy.
 | **Scope inheritance** | Delegated tasks inherit the scope (and constraints) of the requesting agent |
 | **Delegation depth limits** | Maximum chain length before requiring human approval |
 | **Allowlisted delegation pairs** | Explicitly define which agents can call which agents |
+| **Circular delegation detection** | Gateway detects and blocks delegation cycles (A→B→C→A) by tracking the chain path; attempts to re-delegate to an agent already in the active chain are denied |
+| **Agent spawn rate limits** | Maximum number of new agent instances the orchestrator can create per time window; prevents runaway spawning that exhausts resources |
 
 ```yaml
 # Example delegation policy
@@ -110,6 +112,7 @@ Multi-agent chains can loop, cascade, or amplify errors. Circuit breakers preven
 | **Error rate threshold** | Disable agent-to-agent path, fall back to simpler flow |
 | **Latency threshold** | Timeout and escalate rather than waiting indefinitely |
 | **Repeated identical requests** | Detect loops, break them |
+| **Circular delegation detected** | Gateway identifies A→B→C→A cycles and terminates the chain |
 
 ### 5. Outcome Attribution
 
