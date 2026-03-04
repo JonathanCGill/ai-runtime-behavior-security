@@ -430,7 +430,7 @@ Co-founder of BIML. Globally recognised authority on software security (8 books)
 
 ### Johann Rehberger
 
-See [Prompt Injection & Runtime Security](#johann-rehberger--embrace-the-red) above. His "Month of AI Bugs" (August 2025) and AgentHopper self-propagating virus proof-of-concept provide continuous real-world evidence that prompt injection remains unsolved.
+See [Prompt Injection & Runtime Security](#johann-rehberger-embrace-the-red) above. His "Month of AI Bugs" (August 2025) and AgentHopper self-propagating virus proof-of-concept provide continuous real-world evidence that prompt injection remains unsolved.
 
 - [embracethered.com](https://embracethered.com/)
 
