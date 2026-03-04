@@ -76,11 +76,6 @@ img[src$=".svg"] {
   display: none;
 }
 
-/* Homepage hero area */
-.home-hero .md-content__inner {
-  max-width: 45rem;
-}
-
 /* Subtitle line under hidden h1 */
 .home-subtitle {
   text-align: center;
