@@ -1,6 +1,6 @@
 ---
 description: When constraining LLM actions crosses the line from useful security into counterproductive overhead. A framework for finding the point of diminishing returns.
-og_title: The Constraint Curve - AI Runtime Behaviour Security
+og_title: The Constraint Curve - AI Runtime Security
 og_description: Analysis of when LLM constraints become counterproductive, with a proportionality framework for matching controls to actual risk.
 ---
 

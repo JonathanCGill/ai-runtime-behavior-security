@@ -95,7 +95,7 @@ The framework is comprehensive but has no production deployments. Rather than ig
 - **Renamed: AI Security Blueprint → Enterprise AI Security Framework**
   - Better reflects the content scope (governance, compliance, org structure)
   - "Blueprint" implied buildable artifacts; "Framework" is accurate
-  - Later renamed to **AI Runtime Behaviour Security** (February 2026)
+  - Later renamed to **AI Runtime Security** (February 2026)
   
 ### Added
 - **IMPLEMENTATION_GUIDE.md** - New practical guide with working code

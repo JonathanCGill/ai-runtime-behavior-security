@@ -2,7 +2,7 @@
 
 **What a single day looks like when an enterprise with multiple departments, data classifications, and risk tiers operates agentic AI under the framework.**
 
-> *Part of [From Strategy to Production](./) · [AI Runtime Behaviour Security](../)*
+> *Part of [From Strategy to Production](./) · [AI Runtime Security](../)*
 
 ## The Enterprise
 

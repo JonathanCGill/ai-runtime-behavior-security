@@ -1,6 +1,6 @@
 ---
 description: Using an in-memory graph database like Memgraph to model agent interactions as a live graph, detect anomalous behaviour through temporal graph analysis, and feed results into PACE escalation in near real-time.
-og_title: Graph-Based Agent Monitoring - AI Runtime Behaviour Security
+og_title: Graph-Based Agent Monitoring - AI Runtime Security
 og_description: How graph databases transform multi-agent observability from log analysis into structural anomaly detection, catching behavioural patterns that tabular monitoring cannot see.
 ---
 

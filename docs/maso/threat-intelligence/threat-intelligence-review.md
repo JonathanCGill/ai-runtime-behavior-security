@@ -7,7 +7,7 @@
 
 ## Executive Summary
 
-This review cross-references the latest threat intelligence (through February 2026) against every major proposal in the AI Runtime Behaviour Security framework - the three-layer defence model, PACE resilience, risk tiers, MASO controls, and the framework's core architectural claims.
+This review cross-references the latest threat intelligence (through February 2026) against every major proposal in the AI Runtime Security framework - the three-layer defence model, PACE resilience, risk tiers, MASO controls, and the framework's core architectural claims.
 
 **Bottom line:** Current threat intelligence overwhelmingly validates the framework's proposals while revealing seven areas where the threat landscape has evolved faster than the framework anticipated. None of the proposals are invalidated. Several need strengthening.
 

@@ -1,7 +1,7 @@
 # Supply Chain Security Controls
 
 > Part of the [AI Security Infrastructure Controls](../README.md) framework.
-> Companion to [AI Runtime Behaviour Security](https://github.com/JonathanCGill/ai-runtime-behaviour-security).
+> Companion to [AI Runtime Security](https://github.com/JonathanCGill/ai-runtime-behaviour-security).
 
 ## Overview
 

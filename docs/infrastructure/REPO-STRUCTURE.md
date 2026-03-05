@@ -1,6 +1,6 @@
 # AI Security Infrastructure Controls - Repo Structure
 
-> Complements [AI Runtime Behaviour Security](https://github.com/JonathanCGill/ai-runtime-behaviour-security), which defines the *behavioral* security pattern (Guardrails → LLM-as-Judge → Human Oversight). This repo defines the *infrastructure* controls that make that pattern enforceable.
+> Complements [AI Runtime Security](https://github.com/JonathanCGill/ai-runtime-behaviour-security), which defines the *behavioral* security pattern (Guardrails → LLM-as-Judge → Human Oversight). This repo defines the *infrastructure* controls that make that pattern enforceable.
 
 ## Repo Layout
 

@@ -4,7 +4,7 @@
 
 *Click the image to view full-size. Right-click to save or print (landscape, A3 recommended).*
 
-[![AI Runtime Behaviour Security - Complete Tube Map](images/ai-security-tube-map.svg)](images/ai-security-tube-map.svg)
+[![AI Runtime Security - Complete Tube Map](images/ai-security-tube-map.svg)](images/ai-security-tube-map.svg)
 
 ## How to Read the Map
 

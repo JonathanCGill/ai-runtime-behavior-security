@@ -1,4 +1,4 @@
-# Emerging AI Trends - Impact on AI Runtime Behaviour Security
+# Emerging AI Trends - Impact on AI Runtime Security
 
 This document assesses how emerging AI trends affect the reference architecture and identifies required adaptations.
 

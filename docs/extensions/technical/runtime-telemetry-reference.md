@@ -2,7 +2,7 @@
 
 **One transaction, end-to-end. Every control layer. Every log event. Every threshold.**
 
-> *Part of [Technical Extensions](README.md) · [AI Runtime Behaviour Security](../../)*
+> *Part of [Technical Extensions](README.md) · [AI Runtime Security](../../)*
 
 ## Purpose
 

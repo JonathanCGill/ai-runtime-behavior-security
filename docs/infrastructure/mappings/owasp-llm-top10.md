@@ -3,7 +3,7 @@
 > Maps infrastructure controls to the OWASP Top 10 for Large Language Model Applications (2025) and the OWASP Top 10 for Agentic AI.
 >
 > Part of the [AI Security Infrastructure Controls](../README.md) framework.
-> Companion to [AI Runtime Behaviour Security](https://github.com/JonathanCGill/ai-runtime-behaviour-security).
+> Companion to [AI Runtime Security](https://github.com/JonathanCGill/ai-runtime-behaviour-security).
 
 ## OWASP LLM Top 10 (2025)
 

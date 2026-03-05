@@ -2,7 +2,7 @@
 
 **Insider Risk Analysts, UEBA Engineers, Behavioral Analytics Teams - your programme already solves the problem AI agents create. Here's how to extend it.**
 
-> *Part of [Stakeholder Views](README.md) · [AI Runtime Behaviour Security](../)*
+> *Part of [Stakeholder Views](README.md) · [AI Runtime Security](../)*
 
 ## The Problem You Already Solve
 

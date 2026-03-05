@@ -1,4 +1,4 @@
-# AI Runtime Behaviour Security
+# AI Runtime Security
 
 ## AI systems don't just have vulnerabilities. They have behaviours.
 

@@ -2,7 +2,7 @@
 
 **CROs, Risk Managers, GRC Teams - how to quantify AI risk, set appetite, and demonstrate control effectiveness to the board.**
 
-> *Part of [Stakeholder Views](README.md) · [AI Runtime Behaviour Security](../)*
+> *Part of [Stakeholder Views](README.md) · [AI Runtime Security](../)*
 
 ## Executive Summary
 

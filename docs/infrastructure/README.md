@@ -6,7 +6,7 @@ description: Infrastructure controls that enforce AI behavioural security across
 
 **The infrastructure layer that makes behavioural AI security enforceable.**
 
-Companion to [AI Runtime Behaviour Security](https://github.com/JonathanCGill/ai-runtime-behaviour-security), which defines the three-layer behavioural security pattern (Guardrails → LLM-as-Judge → Human Oversight). This repo defines the 80 technical infrastructure controls that underpin that pattern.
+Companion to [AI Runtime Security](https://github.com/JonathanCGill/ai-runtime-behaviour-security), which defines the three-layer behavioural security pattern (Guardrails → LLM-as-Judge → Human Oversight). This repo defines the 80 technical infrastructure controls that underpin that pattern.
 
 ## The Problem
 

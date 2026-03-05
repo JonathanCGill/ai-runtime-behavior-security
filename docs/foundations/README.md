@@ -2,7 +2,7 @@
 description: Runtime behavioural security controls for single-model AI deployments. Guardrails, LLM-as-Judge, and human oversight scaled to risk tiers.
 ---
 
-# AI Runtime Behaviour Security - Single-Agent Controls
+# AI Runtime Security - Single-Agent Controls
 
 > Most AI governance guidance assumes you can test your way to safety.
 > You cannot.

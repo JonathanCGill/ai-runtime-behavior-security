@@ -1,5 +1,5 @@
 ---
-title: AI Runtime Behaviour Security
+title: AI Runtime Security
 description: A practical, open-source framework for securing AI systems at runtime - where prompt injection, model manipulation, and agent drift actually happen.
 template: home.html
 hide:
@@ -9,7 +9,7 @@ hide:
 comments: false
 ---
 
-# AI Runtime Behaviour Security
+# AI Runtime Security
 
 <div class="home-subtitle" markdown>
 
@@ -35,7 +35,7 @@ In every other domain of enterprise security (network, identity, data) we layer 
 
 ### The approach
 
-AI Runtime Behaviour Security applies defence-in-depth at the point of execution. Three layers, each independent, each compensating for the others.
+AI Runtime Security applies defence-in-depth at the point of execution. Three layers, each independent, each compensating for the others.
 
 **Guardrails** enforce hard boundaries. Content policies, scope constraints, tool-use permissions. They are fast, deterministic, and limited. They catch the obvious failures.
 

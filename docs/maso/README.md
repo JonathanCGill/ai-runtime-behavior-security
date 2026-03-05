@@ -206,7 +206,7 @@ These questions come up in every MASO deployment. The answers sit across the fra
 
 ## Relationship to Parent Framework
 
-MASO is the multi-agent extension of [AI Runtime Behaviour Security](../). It inherits the three-layer defence model, PACE resilience methodology, risk classification matrix, and regulatory mapping framework.
+MASO is the multi-agent extension of [AI Runtime Security](../). It inherits the three-layer defence model, PACE resilience methodology, risk classification matrix, and regulatory mapping framework.
 
 It extends into multi-agent territory by addressing multi-model orchestration security, inter-agent communication integrity, the OWASP Agentic Top 10 (2026), compound risk dynamics, Non-Human Identity management, and kill switch architecture.
 

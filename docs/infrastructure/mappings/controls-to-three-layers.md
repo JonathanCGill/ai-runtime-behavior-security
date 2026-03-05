@@ -3,7 +3,7 @@
 > Maps all 80 infrastructure controls to the three-layer behavioural security pattern: **Guardrails → LLM-as-Judge → Human Oversight**.
 >
 > Part of the [AI Security Infrastructure Controls](../README.md) framework.
-> Companion to [AI Runtime Behaviour Security](https://github.com/JonathanCGill/ai-runtime-behaviour-security).
+> Companion to [AI Runtime Security](https://github.com/JonathanCGill/ai-runtime-behaviour-security).
 
 ## How to Read This Mapping
 

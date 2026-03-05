@@ -12,7 +12,7 @@ He develops threat models, risk frameworks, and practical mitigations for AI sys
 
 AI security governance at enterprise scale: designing regulator-ready AI security control frameworks, assessing generative and agentic AI solutions, and defining security guardrails for cloud-native AI platforms. Translating complex technical risk into actionable guidance for engineering teams, regulators, and executive leadership.
 
-This framework — AI Runtime Behaviour Security — is the result of that work. It exists because most AI security guidance stops at the model layer, and the industry needs practical, open-source reference material for what happens after deployment.
+This framework — AI Runtime Security — is the result of that work. It exists because most AI security guidance stops at the model layer, and the industry needs practical, open-source reference material for what happens after deployment.
 
 ## Expertise
 

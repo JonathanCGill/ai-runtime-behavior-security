@@ -2,7 +2,7 @@
 
 **How this framework changed - and why.**
 
-> Part of [AI Runtime Behaviour Security](./)
+> Part of [AI Runtime Security](./)
 > Last updated: February 2026
 
 ## Why This Page Exists
@@ -62,7 +62,7 @@ Major restructure into Core + Extensions. Created a clear 5-document starting pa
 
 **Renamed from "AI Security Blueprint" to "Enterprise AI Security Framework."**
 
-"Blueprint" implied buildable artifacts - specific, ready-to-deploy implementations. The framework was strategic guidance, not a blueprint. The rename was an honesty correction. Later renamed to **AI Runtime Behaviour Security** to reflect the core thesis: AI is non-deterministic, so you secure it by observing runtime behaviour.
+"Blueprint" implied buildable artifacts - specific, ready-to-deploy implementations. The framework was strategic guidance, not a blueprint. The rename was an honesty correction. Later renamed to **AI Runtime Security** to reflect the core thesis: AI is non-deterministic, so you secure it by observing runtime behaviour.
 
 Simultaneously added the Implementation Guide: ~1,500 lines of copy-paste-ready Python covering input guardrails, output guardrails, LLM-as-Judge, human-in-the-loop queue, and telemetry. If the framework was going to be called a framework and not a blueprint, it needed an actual implementation path alongside the strategic guidance.
 

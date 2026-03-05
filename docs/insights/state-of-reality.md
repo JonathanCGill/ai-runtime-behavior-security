@@ -3,7 +3,7 @@
 > *"The world cannot be understood without numbers. And it cannot be understood with numbers alone."*
 > - Hans Rosling, Factfulness
 
-This document grounds the AI Runtime Behaviour Security in observed data rather than projected fear. The threat is real. It is also specific, measurable, and disproportionately concentrated in predictable failure modes.
+This document grounds the AI Runtime Security in observed data rather than projected fear. The threat is real. It is also specific, measurable, and disproportionately concentrated in predictable failure modes.
 
 ## The Incident Landscape
 

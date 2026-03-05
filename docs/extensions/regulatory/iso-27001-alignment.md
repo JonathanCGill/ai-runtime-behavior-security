@@ -1,6 +1,6 @@
 # ISO 27001:2022 Alignment
 
-This document maps the AI Runtime Behaviour Security to ISO 27001:2022 information security requirements.
+This document maps the AI Runtime Security to ISO 27001:2022 information security requirements.
 
 ## Executive Summary
 

@@ -1,6 +1,6 @@
 # Adopters
 
-Organisations and individuals using or adapting the AI Runtime Behaviour Security.
+Organisations and individuals using or adapting the AI Runtime Security.
 
 ## Why List Adopters?
 

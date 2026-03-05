@@ -148,7 +148,7 @@ The three-layer model isn't theoretical. It's already being implemented:
 
 What's been missing: a clear explanation of *why* this pattern is necessary and *how* to implement it proportionate to risk.
 
-That's what the [AI Runtime Behaviour Security](../README.md) provides - a practical synthesis of the pattern with implementation guidance. For detailed solution comparison, see [Current Solutions](../extensions/technical/current-solutions.md).
+That's what the [AI Runtime Security](../README.md) provides - a practical synthesis of the pattern with implementation guidance. For detailed solution comparison, see [Current Solutions](../extensions/technical/current-solutions.md).
 
 For practical implementation guidance on the guardrail layer itself - what to detect, international PII patterns, RAG ingestion filtering, alerting, and governance of exceptions - see **[Practical Guardrails](practical-guardrails.md)**.
 
