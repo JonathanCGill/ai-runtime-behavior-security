@@ -1,3 +1,7 @@
+---
+description: "Tier 2 MASO implementation — managed multi-agent deployment with bounded autonomy, automated monitoring, and exception-based human oversight."
+---
+
 # Tier 2 - Managed Multi-Agent Deployment
 
 **Medium Autonomy · Selective Human Oversight · Production Operations**

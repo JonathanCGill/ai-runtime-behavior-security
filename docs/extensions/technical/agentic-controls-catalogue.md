@@ -1,3 +1,7 @@
+---
+description: "Comprehensive technical controls catalogue for agentic AI systems — identity, execution, data, observability, and supply chain controls with framework cross-references."
+---
+
 # Technical Controls Catalogue for Agentic AI Systems
 
 A comprehensive catalogue of technical controls for agentic AI systems, mapped to the framework's existing control specifications. Use this as a cross-reference to locate control implementations across the framework's documentation.

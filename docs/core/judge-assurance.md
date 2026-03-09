@@ -1,3 +1,7 @@
+---
+description: "How to validate LLM-as-Judge accuracy against human ground truth, detect Judge drift, and prevent evaluation collapse in AI safety systems."
+---
+
 # Judge Assurance
 
 > Who judges the judge?

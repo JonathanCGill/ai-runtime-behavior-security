@@ -1,3 +1,7 @@
+---
+description: "Infrastructure controls for AI incident response — detection, classification, containment, and recovery procedures for prompt injection, data leakage, and model failures."
+---
+
 # Incident Response for AI Systems
 
 > **Control Domain:** Response Controls  

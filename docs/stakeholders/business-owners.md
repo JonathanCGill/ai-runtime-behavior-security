@@ -1,3 +1,7 @@
+---
+description: "AIRS framework guide for business unit leaders — managing AI risk across product lines when agents are operational and the risk is yours."
+---
+
 # Business Owners
 
 **Business Unit Leaders, P&L Owners, General Managers - how to manage AI risk across your product lines when agents are operational, costs are real, and the risk is yours.**

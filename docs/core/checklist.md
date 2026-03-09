@@ -1,3 +1,7 @@
+---
+description: "Phase-by-phase implementation checklist for AI security controls covering classification, logging, guardrails, Judge evaluation, human oversight, and operations."
+---
+
 # Implementation Checklist
 
 ![Implementation Architecture](../images/implementation-architecture.svg)

@@ -1,3 +1,7 @@
+---
+description: "AIRS framework guide for CROs and risk managers — quantifying AI risk, setting appetite, and demonstrating control effectiveness to the board."
+---
+
 # Risk & Governance
 
 **CROs, Risk Managers, GRC Teams - how to quantify AI risk, set appetite, and demonstrate control effectiveness to the board.**

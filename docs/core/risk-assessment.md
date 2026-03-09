@@ -1,3 +1,7 @@
+---
+description: "Quantitative risk assessment methodology for AI controls using layered defence-in-depth, aligned with NIST AI RMF, with worked examples across all four risk tiers."
+---
+
 # Quantitative Risk Assessment for AI Controls
 
 **How the three-layer pattern reduces residual risk - with worked examples across all four tiers.**

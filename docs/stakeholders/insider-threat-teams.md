@@ -1,3 +1,7 @@
+---
+description: "AIRS framework guide for insider risk analysts — extending UEBA and behavioural analytics programmes to monitor AI agent behaviour as non-human entities."
+---
+
 # Insider Threat Teams
 
 **Insider Risk Analysts, UEBA Engineers, Behavioral Analytics Teams - your programme already solves the problem AI agents create. Here's how to extend it.**

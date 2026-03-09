@@ -1,3 +1,7 @@
+---
+description: "MASO integration guide for LangGraph, AutoGen, CrewAI, and AWS Bedrock Agents — mapping control requirements to framework-specific implementation patterns."
+---
+
 # Integration Guide
 
 **Implementing MASO Controls in Agent Orchestration Frameworks**

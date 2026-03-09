@@ -1,3 +1,7 @@
+---
+description: "Proposed security extensions for multimodal, reasoning, streaming, and multi-agent AI systems — design directions for capabilities that break single-model assumptions."
+---
+
 # Emerging Controls
 
 **Status: Theoretical**

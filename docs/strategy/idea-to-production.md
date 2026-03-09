@@ -1,3 +1,7 @@
+---
+description: "End-to-end AI lifecycle — from initial idea through risk classification, tool selection, control implementation, deployment, and ongoing governance with no gaps."
+---
+
 # From Idea to Production to Ongoing Control
 
 *The end-to-end process: strategy to use case to tool selection to risk tiering to deployment to ongoing governance. One flow, no gaps.*

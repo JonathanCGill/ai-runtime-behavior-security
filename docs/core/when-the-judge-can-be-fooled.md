@@ -1,3 +1,7 @@
+---
+description: "Adversarial failure modes for LLM-as-Judge evaluation — output crafting, context manipulation, and evaluation gaming — with mitigations for each."
+---
+
 # When the Judge Can Be Fooled
 
 > *This document uses the simplified three-tier system (Tier 1/2/3). See [Risk Tiers - Simplified Tier Mapping](risk-tiers.md#simplified-tier-mapping) for the mapping to LOW/MEDIUM/HIGH/CRITICAL.*

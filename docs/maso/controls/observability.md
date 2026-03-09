@@ -1,3 +1,7 @@
+---
+description: "MASO observability controls — continuous monitoring, immutable audit trails, and automated anomaly detection across multi-agent AI systems."
+---
+
 # MASO Control Domain: Observability
 
 > Part of the [MASO Framework](../README.md) · Control Specifications

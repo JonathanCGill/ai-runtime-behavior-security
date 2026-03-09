@@ -1,3 +1,7 @@
+---
+description: "Security controls for multi-agent AI systems — trust topologies, delegation chains, privilege boundaries, and accountability across agent-to-agent interactions."
+---
+
 # Multi-Agent Controls
 
 > Extends [Agentic Controls](agentic.md) for systems where agents interact with other agents.

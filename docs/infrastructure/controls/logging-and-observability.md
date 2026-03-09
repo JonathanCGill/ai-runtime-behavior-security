@@ -1,3 +1,7 @@
+---
+description: "Infrastructure controls for AI logging and observability — capturing non-deterministic behaviour, semantic content, and multi-step reasoning chains in production."
+---
+
 # Logging & Observability for AI Systems
 
 > **Control Domain:** Behavioral Controls  

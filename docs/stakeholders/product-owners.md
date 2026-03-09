@@ -1,3 +1,7 @@
+---
+description: "AIRS framework guide for product managers — what AI controls cost, what they prevent, and how to ship AI features without security blocking delivery."
+---
+
 # Product Owners
 
 **Product Managers, Business Owners, Delivery Leads - what controls cost, what they prevent, and how to ship AI without getting blocked by security.**

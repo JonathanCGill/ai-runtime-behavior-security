@@ -1,3 +1,7 @@
+---
+description: "Security controls for multimodal AI systems processing images, audio, video, and documents — addressing attack surfaces that text-based guardrails cannot cover."
+---
+
 # Multimodal Controls
 
 > Practical controls for AI systems that process images, audio, video, or documents - not just text.

@@ -1,3 +1,7 @@
+---
+description: "Why AI guardrails alone are insufficient for production safety — introducing the three-layer control model of guardrails, LLM-as-Judge, and human oversight."
+---
+
 # Why Your AI Guardrails Aren't Enough
 
 *And what to do about it*

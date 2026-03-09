@@ -1,3 +1,7 @@
+---
+description: "The Multi-Agent Security Operations (MASO) framework — a PACE-driven approach to securing multi-model agent orchestration with layered defence and inter-agent controls."
+---
+
 # Multi-Agent Security Operations (MASO) Framework
 
 **A PACE-Driven Approach to Securing Multi-Model Agent Orchestration**

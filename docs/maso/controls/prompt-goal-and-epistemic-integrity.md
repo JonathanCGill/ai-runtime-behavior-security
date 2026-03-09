@@ -1,3 +1,7 @@
+---
+description: "MASO controls for protecting agent instructions, goals, and information quality — covering prompt injection propagation, goal hijacking, and epistemic risks in multi-agent systems."
+---
+
 # MASO Control Domain: Prompt, Goal & Epistemic Integrity
 
 > Part of the [MASO Framework](../README.md) · Control Specifications

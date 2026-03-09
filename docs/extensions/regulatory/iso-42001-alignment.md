@@ -1,3 +1,7 @@
+---
+description: "AI governance operating model aligned with ISO 42001 — centralised policy, federated execution, and unified assurance across enterprise AI platforms."
+---
+
 # AI Governance Operating Model - ISO 42001 Alignment
 
 This document defines how a centralised AI governance function operates in alignment with ISO 42001:2023 (AI Management System) while leveraging the control framework (guardrails, Judge, HITL) and enterprise AI platforms.

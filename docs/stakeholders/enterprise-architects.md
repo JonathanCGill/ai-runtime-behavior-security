@@ -1,3 +1,7 @@
+---
+description: "AIRS framework guide for solution and platform architects — where controls go in the AI pipeline, latency impact, and failure mode design."
+---
+
 # Enterprise Architects
 
 **Solution Architects, Platform Architects, Technical Leads - where controls go in your pipeline, what they cost, and how they fail.**

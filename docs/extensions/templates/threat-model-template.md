@@ -1,3 +1,7 @@
+---
+description: "AI threat modelling template — structured approach to identifying threats across upstream, AI core, and downstream components, aligned with risk tiers."
+---
+
 # AI Threat Modelling Template
 
 A structured approach to identifying threats in AI systems, aligned with risk tiers.

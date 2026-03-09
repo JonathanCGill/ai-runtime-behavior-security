@@ -1,3 +1,7 @@
+---
+description: "MASO identity and access controls for multi-agent AI — per-agent credentials, privilege boundaries, delegation rules, and orchestrator isolation."
+---
+
 # MASO Control Domain: Identity & Access
 
 > Part of the [MASO Framework](../README.md) · Control Specifications

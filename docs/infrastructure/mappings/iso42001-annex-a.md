@@ -1,3 +1,7 @@
+---
+description: "Mapping infrastructure controls to ISO/IEC 42001:2023 Annex A requirements for AI management systems with coverage analysis per clause."
+---
+
 # ISO/IEC 42001 Annex A Mapping
 
 > Maps infrastructure controls to ISO/IEC 42001:2023 Annex A - Controls for AI Management Systems.

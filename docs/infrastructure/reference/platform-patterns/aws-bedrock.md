@@ -1,3 +1,7 @@
+---
+description: "AWS Bedrock implementation patterns for AI security controls — zone-by-zone architecture mapping with IAM, guardrails, and logging configuration."
+---
+
 # AWS Bedrock Implementation Patterns
 
 > **Purpose:** Platform-specific guidance for implementing the infrastructure controls on AWS using Amazon Bedrock as the model hosting platform.  

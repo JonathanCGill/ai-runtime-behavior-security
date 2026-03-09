@@ -1,3 +1,7 @@
+---
+description: "IAM governance principles for AI agents — why traditional identity and access management fails for non-deterministic, agentic AI and what to do about it."
+---
+
 # IAM Governance for AI Systems
 
 **Why traditional identity and access management fails for AI agents - and what to do about it.**

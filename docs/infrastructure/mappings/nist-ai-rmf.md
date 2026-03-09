@@ -1,3 +1,7 @@
+---
+description: "Mapping infrastructure controls to all 51 NIST AI RMF 1.0 subcategories across Govern, Map, Measure, and Manage functions."
+---
+
 # NIST AI Risk Management Framework (AI RMF 1.0) Mapping
 
 > Maps infrastructure controls to the NIST AI RMF 1.0 subcategories across all four functions: Govern, Map, Measure, and Manage.

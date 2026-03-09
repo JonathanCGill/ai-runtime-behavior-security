@@ -1,3 +1,7 @@
+---
+description: "What the data actually shows about AI security incidents — grounding AI runtime security in observed incident data rather than projected fear."
+---
+
 # State of Reality: What the Data Actually Shows
 
 > *"The world cannot be understood without numbers. And it cannot be understood with numbers alone."*

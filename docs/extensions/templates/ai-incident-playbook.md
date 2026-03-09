@@ -1,3 +1,7 @@
+---
+description: "AI incident response playbooks for prompt injection, data leakage, hallucination, bias, model provider breach, guardrail bypass, and Judge system failure."
+---
+
 # AI Incident Response Playbook
 
 Incident response procedures specific to AI systems. These playbooks supplement, not replace, existing incident response procedures.

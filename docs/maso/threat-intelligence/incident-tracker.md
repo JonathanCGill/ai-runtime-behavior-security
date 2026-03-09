@@ -1,3 +1,7 @@
+---
+description: "Real-world AI security incidents mapped to framework controls — tracking which controls would have prevented, detected, or contained each incident."
+---
+
 # Incident Tracker
 
 **Real-World AI Security Incidents Mapped to Framework Controls**

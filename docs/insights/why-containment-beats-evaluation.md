@@ -1,3 +1,7 @@
+---
+description: "A constrain-regardless architecture for sandbagging-resistant AI governance — why making evaluations less important is more robust than making them more accurate."
+---
+
 # Why Containment Beats Evaluation
 
 *A constrain-regardless architecture for sandbagging-resistant AI governance.*

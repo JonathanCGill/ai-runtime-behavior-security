@@ -1,3 +1,7 @@
+---
+description: "Model Context Protocol creates an uncontrolled tool discovery and execution surface — security implications of MCP adoption for agentic AI systems."
+---
+
 # The MCP Problem
 
 *You gave your agents a universal protocol for calling tools. You didn't give your security architecture one for controlling them.*

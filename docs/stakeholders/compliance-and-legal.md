@@ -1,3 +1,7 @@
+---
+description: "AIRS framework guide for compliance officers and legal counsel — regulatory mapping, evidence generation, and audit-ready documentation for AI systems."
+---
+
 # Compliance & Legal
 
 **Compliance Officers, Legal Counsel, DPOs, Audit Teams - how this framework maps to your regulatory obligations and produces the evidence you need.**
