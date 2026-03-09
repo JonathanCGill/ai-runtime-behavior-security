@@ -15,7 +15,8 @@ comments: false
 
 **A discipline for controlling AI behaviour in production.**
 
-The AI-RS Framework provides architecture patterns and controls for implementing runtime AI security in enterprise systems.
+A framework for monitoring, validating, and controlling
+AI system behaviour during live operation.
 
 </div>
 
