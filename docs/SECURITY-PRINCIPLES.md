@@ -338,11 +338,13 @@ Continuous monitoring, regular [red-teaming](maso/red-team/red-team-playbook.md)
 
 > **Beware Silent Failures** - *"The most dangerous AI failures look like normal responses."*
 >
-> The failures that cause the most damage are not the ones that crash systems or trigger alerts. They are the outputs that look plausible, pass guardrails, and reach users or downstream systems unchallenged. A hallucinated regulatory disclosure delivered with confidence. A subtly wrong calculation embedded in a financial summary. A tool call that technically succeeds but operates on the wrong data.
+> The AI system looks like it is running fine. Outputs flow. Dashboards are green. No alerts fire. But the system is not actually functioning correctly. A grounding source has gone stale and the model is answering from outdated data. A guardrail rule was updated and now silently passes traffic it should block. The Judge is evaluating against the wrong policy version. An agent loop is completing successfully but producing meaningless results because an upstream dependency changed.
 >
-> Silent failures are invisible to pattern-matching defenses because there is no anomalous pattern to match. They require semantic evaluation - which is why the [Judge layer](ARCHITECTURE.md) exists. They require behavioral baselines - which is why [Domain 4](maso/controls/domain-4-observability.md) tracks output distributions over time. And they require humans in the loop for high-stakes decisions - because neither guardrails nor judges can catch every failure that looks like success.
+> These are not crashes or outages. They are the operational equivalent of carbon monoxide - everything appears normal until the damage is done. Silent failures evade traditional monitoring because they produce no error signals. Latency is fine. Throughput is fine. Status codes are fine. The system is confidently wrong.
 >
-> If your monitoring only detects loud failures, you are missing the ones that matter most.
+> Detecting silent failures requires behavioral baselines that track output quality over time ([Domain 4](maso/controls/domain-4-observability.md)), semantic evaluation that goes beyond surface-level health checks ([Judge layer](ARCHITECTURE.md)), and structured human review that samples outputs for correctness, not just availability.
+>
+> If your monitoring only tells you the system is up, it is not telling you enough.
 
 ---
 
