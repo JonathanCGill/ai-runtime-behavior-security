@@ -1,3 +1,7 @@
+---
+description: "AIRS framework guide for ML engineers and AI developers — concrete implementation patterns, architecture placement, and testing approaches for AI security controls."
+---
+
 # AI Engineers
 
 **ML Engineers, AI Developers, Data Scientists, Platform Engineers - implementation patterns, not governance theory.**

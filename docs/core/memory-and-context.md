@@ -1,3 +1,7 @@
+---
+description: "Security controls for AI memory and context — protecting against cross-session data leakage, context poisoning, and accumulated state attacks."
+---
+
 # Memory and Context Controls
 
 > Securing what the model remembers - across turns, sessions, and users.

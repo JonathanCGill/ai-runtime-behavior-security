@@ -1,3 +1,7 @@
+---
+description: "MASO supply chain controls — inventorying, vetting, and integrity-verifying every model, tool, MCP server, and plugin in multi-agent AI systems."
+---
+
 # MASO Control Domain: Supply Chain
 
 > Part of the [MASO Framework](../README.md) · Control Specifications

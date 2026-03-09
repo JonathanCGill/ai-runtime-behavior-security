@@ -1,3 +1,7 @@
+---
+description: "LLM-as-Judge implementation guide — configuring the Judge as a continuous assurance mechanism for reviewing AI outputs, not a real-time gatekeeper."
+---
+
 # LLM-as-Judge: An Assurance Mechanism
 
 ## What the Judge Is

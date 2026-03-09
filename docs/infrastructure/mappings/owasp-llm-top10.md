@@ -1,3 +1,7 @@
+---
+description: "Mapping infrastructure controls to the OWASP Top 10 for LLM Applications (2025) and the OWASP Top 10 for Agentic AI with specific mitigations per risk."
+---
+
 # OWASP LLM Top 10 and Agentic Top 10 Mapping
 
 > Maps infrastructure controls to the OWASP Top 10 for Large Language Model Applications (2025) and the OWASP Top 10 for Agentic AI.

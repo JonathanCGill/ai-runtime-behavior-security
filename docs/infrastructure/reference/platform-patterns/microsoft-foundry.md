@@ -1,3 +1,7 @@
+---
+description: "Microsoft Azure and Foundry implementation patterns for AI security controls — zone-by-zone architecture mapping with Entra ID, Content Safety, and Sentinel."
+---
+
 # Microsoft Foundry Implementation Patterns
 
 > **Purpose:** Platform-specific guidance for implementing the infrastructure controls on Azure using Azure OpenAI Service and Microsoft Foundry (formerly Azure AI Studio) as the model hosting platforms.  

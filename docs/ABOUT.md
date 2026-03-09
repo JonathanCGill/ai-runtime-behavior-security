@@ -1,3 +1,7 @@
+---
+description: "About Jonathan Gill — cybersecurity practitioner with 20+ years in enterprise security, focused on runtime AI security for regulated environments."
+---
+
 # About the Author
 
 <div style="float: right; margin: 0 0 1em 1.5em; max-width: 120px;">

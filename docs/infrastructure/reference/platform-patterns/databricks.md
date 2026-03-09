@@ -1,3 +1,7 @@
+---
+description: "Databricks implementation patterns for AI security controls — zone-by-zone architecture using Mosaic AI Gateway, Unity Catalog, and Model Serving."
+---
+
 # Databricks Implementation Patterns
 
 > **Purpose:** Platform-specific guidance for implementing the infrastructure controls on Databricks using Model Serving, Mosaic AI Gateway, and Unity Catalog as the AI platform.  

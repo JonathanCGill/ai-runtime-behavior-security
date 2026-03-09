@@ -1,3 +1,7 @@
+---
+description: "Detailed mapping of framework technical controls to ISO/IEC 42001:2023 clause requirements with a quick reference matrix across guardrails, Judge, and HITL."
+---
+
 # ISO 42001 Clause Mapping
 
 ## Technical Controls to ISO Requirements

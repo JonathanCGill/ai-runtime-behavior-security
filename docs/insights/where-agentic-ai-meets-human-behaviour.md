@@ -1,3 +1,7 @@
+---
+description: "Where agentic AI converges with and diverges from human behaviour — and why the gaps matter for runtime security controls and governance."
+---
+
 # Where Agentic AI Meets Human Behaviour
 
 *The research landscape on where agentic AI converges with and diverges from human behaviour — and why the gaps matter for runtime security*

@@ -1,3 +1,7 @@
+---
+description: "Future directions for AI runtime security — open questions on open-weight deployment, autonomous agents, societal-scale risks, and evolving threat landscapes."
+---
+
 # Future Considerations
 
 **What this framework acknowledges but doesn't yet address - and why.**

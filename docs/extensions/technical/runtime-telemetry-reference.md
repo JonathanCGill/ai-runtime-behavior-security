@@ -1,3 +1,7 @@
+---
+description: "End-to-end runtime telemetry reference — one transaction through every control layer with JSON events, thresholds, and evidence artefacts for a HIGH-tier AI system."
+---
+
 # Runtime Telemetry Reference
 
 **One transaction, end-to-end. Every control layer. Every log event. Every threshold.**

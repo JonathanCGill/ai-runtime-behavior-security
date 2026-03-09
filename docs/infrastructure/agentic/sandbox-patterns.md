@@ -1,3 +1,7 @@
+---
+description: "Sandbox patterns for agentic AI — containing code-generating agents with execution isolation, file system restrictions, network controls, and resource limits."
+---
+
 # Sandbox Patterns for Agentic AI
 
 > **Control Domain:** Agentic - Execution Controls  

@@ -1,3 +1,7 @@
+---
+description: "End-to-end MASO implementation examples for financial services, healthcare, and critical infrastructure — realistic multi-agent scenarios with PACE failure walkthroughs."
+---
+
 # Worked Examples
 
 **MASO Implementation for Financial Services, Healthcare, and Critical Infrastructure**

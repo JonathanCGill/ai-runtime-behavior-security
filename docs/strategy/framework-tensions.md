@@ -1,3 +1,7 @@
+---
+description: "Where the security framework supports strategy, where it constrains choices, and how to navigate the tension between risk management and business value creation."
+---
+
 # Framework Tensions
 
 *Where this framework supports strategy, where it's silent, and where it actively constrains strategic choices.*

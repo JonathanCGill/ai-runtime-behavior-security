@@ -1,3 +1,7 @@
+---
+description: "Infrastructure controls for AI network security — isolating model endpoints, vector stores, and agent tools into defined zones to limit blast radius."
+---
+
 # Network & Segmentation for AI Systems
 
 > **Control Domain:** Containment Controls  

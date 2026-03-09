@@ -1,3 +1,7 @@
+---
+description: "Multi-agent AI systems create accountability gaps that single-agent frameworks cannot address — coordination risks, trust propagation, and governance requirements."
+---
+
 # When Agents Talk to Agents
 
 *Multi-agent systems create accountability gaps that require careful governance*

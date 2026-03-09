@@ -1,3 +1,7 @@
+---
+description: "RAG security controls for ingestion, embedding, retrieval, and augmentation pipelines — protecting against document poisoning, embedding manipulation, and retrieval attacks."
+---
+
 # RAG Security Controls
 
 > Implementation guidance for securing Retrieval-Augmented Generation pipelines.

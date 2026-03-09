@@ -1,3 +1,7 @@
+---
+description: "Structured red team test scenarios for multi-agent AI systems — mapped to OWASP risks and MASO controls with execution steps and success criteria."
+---
+
 # Red Team Playbook
 
 **Structured Test Scenarios for Multi-Agent AI Systems**

@@ -1,3 +1,7 @@
+---
+description: "AIRS framework guide for CIOs and CTOs — governing AI across a technology portfolio with consistent classification, cost visibility, and risk management."
+---
+
 # Chief Information Officers
 
 **CIOs, CTOs, VP Technology - how to govern AI across your technology portfolio when every product runs different agents with different risk profiles.**

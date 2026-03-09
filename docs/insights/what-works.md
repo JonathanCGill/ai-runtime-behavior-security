@@ -1,3 +1,7 @@
+---
+description: "Where AI security controls are measurably reducing harm — evidence from breach data, industry surveys, and operational deployments that defence-in-depth works."
+---
+
 # What's Working: Where Controls Are Reducing Harm
 
 > *"People often call me an optimist, because I show them the enormous progress they didn't know about. That makes me angry. I'm not an optimist. That makes me sound naive. I'm a very serious 'possibilist'."*

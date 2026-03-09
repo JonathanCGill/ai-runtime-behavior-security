@@ -1,3 +1,7 @@
+---
+description: "Cost and latency analysis for the three-layer AI security pattern — per-layer budget impact at scale with optimisation strategies for guardrails, Judge, and human review."
+---
+
 # Cost and Latency
 
 > The three-layer pattern is not free. Budget for it.
