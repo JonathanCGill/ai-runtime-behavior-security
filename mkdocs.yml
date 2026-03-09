@@ -1,8 +1,8 @@
-site_name: AIRS
+site_name: AI-RS
 site_url: https://airuntimesecurity.co.za/
 site_description: >-
-  A practitioner's reference for runtime AI security — from single-model
-  deployments to autonomous multi-agent orchestration.
+  AI Runtime Security (AI-RS) — the discipline of monitoring, controlling,
+  and constraining AI system behaviour in production environments.
 site_author: Jonathan Gill
 
 edit_uri: ""
@@ -82,6 +82,7 @@ copyright: Copyright &copy; 2026 Jonathan Gill | MIT License
 
 nav:
   - Home: README.md
+  - What is AI-RS?: what-is-ai-runtime-security.md
 
   - Framework:
     - Architecture: ARCHITECTURE.md
