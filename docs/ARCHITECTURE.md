@@ -1,5 +1,5 @@
 ---
-description: "AIRS Framework architecture — layered runtime controls for single-agent and multi-agent AI systems."
+description: "AI-RS Framework architecture — layered runtime controls for single-agent and multi-agent AI systems."
 ---
 
 # Architecture Overview
