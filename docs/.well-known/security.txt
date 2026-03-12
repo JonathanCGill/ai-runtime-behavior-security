@@ -1,7 +1,7 @@
 # Security contact for airuntimesecurity.io
 # https://securitytxt.org/ — RFC 9116
 
-Contact: https://github.com/JonathanCGill/ai-runtime-behavior-security/security/advisories
+Contact: https://github.com/JonathanCGill/airuntimesecurity.io/security/advisories
 Policy: https://airuntimesecurity.io/SECURITY/
 Preferred-Languages: en
 Canonical: https://airuntimesecurity.io/.well-known/security.txt
