@@ -70,7 +70,7 @@ The [AIRS Framework](ARCHITECTURE.md) is a reference architecture for this disci
 - [Multi-Agent Security Operations (MASO)](maso/) for autonomous agent coordination (128 controls)
 - [Regulatory alignment](extensions/regulatory/eu-ai-act-crosswalk.md) with EU AI Act, ISO 42001, and NIST AI RMF
 - [Platform-specific patterns](infrastructure/reference/platform-patterns/aws-bedrock.md) for AWS, Azure, and Databricks
-- An [open-source SDK](sdk/) for runtime control implementation
+
 
 As AI systems grow more autonomous, the need for structured runtime security will only increase. The question is not whether organisations need AI Runtime Security. It is whether they implement it before or after the first production incident forces them to.
 
