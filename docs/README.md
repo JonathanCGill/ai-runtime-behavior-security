@@ -21,7 +21,7 @@ A risk-proportionate framework of control patterns that you select, adapt, or co
 
 <div class="pull-quote" markdown>
 
-> **"Reduce harm. Not paperwork."**
+> **"Reduce harm with minimal paperwork."**
 
 </div>
 
