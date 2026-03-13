@@ -1,6 +1,6 @@
 ---
 title: AI Runtime Security (AIRS)
-description: "AI Runtime Security (AIRS) is a framework for reducing risk in production AI systems through structured identification, assessment, and treatment of threats to confidentiality, integrity, and availability. It provides reference architecture and controls for implementing runtime AI security."
+description: "AI Runtime Security (AIRS) is a risk-proportionate framework for monitoring, controlling, and constraining AI system behaviour in production environments. It focuses on guardrails rather than gates, enabling organisations to consciously select controls based on risk appetite."
 template: home.html
 hide:
   - toc
@@ -23,7 +23,7 @@ during live operation.
 
 <div class="pull-quote" markdown>
 
-> **"The most dangerous AI failures look like normal responses."**
+> **"Reduce harm. Not paperwork."**
 
 </div>
 
@@ -32,6 +32,8 @@ during live operation.
 [AI Runtime Security](what-is-ai-runtime-security.md) is the practice of identifying, assessing, and treating threats to the confidentiality, integrity, and availability of AI systems during live operation. It applies defence-in-depth principles at the point of execution, treating deployment as the beginning of the risk lifecycle rather than the end of it.
 
 This is not a vendor product or a proprietary methodology. It is a field of practice, comparable to how disciplines like Zero Trust, DevSecOps, and Security Chaos Engineering emerged to address gaps that existing security models did not cover.
+
+The framework is built around a core principle: **controls should be proportionate to risk**. Not every AI use case carries the same risk. A summarisation tool for internal meeting notes does not need the same controls as a customer-facing advisory agent handling regulated financial data. AIRS gives you risk-oriented paths so you can apply the right level of control to each situation.
 
 **[What is AI Runtime Security? →](what-is-ai-runtime-security.md)**
 
@@ -43,17 +45,21 @@ Enterprises are deploying large language models into production at pace. Custome
 
 This misses the point. The risk that actually matters in a regulated enterprise is not what the model can do. It is what the model does do, at runtime, in production, when it is interacting with real data, real users, and real business processes. A model that passed every benchmark can still hallucinate a regulatory disclosure, leak PII through a poorly scoped tool call, or take an action in a multi-agent chain that no human authorised.
 
-Most enterprises have no runtime behavioral controls. They deploy, they monitor logs, and they rely on the model behaving as tested.
+Most enterprises have no runtime behavioural controls. They deploy. They monitor logs. They hope.
 
 ### Why existing approaches fall short
 
-Prompt engineering is fragile. Input and output filters catch known patterns but miss novel failures. Model evaluations are point-in-time. They tell you how the model behaved in a controlled test environment, not how it behaves in production when exposed to real users, real data, and unpredictable workflows. Guardrails on their own are a single point of failure.
+The typical response to AI risk is to add process. More review boards. More sign-off stages. More documentation requirements. This creates gates that slow delivery without meaningfully reducing harm. Teams learn to treat compliance as a paperwork exercise and the controls become performative rather than protective.
 
-In every other domain of enterprise security (network, identity, data) we layer controls. We assume any single control will fail and we design accordingly. AI security has not caught up. The industry is still treating deployment as the finish line when it is actually where the risk begins.
+On the technical side, prompt engineering is fragile. Input and output filters catch known patterns but miss novel failures. Model evaluations are point-in-time. They tell you how the model behaved in a controlled test environment, not how it behaves in production when exposed to real users, real data, and unpredictable workflows. Guardrails on their own are a single point of failure.
+
+In every other domain of enterprise security (network, identity, data) we layer controls. We assume any single control will fail and we design accordingly. AI security has not caught up.
 
 ### The AIRS approach
 
-AI Runtime Security applies defence-in-depth at the point of execution. Four core controls, each independent, each compensating for the others:
+AI Runtime Security applies defence-in-depth at the point of execution. It provides a menu of controls that you select based on the risk profile of each use case. Not everything needs every control. The framework gives AI product owners and business owners the ability to consciously deselect controls based on their risk appetite, rather than imposing a one-size-fits-all mandate.
+
+Four core controls, each independent, each compensating for the others:
 
 **Guardrails** enforce hard boundaries. Content policies, scope constraints, tool-use permissions. They are fast, deterministic, and limited. They catch the obvious failures.
 
@@ -63,7 +69,9 @@ AI Runtime Security applies defence-in-depth at the point of execution. Four cor
 
 **Circuit breakers** halt AI operations and activate safe fallbacks when controls themselves fail or when confirmed compromise is detected.
 
-Each layer operates independently. If guardrails miss something, the judge catches it. If the judge misjudges, human oversight provides the backstop. No single failure compromises the system. The principle is not new. Defence-in-depth has always been how we secure complex systems. What is new is applying it systematically to AI runtime behaviour.
+Each layer operates independently. If guardrails miss something, the judge catches it. If the judge misjudges, human oversight provides the backstop. No single failure compromises the system.
+
+The principle is not new. Defence-in-depth has always been how we secure complex systems. What is new is applying it systematically to AI runtime behaviour. What is also new is making the control selection explicit and risk-proportionate, so that teams can move fast where the risk is low and apply rigour where it genuinely matters.
 
 ### Why it matters for regulated industries
 
@@ -113,7 +121,7 @@ Securing autonomous agent coordination in multi-agent systems.
 
 <p class="learning-callout__title">New to the MASO Framework?</p>
 
-<p class="learning-callout__desc">AIruntimesecurity.co.za is a dedicated learning site for the Multi-Agent Security Operations framework, with structured guides, walkthroughs, and practical examples to help you get started.</p>
+<p class="learning-callout__desc">AIruntimesecurity.co.za is a dedicated learning site for the Multi-Agent Security Operations framework. Structured guides, walkthroughs, and practical examples to help you get started.</p>
 
 [Explore AIruntimesecurity.co.za](https://airuntimesecurity.co.za){ .md-button }
 
