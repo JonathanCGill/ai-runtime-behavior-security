@@ -168,11 +168,19 @@ def _get_model_caller(provider: str, model: str):
 
     api_key = os.environ.get(env_var)
     if not api_key:
+        key_urls = {
+            "openai": "https://platform.openai.com/api-keys",
+            "anthropic": "https://console.anthropic.com/settings/keys",
+        }
         console.print()
         console.print(Panel(
             f"No [bold]{env_var}[/bold] found in environment.\n\n"
-            f"Paste your API key below to continue, or set it for future runs:\n\n"
-            f"  [dim]export {env_var}=sk-...[/dim]",
+            f"Get an API key here: [link={key_urls[provider]}]{key_urls[provider]}[/link]\n\n"
+            f"Paste it below to continue, or set it for future runs:\n\n"
+            f"  [dim]export {env_var}=sk-...[/dim]\n\n"
+            f"[dim]Note: Live model tests make API calls that incur costs on your\n"
+            f"account (typically a few cents per run). The assessment works fine\n"
+            f"without --provider — live testing is entirely optional.[/dim]",
             title="API Key Required",
             border_style="yellow",
         ))

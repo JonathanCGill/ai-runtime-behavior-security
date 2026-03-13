@@ -304,6 +304,43 @@ For machine-readable output:
 airs assess --json
 ```
 
+### Live model testing (optional)
+
+You can also run the assessment against a live AI model. This sends test prompts (clean questions + injection/jailbreak attempts) through the full AIRS security pipeline and shows what gets blocked and what gets through.
+
+```bash
+# Test against OpenAI
+airs assess --provider openai --model gpt-4o --non-interactive --json
+
+# Test against Anthropic
+airs assess --provider anthropic --model claude-sonnet-4-20250514 --non-interactive --json
+
+# Omit --model to use the default for each provider
+airs assess --provider openai --non-interactive
+```
+
+**No API key? No problem.** The assessment works perfectly without `--provider`. Live model testing is entirely optional — it just adds a real-world demo of the guardrails in action.
+
+!!! info "API keys and costs"
+    Live model testing requires an API key from your chosen provider. If the key isn't set as an environment variable, `airs assess` will prompt you to paste it.
+
+    **Get an API key:**
+
+    - **OpenAI**: [platform.openai.com/api-keys](https://platform.openai.com/api-keys)
+    - **Anthropic**: [console.anthropic.com/settings/keys](https://console.anthropic.com/settings/keys)
+
+    **Set it for future runs:**
+
+    ```bash
+    # OpenAI
+    export OPENAI_API_KEY=sk-your-key-here
+
+    # Anthropic
+    export ANTHROPIC_API_KEY=sk-ant-your-key-here
+    ```
+
+    **Costs:** Each live test run makes a small number of API calls (4 short prompts). This typically costs a few cents on your account. No calls are made unless you explicitly use `--provider`.
+
 ## What's Next
 
 | Guide | Description |
