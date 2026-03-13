@@ -1,5 +1,5 @@
 ---
-description: "Infrastructure controls for AI secrets management — preventing credential exposure via context windows, tool results, and model outputs."
+description: "Infrastructure controls for AI secrets management: preventing credential exposure via context windows, tool results, and model outputs."
 ---
 
 # Secrets & Credentials for AI Systems

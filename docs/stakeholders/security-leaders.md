@@ -1,5 +1,5 @@
 ---
-description: "AIRS framework guide for CISOs and security directors — translating AI runtime risks into actionable security programme requirements."
+description: "AIRS framework guide for CISOs and security directors, focused on translating AI runtime risks into actionable security programme requirements."
 ---
 
 # Security Leaders

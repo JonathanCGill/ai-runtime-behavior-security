@@ -1,5 +1,5 @@
 ---
-description: "Principles for selecting the right LLM-as-Judge model — prioritising model diversity, conservative bias, and throughput to match transaction volume."
+description: "Principles for selecting the right LLM-as-Judge model: prioritising model diversity, conservative bias, and throughput to match transaction volume."
 ---
 
 # Judge Model Selection

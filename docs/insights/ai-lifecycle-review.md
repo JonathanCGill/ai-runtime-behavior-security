@@ -1,5 +1,5 @@
 ---
-description: "A systematic review of the AIRS framework against standard AI lifecycle phases — identifying where runtime security connects, where it leads, and where deliberate boundaries create gaps that adopters must fill."
+description: "A systematic review of the AIRS framework against standard AI lifecycle phases, identifying where runtime security connects, where it leads, and where deliberate boundaries create gaps that adopters must fill."
 ---
 
 # Review: The Framework Against the AI Lifecycle
@@ -10,7 +10,7 @@ description: "A systematic review of the AIRS framework against standard AI life
 
 The framework makes a clear scope claim: it secures AI systems at runtime. It does not claim to be a complete AI governance framework, a model development methodology, or a regulatory compliance programme. That honesty is a strength.
 
-But adopters don't deploy the framework in isolation. They deploy it within organisations that must govern the entire AI lifecycle — from initial concept through retirement. Standards like NIST AI RMF, ISO 42001, the EU AI Act, and NIST IR 8596 all define lifecycle obligations that extend well beyond runtime. When an organisation adopts the AIRS framework as its primary AI security reference, the gaps between "what the framework covers" and "what the lifecycle requires" become operational risks.
+But adopters don't deploy the framework in isolation. They deploy it within organisations that must govern the entire AI lifecycle, from initial concept through retirement. Standards like NIST AI RMF, ISO 42001, the EU AI Act, and NIST IR 8596 all define lifecycle obligations that extend well beyond runtime. When an organisation adopts the AIRS framework as its primary AI security reference, the gaps between "what the framework covers" and "what the lifecycle requires" become operational risks.
 
 This review maps those gaps systematically so that adopters know exactly what they're getting and what they still need to build.
 
@@ -30,13 +30,13 @@ Drawing from NIST AI RMF, ISO 42001 (Clause 8), and the EU AI Act, the AI lifecy
 
 ## Coverage Assessment
 
-### Phase 1: Concept & Alignment — Strong
+### Phase 1: Concept & Alignment (Strong)
 
 The framework's strategy section provides substantive coverage here, which is notable for a runtime-focused framework.
 
 **What's covered:**
 - [Business Alignment](../strategy/business-alignment.md) forces honest evaluation of whether the problem justifies investment
-- [Use Case Filter](../strategy/use-case-filter.md) asks "is AI the right tool?" before committing to AI — the framework's "first control"
+- [Use Case Filter](../strategy/use-case-filter.md) asks "is AI the right tool?" before committing to AI (the framework's "first control")
 - [From Idea to Production](../strategy/idea-to-production.md) Stage 1 defines the business case structure
 - [The Thread](../strategy/the-thread.md) connects strategy decisions to downstream control requirements
 
@@ -47,7 +47,7 @@ The framework's strategy section provides substantive coverage here, which is no
 
 **Assessment: 7/10.** Stronger than expected for a runtime framework. The concept-phase coverage is pragmatic and operational. The gaps are in areas the framework consciously defers to organisational governance.
 
-### Phase 2: Design & Definition — Strong
+### Phase 2: Design & Definition (Strong)
 
 This is where the framework genuinely excels. The connection between use case definition and control requirements is the framework's signature contribution.
 
@@ -67,12 +67,12 @@ This is where the framework genuinely excels. The connection between use case de
 
 **Assessment: 8/10.** The ten-question use case definition driving risk classification and control selection is genuinely well-engineered. The gap is that security-focused design doesn't address the full scope of "responsible AI" design that standards now expect.
 
-### Phase 3: Data & Development — Acknowledged Gap
+### Phase 3: Data & Development (Acknowledged Gap)
 
 This is the framework's most significant lifecycle gap, and it's intentional. The framework is explicitly a runtime security framework, not a model development framework.
 
 **What's covered:**
-- [Data Reality](../strategy/data-reality.md) evaluates data feasibility (existence, accessibility, quality, legality, usability) — but as a pre-commitment gate, not as development governance
+- [Data Reality](../strategy/data-reality.md) evaluates data feasibility (existence, accessibility, quality, legality, usability), but as a pre-commitment gate, not as development governance
 - [Supply Chain Controls](../maso/controls/supply-chain.md) address model provenance and AIBOM
 - [Build & Test](../strategy/idea-to-production.md) (Stage 6) covers implementing controls alongside the system
 
@@ -85,7 +85,7 @@ This is the framework's most significant lifecycle gap, and it's intentional. Th
 
 **Assessment: 3/10.** This is a known, intentional scope boundary. The framework explicitly states that model training and development are out of scope. However, adopters in regulated environments (EU AI Act, financial services) cannot treat this phase as optional. The gap must be filled by complementary frameworks or organisational processes.
 
-### Phase 4: Verification & Validation — Moderate
+### Phase 4: Verification & Validation (Moderate)
 
 The framework provides strong testing guidance for runtime controls but limited coverage of pre-deployment model evaluation.
 
@@ -98,14 +98,14 @@ The framework provides strong testing guidance for runtime controls but limited 
 
 **What's missing:**
 - **Conformity assessment.** EU AI Act Articles 40–49 require conformity assessment before high-risk AI can be placed on the market. The framework has no controls for this regulatory gate.
-- **Pre-market technical documentation.** Article 11 requires documentation "before placing on the market" — the framework addresses documentation as ongoing but not as a pre-deployment regulatory artefact.
+- **Pre-market technical documentation.** Article 11 requires documentation "before placing on the market"; the framework addresses documentation as ongoing but not as a pre-deployment regulatory artefact.
 - **Bias and fairness testing.** Pre-deployment evaluation of model outputs for demographic bias, fairness across protected characteristics, and disparate impact analysis.
 - **Model performance benchmarking.** Systematic evaluation against established benchmarks before production deployment.
-- **Independent validation.** Third-party or independent internal validation of model performance — not just control effectiveness.
+- **Independent validation.** Third-party or independent internal validation of model performance, not just control effectiveness.
 
-**Assessment: 5/10.** The control verification coverage is solid. The gap is in model-level evaluation — the framework tests whether controls work, but not whether the model itself is fit for purpose. This is consistent with its runtime focus but creates a lifecycle gap for regulated adopters.
+**Assessment: 5/10.** The control verification coverage is solid. The gap is in model-level evaluation: the framework tests whether controls work, but not whether the model itself is fit for purpose. This is consistent with its runtime focus but creates a lifecycle gap for regulated adopters.
 
-### Phase 5: Deployment — Strong
+### Phase 5: Deployment (Strong)
 
 The framework provides detailed, tier-appropriate deployment guidance.
 
@@ -117,13 +117,13 @@ The framework provides detailed, tier-appropriate deployment guidance.
 - Gradual rollout as an "absorb" control for blast radius containment
 
 **What's missing:**
-- **EU database registration.** Article 51 requires registration of high-risk AI systems — not addressed.
+- **EU database registration.** Article 51 requires registration of high-risk AI systems; not addressed.
 - **Operator training and certification.** While [Human Factors](../strategy/human-factors.md) identifies the skills gap, the deployment phase doesn't include structured operator training as a gate.
 - **User notification and transparency.** EU AI Act Article 13 requires informing users they're interacting with AI. The framework doesn't address deployment-time transparency obligations.
 
 **Assessment: 8/10.** Deployment guidance is practical, specific, and risk-proportionate. The tier-based rollout patterns and first-30-days plans are operationally mature. Gaps are primarily regulatory procedural requirements.
 
-### Phase 6: Operation & Monitoring — Exceptional
+### Phase 6: Operation & Monitoring (Exceptional)
 
 This is the framework's core domain and it shows. Runtime operation is covered with depth, specificity, and operational maturity that few other frameworks match.
 
@@ -146,7 +146,7 @@ This is the framework's core domain and it shows. Runtime operation is covered w
 
 **Assessment: 9/10.** This is the framework's reason for existence and it delivers. The three-layer pattern, PACE resilience, and operational governance model represent genuine contributions to the field. The only meaningful gap is regulatory framing of post-market obligations.
 
-### Phase 7: Retirement — Minimal
+### Phase 7: Retirement (Minimal)
 
 Retirement is addressed but not developed in depth.
 
@@ -183,7 +183,7 @@ NIST IR 8596 (Gap G2) and ISO 42001 expect contractual terms with AI suppliers. 
 
 ### 4. Regulatory Procedural Requirements
 
-The EU AI Act includes procedural requirements — conformity assessment, database registration, post-market surveillance reporting — that are administrative, not technical. The framework maps technical controls to regulatory intent but doesn't address the procedural compliance workflow.
+The EU AI Act includes procedural requirements (conformity assessment, database registration, post-market surveillance reporting) that are administrative, not technical. The framework maps technical controls to regulatory intent but doesn't address the procedural compliance workflow.
 
 ## Summary Scorecard
 
@@ -216,17 +216,17 @@ The weighting reflects that Phases 5–6 represent the majority of an AI system'
 - Fairness and ethics obligations are part of your governance requirements (add responsible AI framework)
 
 ### Recommended complementary frameworks:
-- **NIST AI RMF** — for the Govern and Map functions that require organisational (not technical) implementation
-- **ISO 42001** — for AI management system structure, especially Clauses 4–7 (context, leadership, support, planning)
-- **NIST SP 800-218A** — for secure software development practices applied to AI
-- **Responsible AI frameworks** (e.g., Microsoft RAI, Google AI Principles) — for fairness, ethics, and societal impact assessment
+- **NIST AI RMF**: for the Govern and Map functions that require organisational (not technical) implementation
+- **ISO 42001**: for AI management system structure, especially Clauses 4–7 (context, leadership, support, planning)
+- **NIST SP 800-218A**: for secure software development practices applied to AI
+- **Responsible AI frameworks** (e.g., Microsoft RAI, Google AI Principles): for fairness, ethics, and societal impact assessment
 
 ## Conclusion
 
-The AIRS framework is honest about its scope: runtime security for AI systems in production. Within that scope, it is exceptionally thorough — the three-layer defence model, PACE resilience, and operational governance guidance represent genuine advances in practical AI security.
+The AIRS framework is honest about its scope: runtime security for AI systems in production. Within that scope, it is exceptionally thorough: the three-layer defence model, PACE resilience, and operational governance guidance represent genuine advances in practical AI security.
 
 The lifecycle review reveals that the framework has also grown beyond its original scope, with the strategy section providing substantive coverage of Phases 1–2 and 5 that many "complete" AI governance frameworks lack. The eight-stage lifecycle in [From Idea to Production](../strategy/idea-to-production.md) and the narrative continuity in [The Thread](../strategy/the-thread.md) demonstrate awareness that runtime security cannot exist in isolation.
 
-The remaining gaps — training data governance, conformity assessment, fairness evaluation, and retirement depth — are real but manageable. They're manageable because the framework is clear about where it stops. An adopter who knows the boundaries can fill them. An adopter who assumes full lifecycle coverage will discover the gaps in production — or in a regulatory review.
+The remaining gaps (training data governance, conformity assessment, fairness evaluation, and retirement depth) are real but manageable. They're manageable because the framework is clear about where it stops. An adopter who knows the boundaries can fill them. An adopter who assumes full lifecycle coverage will discover the gaps in production, or in a regulatory review.
 
 The honest assessment: **this framework covers approximately 70% of the AI lifecycle, and covers that 70% better than almost anything else available.** The remaining 30% requires complementary governance that the framework's standards mappings help identify but don't implement.

@@ -1,4 +1,4 @@
-# LLM-as-Judge — Layer 2
+# LLM-as-Judge: Layer 2
 
 The Judge catches what guardrails miss. It evaluates AI outputs for subtle policy violations, hallucinations, inappropriate content, and novel attack patterns that can't be detected with pattern matching.
 
@@ -9,7 +9,7 @@ The Judge catches what guardrails miss. It evaluates AI outputs for subtle polic
 | Verdict | Meaning | Action |
 |---------|---------|--------|
 | **PASS** | Output is safe and policy-compliant | Deliver to user |
-| **REVIEW** | Uncertain or borderline — needs human review | Queue for review (or log, based on config) |
+| **REVIEW** | Uncertain or borderline, needs human review | Queue for review (or log, based on config) |
 | **ESCALATE** | Clearly violates policy or is dangerous | Block immediately, alert security team |
 
 ## Rule-Based Judge
@@ -30,8 +30,8 @@ result = await judge.evaluate(
 
 The rule-based judge catches:
 
-- **Excessive output length** — outputs exceeding the configured limit get `REVIEW`
-- **Refusal-then-comply** — when the model says "I can't do that" but then proceeds to do it anyway (a common jailbreak indicator)
+- **Excessive output length**: outputs exceeding the configured limit get `REVIEW`
+- **Refusal-then-comply**: when the model says "I can't do that" but then proceeds to do it anyway (a common jailbreak indicator)
 
 This is useful for:
 
@@ -200,8 +200,8 @@ The judge always evaluates if:
 
 The framework recommends deploying the judge in phases:
 
-1. **Shadow** — Judge evaluates but results are only logged, not acted on. Measure accuracy against human reviews.
-2. **Advisory** — Judge verdicts are shown to reviewers as a recommendation but don't block.
-3. **Operational** — Judge verdicts drive blocking and escalation.
+1. **Shadow**: Judge evaluates but results are only logged, not acted on. Measure accuracy against human reviews.
+2. **Advisory**: Judge verdicts are shown to reviewers as a recommendation but don't block.
+3. **Operational**: Judge verdicts drive blocking and escalation.
 
 Use the rule-based judge or FLAG mode guardrails to implement shadow mode without any judge infrastructure.

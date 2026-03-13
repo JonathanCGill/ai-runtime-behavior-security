@@ -1,17 +1,17 @@
 ---
 title: What is AI Runtime Security?
-description: "AI Runtime Security (AIRS) is the discipline of controlling and observing AI system behaviour during live operation — definition, scope, core controls, and relationship to existing security domains."
+description: "AI Runtime Security (AIRS) is the discipline of controlling and observing AI system behaviour during live operation. Definition, scope, core controls, and relationship to existing security domains."
 ---
 
 # What is AI Runtime Security?
 
 **AI Runtime Security (AIRS)** is the discipline of controlling and observing AI system behaviour during live operation, rather than relying solely on design-time testing or model evaluation.
 
-It addresses a gap that existing security disciplines do not cover: the period between deployment and decommission, when AI systems interact with real users, real data, and real business processes — and when their behaviour can diverge from what was tested, expected, or authorised.
+It addresses a gap that existing security disciplines do not cover: the period between deployment and decommission, when AI systems interact with real users, real data, and real business processes, and when their behaviour can diverge from what was tested, expected, or authorised.
 
 ## Definition
 
-> AI Runtime Security is the practice of monitoring, constraining, and governing AI system behaviour in production environments. It applies defence-in-depth principles at the point of execution, treating deployment as the beginning of the risk lifecycle rather than the end of it.
+> AI Runtime Security is the practice of identifying, assessing, and treating threats to the confidentiality, integrity, and availability of AI systems in production. It applies defence-in-depth principles at the point of execution, treating deployment as the beginning of the risk lifecycle rather than the end of it.
 
 ## Scope
 
@@ -33,13 +33,13 @@ This does not mean pre-deployment activities are unimportant. They are necessary
 
 AI Runtime Security is built on layered, independent controls that compensate for each other's weaknesses:
 
-**Guardrails** — fast, deterministic boundaries that enforce content policies, scope constraints, and tool-use permissions at the point of execution.
+**Guardrails** are fast, deterministic boundaries that enforce content policies, scope constraints, and tool-use permissions at the point of execution.
 
-**LLM-as-Judge** — an independent model that evaluates the primary model's outputs against policy, context, and intent before those outputs reach users or downstream systems.
+**LLM-as-Judge** is an independent model that evaluates the primary model's outputs against policy, context, and intent before those outputs reach users or downstream systems.
 
-**Human Oversight** — structured escalation paths, audit trails, and intervention capability for high-risk decisions and anomaly-triggered review.
+**Human Oversight** provides structured escalation paths, audit trails, and intervention capability for high-risk decisions and anomaly-triggered review.
 
-**Circuit Breakers** — emergency failsafes that halt AI operations and activate safe fallbacks when controls themselves fail or when confirmed compromise is detected.
+**Circuit Breakers** are emergency failsafes that halt AI operations and activate safe fallbacks when controls themselves fail or when confirmed compromise is detected.
 
 Each layer operates independently. No single failure compromises the system.
 
@@ -56,7 +56,7 @@ AI Runtime Security does not replace existing security disciplines. It extends t
 | Incident Response | Detection, containment, recovery | AI-specific failure modes, PACE resilience, circuit breaker activation |
 | Security Operations | Monitoring, alerting, investigation | AI behavioural telemetry, judge evaluation pipelines, drift detection |
 
-The principle is not new. Defence-in-depth has always been how we secure complex systems. What is new is applying it systematically to AI runtime behaviour — where the system's outputs are non-deterministic, context-dependent, and capable of autonomous action.
+The principle is not new. Defence-in-depth has always been how we secure complex systems. What is new is applying it systematically to AI runtime behaviour, where the system's outputs are non-deterministic, context-dependent, and capable of autonomous action.
 
 ## Why a Discipline, Not Just a Framework
 
@@ -64,7 +64,7 @@ Frameworks get copied. Categories get cited.
 
 AI Runtime Security is not a single product, vendor capability, or proprietary methodology. It is a field of practice that any organisation deploying AI systems in production needs to address.
 
-The [AIRS Framework](ARCHITECTURE.md) is a reference architecture for this discipline — one implementation model that provides controls, patterns, and operational guidance. But the discipline itself is broader than any single framework. It encompasses:
+The [AIRS Framework](ARCHITECTURE.md) is a reference architecture for this discipline: one implementation model that provides controls, patterns, and operational guidance. But the discipline itself is broader than any single framework. It encompasses:
 
 - The [Foundation Framework](foundations/) for single-agent deployments (80+ controls)
 - [Multi-Agent Security Operations (MASO)](maso/) for autonomous agent coordination (128 controls)
@@ -78,12 +78,12 @@ As AI systems grow more autonomous, the need for structured runtime security wil
 
 AI Runtime Security maps to established regulatory and standards frameworks:
 
-- **EU AI Act** — Article 9 (risk management), Article 14 (human oversight), Article 15 (accuracy and robustness)
-- **NIST AI RMF** — GOVERN, MAP, MEASURE, MANAGE functions
-- **ISO 42001** — Annex A controls for AI management systems
-- **OWASP LLM Top 10 (2025)** — full coverage across runtime control layers
-- **OWASP Agentic Top 10 (2026)** — multi-agent specific controls via MASO
+- **EU AI Act**: Article 9 (risk management), Article 14 (human oversight), Article 15 (accuracy and robustness)
+- **NIST AI RMF**: GOVERN, MAP, MEASURE, MANAGE functions
+- **ISO 42001**: Annex A controls for AI management systems
+- **OWASP LLM Top 10 (2025)**: full coverage across runtime control layers
+- **OWASP Agentic Top 10 (2026)**: multi-agent specific controls via MASO
 
 ---
 
-*[Jonathan C. Gill](https://www.linkedin.com/in/jonathancgill/) is a contributor to the AI Runtime Security discipline through the AIRS Framework at [airuntimesecurity.io](https://airuntimesecurity.io).*
+*[Jonathan C. Gill](https://www.linkedin.com/in/jonathancgill/) contributes to the AI Runtime Security discipline through the AIRS Framework at [airuntimesecurity.io](https://airuntimesecurity.io).*

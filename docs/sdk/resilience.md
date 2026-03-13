@@ -1,9 +1,9 @@
-# Circuit Breaker & PACE — Resilience
+# Circuit Breaker & PACE: Resilience
 
 Two mechanisms ensure your AI system degrades safely when things go wrong:
 
-- **Circuit Breaker** — emergency stop that blocks all AI traffic when failure rates spike
-- **PACE Controller** — structured degradation through four operational postures
+- **Circuit Breaker**: emergency stop that blocks all AI traffic when failure rates spike
+- **PACE Controller**: structured degradation through four operational postures
 
 ## Circuit Breaker
 
@@ -58,7 +58,7 @@ breaker = CircuitBreaker(
 
 ```python
 # Emergency stop
-breaker.trip("Incident #1234 — confirmed attack")
+breaker.trip("Incident #1234 - confirmed attack")
 
 # Resume after incident resolution
 breaker.reset()
@@ -84,7 +84,7 @@ def on_state_change(old_state, new_state):
     if new_state == CircuitState.OPEN:
         send_pagerduty_alert(f"Circuit breaker tripped: {old_state} → {new_state}")
     elif new_state == CircuitState.CLOSED:
-        send_slack_message("Circuit breaker recovered — AI traffic resumed")
+        send_slack_message("Circuit breaker recovered - AI traffic resumed")
 
 breaker = CircuitBreaker(on_state_change=on_state_change)
 ```
@@ -93,7 +93,7 @@ breaker = CircuitBreaker(on_state_change=on_state_change)
 
 ## PACE Controller
 
-PACE provides structured degradation — instead of binary on/off, your system moves through four postures with defined behaviors at each level.
+PACE provides structured degradation: instead of binary on/off, your system moves through four postures with defined behaviors at each level.
 
 ### The Four States
 
@@ -101,7 +101,7 @@ PACE provides structured degradation — instead of binary on/off, your system m
 |-------|------|-------|---------------|----------|
 | **Primary** | Normal operation | 5% sampling | No | Full |
 | **Alternate** | One control degraded | 100% evaluation | No | Reduced (no new tools) |
-| **Contingency** | Multiple controls degraded | 100% evaluation | Yes — all outputs | Minimal (read-only) |
+| **Contingency** | Multiple controls degraded | 100% evaluation | Yes, all outputs | Minimal (read-only) |
 | **Emergency** | Confirmed compromise | Disabled (AI off) | Yes | None (circuit breaker fires) |
 
 ### Basic Usage
@@ -116,7 +116,7 @@ assert pace.state == "primary"
 assert pace.requires_human_approval() == False
 
 # Something degrades → escalate one level
-pace.escalate("Judge service timeout — falling back to rule-based")
+pace.escalate("Judge service timeout - falling back to rule-based")
 assert pace.state == "alternate"
 
 # Getting worse → escalate again
@@ -133,7 +133,7 @@ assert pace.state == "emergency"
 
 - **Escalation is one-directional** during an incident: P → A → C → E
 - **You can jump directly to Emergency** with `pace.emergency()`
-- **You cannot escalate past Emergency** — calling `escalate()` at Emergency is a no-op
+- **You cannot escalate past Emergency**: calling `escalate()` at Emergency is a no-op
 
 ### Recovery
 

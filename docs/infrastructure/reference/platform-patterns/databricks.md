@@ -1,5 +1,5 @@
 ---
-description: "Databricks implementation patterns for AI security controls — zone-by-zone architecture using Mosaic AI Gateway, Unity Catalog, and Model Serving."
+description: "Databricks implementation patterns for AI security controls: zone-by-zone architecture using Mosaic AI Gateway, Unity Catalog, and Model Serving."
 ---
 
 # Databricks Implementation Patterns

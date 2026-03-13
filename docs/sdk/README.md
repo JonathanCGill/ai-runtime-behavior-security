@@ -6,13 +6,13 @@ The AIRS Python SDK implements the three-layer security architecture as a drop-i
 
 ## Bring Your Own Model
 
-The SDK is **model-agnostic**. It does not call AI models for you — it wraps security controls *around* your existing model calls. You continue using whatever model, provider, or framework you already have:
+The SDK is **model-agnostic**. It does not call AI models for you. It wraps security controls *around* your existing model calls. You continue using whatever model, provider, or framework you already have:
 
 ```python
 # 1. AIRS checks the input
 input_result = await pipeline.evaluate_input(request)
 
-# 2. You call YOUR model — OpenAI, Anthropic, Bedrock, Ollama, local, anything
+# 2. You call YOUR model - OpenAI, Anthropic, Bedrock, Ollama, local, anything
 ai_output = await your_model(request.input_text)
 
 # 3. AIRS checks the output
@@ -21,17 +21,17 @@ output_result = await pipeline.evaluate_output(request, response)
 
 AIRS only sees the text going in and the text coming out. It doesn't know or care which model you're using, how you're calling it, or what framework it runs on. This means it works with:
 
-- **Any model provider** — OpenAI, Anthropic, Google, Mistral, Cohere, local models
-- **Any framework** — LangChain, LlamaIndex, Haystack, raw API calls
-- **Any architecture** — single model, RAG, agents, multi-agent orchestration
+- **Any model provider**: OpenAI, Anthropic, Google, Mistral, Cohere, local models
+- **Any framework**: LangChain, LlamaIndex, Haystack, raw API calls
+- **Any architecture**: single model, RAG, agents, multi-agent orchestration
 
-The one exception is the optional **LLM-as-Judge**, which does call an OpenAI-compatible API to *evaluate* outputs. This is the judge model — a separate, independent model used for security evaluation, not your production model.
+The one exception is the optional **LLM-as-Judge**, which does call an OpenAI-compatible API to *evaluate* outputs. This is the judge model, a separate, independent model used for security evaluation, not your production model.
 
 ## What It Provides
 
 | Component | What It Does |
 |-----------|-------------|
-| **Guardrails** | Regex-based prompt injection detection, PII filtering, content policy — extensible |
+| **Guardrails** | Regex-based prompt injection detection, PII filtering, content policy (extensible) |
 | **LLM-as-Judge** | Rule-based (no API key) or LLM-based (OpenAI-compatible) output evaluation |
 | **Circuit Breaker** | Sliding-window failure tracking, auto-trip, manual emergency stop, recovery |
 | **PACE Controller** | State machine for structured degradation (Primary → Alternate → Contingency → Emergency) |
@@ -267,12 +267,12 @@ Classify your deployment and get a prioritized implementation plan:
 airs assess
 ```
 
-The tool asks about your deployment context — audience, data sensitivity, autonomy, architecture — and outputs:
+The tool asks about your deployment context (audience, data sensitivity, autonomy, architecture) and outputs:
 
 - **Risk tier** (LOW / MEDIUM / HIGH / CRITICAL)
 - **Risk factors and mitigations** specific to your deployment
-- **PACE resilience posture** — what happens at each degradation level
-- **Prioritized control list** — what to implement first
+- **PACE resilience posture**: what happens at each degradation level
+- **Prioritized control list**: what to implement first
 - **Code snippet** to get started
 
 For machine-readable output:
@@ -285,8 +285,8 @@ airs assess --json
 
 | Guide | Description |
 |-------|-------------|
-| [Guardrails](guardrails.md) | Layer 1 — input/output filtering, custom guardrails, chaining |
-| [Judge](judge.md) | Layer 2 — rule-based and LLM-based evaluation |
+| [Guardrails](guardrails.md) | Layer 1: input/output filtering, custom guardrails, chaining |
+| [Judge](judge.md) | Layer 2: rule-based and LLM-based evaluation |
 | [Circuit Breaker & PACE](resilience.md) | Emergency stop and structured degradation |
 | [Pipeline](pipeline.md) | Full pipeline orchestration and configuration |
 | [Agent Security](agents.md) | Identity propagation, delegation enforcement, tool access control |

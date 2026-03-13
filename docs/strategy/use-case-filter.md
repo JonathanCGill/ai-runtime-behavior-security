@@ -1,5 +1,5 @@
 ---
-description: "A structured decision flow for determining whether AI is the right solution — from traditional software to generative AI, with risk profiles for each exit point."
+description: "A structured decision flow for determining whether AI is the right solution, from traditional software to generative AI, with risk profiles for each exit point."
 ---
 
 # Use Case Filter

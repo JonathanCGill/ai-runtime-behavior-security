@@ -1,5 +1,5 @@
 ---
-description: "Why AI security must shift from pre-deployment testing to continuous runtime verification — non-deterministic systems cannot be fully validated before production."
+description: "Why AI security must shift from pre-deployment testing to continuous runtime verification. Non-deterministic systems cannot be fully validated before production."
 ---
 
 # Why AI Security Is a Runtime Problem

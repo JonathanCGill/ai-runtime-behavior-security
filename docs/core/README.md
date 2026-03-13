@@ -1,10 +1,10 @@
 ---
-description: Core implementation guide for AI behavioral controls including risk classification, control definitions, and specialised controls for production AI systems.
+description: Core implementation guide for AI runtime security controls including risk classification, control definitions, and specialised controls for production AI systems.
 ---
 
 # AI Runtime Security - Core
 
-Implementing behavioral controls for AI systems in production.
+Reducing risk to an acceptable level through structured identification, assessment, and treatment of threats to the confidentiality, integrity, and availability of AI systems in production.
 
 > *This is the implementation companion to the [Foundation overview](../foundations/). The Foundation explains the architecture and principles. This section contains the risk classification criteria, control definitions, checklists, and specialised controls you need to implement them.*
 

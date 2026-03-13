@@ -1,5 +1,5 @@
 ---
-description: "MASO integration guide for LangGraph, AutoGen, CrewAI, and AWS Bedrock Agents — mapping control requirements to framework-specific implementation patterns."
+description: "MASO integration guide for LangGraph, AutoGen, CrewAI, and AWS Bedrock Agents. Mapping control requirements to framework-specific implementation patterns."
 ---
 
 # Integration Guide

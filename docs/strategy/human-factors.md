@@ -1,5 +1,5 @@
 ---
-description: "The human constraints in AI strategy — skills gaps, learning capacity, available time, willingness to change, and the organisational readiness nobody audits."
+description: "The human constraints in AI strategy: skills gaps, learning capacity, available time, willingness to change, and the organisational readiness nobody audits."
 ---
 
 # Human Factors

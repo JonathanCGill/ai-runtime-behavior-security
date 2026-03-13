@@ -1,5 +1,5 @@
 ---
-description: "Comprehensive technical controls catalogue for agentic AI systems — identity, execution, data, observability, and supply chain controls with framework cross-references."
+description: "Comprehensive technical controls catalogue for agentic AI systems: identity, execution, data, observability, and supply chain controls with framework cross-references."
 ---
 
 # Technical Controls Catalogue for Agentic AI Systems
@@ -22,7 +22,7 @@ A comprehensive catalogue of technical controls for agentic AI systems, mapped t
 
 | Control | Framework Coverage | Reference |
 |---------|-------------------|-----------|
-| **Allow lists** — explicit enumeration of permitted tools, APIs, shell commands, file paths | TOOL-01 declare tool permissions explicitly (allowlist, not denylist), EC-1.2 tool allow-lists | [Tool Access Controls](../../infrastructure/agentic/tool-access-controls.md), [MASO Execution Control](../../maso/controls/execution-control.md) |
+| **Allow lists**: explicit enumeration of permitted tools, APIs, shell commands, file paths | TOOL-01 declare tool permissions explicitly (allowlist, not denylist), EC-1.2 tool allow-lists | [Tool Access Controls](../../infrastructure/agentic/tool-access-controls.md), [MASO Execution Control](../../maso/controls/execution-control.md) |
 | **Deny lists** (secondary, for known-bad patterns) | TOOL-01 operates as strict allowlist; deny lists are a secondary layer for known-bad tool parameter patterns | [Tool Access Controls](../../infrastructure/agentic/tool-access-controls.md), [Agentic Controls](../../core/agentic.md) |
 | **Tool call signing / integrity verification** | SC-2.2 signed tool manifests, SC-2.4 runtime integrity checks at load time | [MASO Supply Chain](../../maso/controls/supply-chain.md) |
 | **Read-only vs read-write tool separation** | TOOL-04 classifies actions by reversibility: read-only, reversible-write, irreversible-write, privileged | [Tool Access Controls](../../infrastructure/agentic/tool-access-controls.md#tool-04---classify-tool-actions-by-reversibility-and-impact) |
@@ -36,12 +36,12 @@ A comprehensive catalogue of technical controls for agentic AI systems, mapped t
 
 | Control | Framework Coverage | Reference |
 |---------|-------------------|-----------|
-| **Data boundaries** — namespaced access per agent, per task, per tenant | DP-2.3 infrastructure data fencing, DAT-04 access-controlled RAG retrieval, session isolation in memory controls | [MASO Data Protection](../../maso/controls/data-protection.md), [Data Protection](../../infrastructure/controls/data-protection.md) |
+| **Data boundaries**: namespaced access per agent, per task, per tenant | DP-2.3 infrastructure data fencing, DAT-04 access-controlled RAG retrieval, session isolation in memory controls | [MASO Data Protection](../../maso/controls/data-protection.md), [Data Protection](../../infrastructure/controls/data-protection.md) |
 | **Prompt injection filtering (input sanitisation at tool boundaries)** | PG-1.1 input sanitisation per agent on all input sources, LOG-06 injection detection | [MASO Prompt, Goal & Epistemic Integrity](../../maso/controls/prompt-goal-and-epistemic-integrity.md), [Agentic Controls](../../core/agentic.md) |
 | **Output filtering / DLP before data leaves agent context** | DAT-03 PII detection and redaction on I/O, DAT-06 response leakage prevention, DP-2.1 DLP on message bus | [Data Protection](../../infrastructure/controls/data-protection.md), [MASO Data Protection](../../maso/controls/data-protection.md) |
 | **PII/sensitive data redaction in tool outputs before returning to model** | DAT-03 PII detection at tool result boundary, SEC-01 tool result sanitisation, LOG-09 redaction in logs | [Data Protection](../../infrastructure/controls/data-protection.md#dat-03-pii-detection-and-redaction), [Secrets & Credentials](../../infrastructure/controls/secrets-and-credentials.md) |
 | **Data residency constraints (agent cannot exfiltrate to non-compliant endpoints)** | NET-04 agent egress restricted to declared endpoints, SAND-03 sandbox network restrictions with allowlisted destinations, egress proxy enforcement | [Network & Segmentation](../../infrastructure/controls/network-and-segmentation.md), [Sandbox Patterns](../../infrastructure/agentic/sandbox-patterns.md) |
-| **Secrets management integration (Vault, AWS Secrets Manager) — no credentials in context** | SEC-01 through SEC-08: centralised vault, out-of-band credential injection, context window isolation, IA-2.6 secrets exclusion from context | [Secrets & Credentials](../../infrastructure/controls/secrets-and-credentials.md), [MASO Identity & Access](../../maso/controls/identity-and-access.md) |
+| **Secrets management integration (Vault, AWS Secrets Manager), no credentials in context** | SEC-01 through SEC-08: centralised vault, out-of-band credential injection, context window isolation, IA-2.6 secrets exclusion from context | [Secrets & Credentials](../../infrastructure/controls/secrets-and-credentials.md), [MASO Identity & Access](../../maso/controls/identity-and-access.md) |
 | **Context window scrubbing (strip sensitive fields before handoff to sub-agents)** | Memory & context controls section 2 (context window hygiene), IA-2.6 secrets exclusion, DAT-02 data minimisation | [Memory & Context](../../core/memory-and-context.md), [Data Protection](../../infrastructure/controls/data-protection.md#dat-02-data-minimisation) |
 | **Grounding source restrictions (retrieval only from approved corpora)** | SUP-03 RAG data source integrity with source allowlisting, SC-1.4 RAG source inventory, DAT-04 access-controlled retrieval | [Supply Chain](../../infrastructure/agentic/supply-chain.md), [Data Protection](../../infrastructure/controls/data-protection.md#dat-04-access-controlled-rag-retrieval) |
 
@@ -49,7 +49,7 @@ A comprehensive catalogue of technical controls for agentic AI systems, mapped t
 
 | Control | Framework Coverage | Reference |
 |---------|-------------------|-----------|
-| **AI Bill of Materials (AI BOM)** — model provenance, version, training data lineage, fine-tune history | SUP-07 AI component inventory (AI-BOM), SC-2.1 AIBOM per agent with full component coverage | [Supply Chain](../../infrastructure/agentic/supply-chain.md), [MASO Supply Chain](../../maso/controls/supply-chain.md) |
+| **AI Bill of Materials (AI BOM)**: model provenance, version, training data lineage, fine-tune history | SUP-07 AI component inventory (AI-BOM), SC-2.1 AIBOM per agent with full component coverage | [Supply Chain](../../infrastructure/agentic/supply-chain.md), [MASO Supply Chain](../../maso/controls/supply-chain.md) |
 | **Plugin/tool registry with cryptographic signing** | SUP-05 tool registry with security assessment, SC-2.2 signed tool manifests | [Supply Chain](../../infrastructure/agentic/supply-chain.md#sup-05---audit-tool-and-plugin-supply-chain), [MASO Supply Chain](../../maso/controls/supply-chain.md) |
 | **Sub-agent provenance tracking (which model, which version, which orchestrator)** | DEL-02 complete audit trail with hop tracking, AIBOM specification per agent | [Delegation Chains](../../infrastructure/agentic/delegation-chains.md), [MASO Supply Chain](../../maso/controls/supply-chain.md) |
 | **Dependency scanning for agent frameworks (LangChain, AutoGen, CrewAI, etc.)** | SC-3.3 continuous dependency scanning, SUP-08 monitor for vulnerabilities | [MASO Supply Chain](../../maso/controls/supply-chain.md), [Supply Chain](../../infrastructure/agentic/supply-chain.md#sup-08---monitor-for-model-and-dependency-vulnerabilities) |
@@ -61,7 +61,7 @@ A comprehensive catalogue of technical controls for agentic AI systems, mapped t
 
 | Control | Framework Coverage | Reference |
 |---------|-------------------|-----------|
-| **Behavioral baselines** — expected tool call patterns, output distributions, token velocity | OB-2.2 continuous anomaly scoring against established baseline, LOG-05 behavioral drift detection | [MASO Observability](../../maso/controls/observability.md), [Logging & Observability](../../infrastructure/controls/logging-and-observability.md) |
+| **Behavioral baselines**: expected tool call patterns, output distributions, token velocity | OB-2.2 continuous anomaly scoring against established baseline, LOG-05 behavioral drift detection | [MASO Observability](../../maso/controls/observability.md), [Logging & Observability](../../infrastructure/controls/logging-and-observability.md) |
 | **Anomaly detection on tool call sequences (graph-based or statistical)** | OB-2.2 anomaly scoring model with tool usage pattern signal (0.15 weight), TOOL-05 burst detection | [MASO Observability](../../maso/controls/observability.md#anomaly-scoring-model-tier-2), [Tool Access Controls](../../infrastructure/agentic/tool-access-controls.md) |
 | **LLM-as-Judge for output validation** | EC-2.5 LLM-as-Judge gate, the core three-layer pattern (Layer 2) | [Controls](../../core/controls.md), [MASO Execution Control](../../maso/controls/execution-control.md) |
 | **Semantic drift detection (output meaning diverging from task intent)** | OB-2.3 drift detection with rolling baseline, EP-05 semantic drift in epistemic controls | [MASO Observability](../../maso/controls/observability.md), [MASO Prompt, Goal & Epistemic Integrity](../../maso/controls/prompt-goal-and-epistemic-integrity.md) |
@@ -74,7 +74,7 @@ A comprehensive catalogue of technical controls for agentic AI systems, mapped t
 
 | Control | Framework Coverage | Reference |
 |---------|-------------------|-----------|
-| **Execution sandboxes** — containerised tool execution (gVisor, Firecracker, Wasm) | SAND-01 isolated execution environments with four isolation levels (process, container, VM, remote sandbox) | [Sandbox Patterns](../../infrastructure/agentic/sandbox-patterns.md#sand-01-isolated-execution-environments) |
+| **Execution sandboxes**: containerised tool execution (gVisor, Firecracker, Wasm) | SAND-01 isolated execution environments with four isolation levels (process, container, VM, remote sandbox) | [Sandbox Patterns](../../infrastructure/agentic/sandbox-patterns.md#sand-01-isolated-execution-environments) |
 | **Network egress filtering per agent (allowlisted domains only)** | SAND-03 default no-network with allowlisted destinations, NET-04 egress proxy with declared endpoints | [Sandbox Patterns](../../infrastructure/agentic/sandbox-patterns.md#sand-03-network-restrictions), [Network & Segmentation](../../infrastructure/controls/network-and-segmentation.md) |
 | **Filesystem isolation (chroot, ephemeral volumes, no persistence by default)** | SAND-02 file system restricted to declared paths, read-only mounts, no system access | [Sandbox Patterns](../../infrastructure/agentic/sandbox-patterns.md#sand-02-file-system-restrictions) |
 | **Process isolation for code execution tools** | SAND-01 process isolation with seccomp, AppArmor; container and VM isolation for higher risk | [Sandbox Patterns](../../infrastructure/agentic/sandbox-patterns.md#sand-01-isolated-execution-environments) |
@@ -86,7 +86,7 @@ A comprehensive catalogue of technical controls for agentic AI systems, mapped t
 
 | Control | Framework Coverage | Reference |
 |---------|-------------------|-----------|
-| **Trust tiers** — orchestrator vs sub-agent vs tool with differentiated permissions | PA agent role classification (task, orchestrator, evaluator, observer), IA-2.5 orchestrator privilege separation | [Privileged Agent Governance](../../maso/controls/privileged-agent-governance.md), [MASO Identity & Access](../../maso/controls/identity-and-access.md) |
+| **Trust tiers**: orchestrator vs sub-agent vs tool with differentiated permissions | PA agent role classification (task, orchestrator, evaluator, observer), IA-2.5 orchestrator privilege separation | [Privileged Agent Governance](../../maso/controls/privileged-agent-governance.md), [MASO Identity & Access](../../maso/controls/identity-and-access.md) |
 | **Maximum delegation depth (prevent runaway spawning)** | DEL-03 maximum delegation depth per risk tier with gateway enforcement | [Delegation Chains](../../infrastructure/agentic/delegation-chains.md#del-03---limit-delegation-depth) |
 | **Agent spawn rate limits** | EC-1.3 per-agent rate limits, EC-2.3 blast radius caps; orchestrator spawn rate enforcement at the gateway | [MASO Execution Control](../../maso/controls/execution-control.md), [Multi-Agent Controls](../../core/multi-agent-controls.md) |
 | **Cross-agent communication signing / verification** | IA-2.3 mutual authentication with NHI certificates, IA-3.3 signed delegation contracts | [MASO Identity & Access](../../maso/controls/identity-and-access.md) |
@@ -99,7 +99,7 @@ A comprehensive catalogue of technical controls for agentic AI systems, mapped t
 
 | Control | Framework Coverage | Reference |
 |---------|-------------------|-----------|
-| **Memory access controls** — scoped read/write per agent instance | Memory & context persistent memory controls, DP-2.4 per-agent memory isolation | [Memory & Context](../../core/memory-and-context.md), [MASO Data Protection](../../maso/controls/data-protection.md) |
+| **Memory access controls**: scoped read/write per agent instance | Memory & context persistent memory controls, DP-2.4 per-agent memory isolation | [Memory & Context](../../core/memory-and-context.md), [MASO Data Protection](../../maso/controls/data-protection.md) |
 | **Memory TTL / automatic expiry** | DP-3.2 memory decay with maximum retention window and auto-purge | [MASO Data Protection](../../maso/controls/data-protection.md), [Memory & Context](../../core/memory-and-context.md) |
 | **Memory audit log (who wrote what, when)** | Memory & context section 3 persistent memory audit trail, OB-1.1 action audit log | [Memory & Context](../../core/memory-and-context.md), [MASO Observability](../../maso/controls/observability.md) |
 | **Semantic deduplication to prevent poisoned memory accumulation** | DP-3.3 cross-session memory analysis for poisoning indicators, memory content filtering before storage | [MASO Data Protection](../../maso/controls/data-protection.md), [Memory & Context](../../core/memory-and-context.md) |
@@ -166,7 +166,7 @@ Controls that are emerging or not yet standardised but worth tracking. The frame
 
 | Control | Description | Framework Status | Reference |
 |---------|-------------|------------------|-----------|
-| **Capability sealing** | Formal declaration of what a model version can and cannot do, enforced at runtime | Partially addressed through TOOL-01 (machine-readable manifests declare permitted capabilities) and SUP-01 (version pinning). The formal "sealing" concept — a cryptographically signed capability declaration that the runtime enforces — extends beyond current manifest-based controls | [Tool Access Controls](../../infrastructure/agentic/tool-access-controls.md), [Supply Chain](../../infrastructure/agentic/supply-chain.md) |
-| **Intent verification** | Confirming agent interpretation of a task before execution begins | Addressed by PA-2.1 (orchestrator intent verification by independent model), PG-1.6 (task clarity threshold — agents must flag ambiguity rather than interpret), and AG.1.1 (plan disclosure before execution) | [Privileged Agent Governance](../../maso/controls/privileged-agent-governance.md), [MASO Prompt, Goal & Epistemic Integrity](../../maso/controls/prompt-goal-and-epistemic-integrity.md) |
+| **Capability sealing** | Formal declaration of what a model version can and cannot do, enforced at runtime | Partially addressed through TOOL-01 (machine-readable manifests declare permitted capabilities) and SUP-01 (version pinning). The formal "sealing" concept (a cryptographically signed capability declaration that the runtime enforces) extends beyond current manifest-based controls | [Tool Access Controls](../../infrastructure/agentic/tool-access-controls.md), [Supply Chain](../../infrastructure/agentic/supply-chain.md) |
+| **Intent verification** | Confirming agent interpretation of a task before execution begins | Addressed by PA-2.1 (orchestrator intent verification by independent model), PG-1.6 (task clarity threshold, agents must flag ambiguity rather than interpret), and AG.1.1 (plan disclosure before execution) | [Privileged Agent Governance](../../maso/controls/privileged-agent-governance.md), [MASO Prompt, Goal & Epistemic Integrity](../../maso/controls/prompt-goal-and-epistemic-integrity.md) |
 | **Economic circuit breakers** | Cost-based kill switches as a practical proxy for runaway behavior | Addressed by OB-2.5 (cost and consumption monitoring with alerting thresholds), EC-2.3 (blast radius caps including financial value), and circuit breaker patterns | [MASO Observability](../../maso/controls/observability.md), [MASO Execution Control](../../maso/controls/execution-control.md) |
 

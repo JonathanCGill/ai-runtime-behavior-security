@@ -1,5 +1,5 @@
 ---
-description: "Integrating AI security monitoring with existing SOC operations — alert taxonomy, SIEM integration, runbooks, and analyst training for AI-specific incidents."
+description: "Integrating AI security monitoring with existing SOC operations: alert taxonomy, SIEM integration, runbooks, and analyst training for AI-specific incidents."
 ---
 
 # SOC Integration for AI Systems

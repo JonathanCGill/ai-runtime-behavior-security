@@ -7,9 +7,9 @@
 
 ## How to Read This Page
 
-The [Incident Tracker](maso/threat-intelligence/incident-tracker.md) is organised by incident — "here's what happened, here are the controls." This page inverts that view. It's organised by **control** — "here's the control, here are the real-world incidents it addresses."
+The [Incident Tracker](maso/threat-intelligence/incident-tracker.md) is organised by incident: "here's what happened, here are the controls." This page inverts that view. It's organised by **control**: "here's the control, here are the real-world incidents it addresses."
 
-Each control is mapped to the incidents it would have prevented or detected, with the specific mechanism explained. Controls aligned to more incidents address a wider range of known attack patterns. Controls aligned to zero incidents are flagged — they may still be valuable, but they're based on threat modelling rather than observed attacks.
+Each control is mapped to the incidents it would have prevented or detected, with the specific mechanism explained. Controls aligned to more incidents address a wider range of known attack patterns. Controls aligned to zero incidents are flagged. They may still be valuable, but they're based on threat modelling rather than observed attacks.
 
 **Validation does not mean proven.** It means the control addresses a documented attack pattern. Whether the control would have *actually* prevented the incident in your environment depends on your implementation. This is retroactive analysis, not a guarantee.
 
@@ -42,7 +42,7 @@ These controls are referenced across the highest number of documented incidents.
 | 4 | **Tool scoping / capability constraints** | 5 of 9 | INC-01, 02, 04, 05, 06 |
 | 5 | **Audit logging** | 5 of 9 | INC-01, 04, 06, 07, 09 |
 
-**What this tells you:** If you implement nothing else, input guardrails and an independent Judge gate address the widest range of documented attack patterns. Circuit breakers provide the safety net when prevention fails. This is consistent with the framework's core architecture — Guardrails prevent, Judge detects, Circuit breaker contains.
+**What this tells you:** If you implement nothing else, input guardrails and an independent Judge gate address the widest range of documented attack patterns. Circuit breakers provide the safety net when prevention fails. This is consistent with the framework's core architecture: Guardrails prevent, Judge detects, Circuit breaker contains.
 
 ## Control-by-Control Validation
 
@@ -52,7 +52,7 @@ These controls are referenced across the highest number of documented incidents.
 
 | Incident | How This Control Helps |
 |----------|----------------------|
-| INC-01: Copilot EchoLeak | Email body and attachments tagged as untrusted data, never instruction — prevents LLM from treating email content as executable commands |
+| INC-01: Copilot EchoLeak | Email body and attachments tagged as untrusted data, never instruction. Prevents LLM from treating email content as executable commands |
 
 **Why this matters:** The root cause of indirect prompt injection is that AI systems treat all input as potential instruction. Untrusted content isolation enforces the instruction/data boundary at the protocol level. This control is architecturally simple but addresses the most common AI attack primitive.
 
@@ -60,7 +60,7 @@ These controls are referenced across the highest number of documented incidents.
 
 **Incident alignment: Strong (7 incidents) · Confidence: High**
 
-The single most broadly validated control. Addresses the widest range of attack vectors because prompt injection — direct and indirect — is the most common AI attack primitive.
+The single most broadly validated control. Addresses the widest range of attack vectors because prompt injection (direct and indirect) is the most common AI attack primitive.
 
 | Incident | Attack Vector | How This Control Helps |
 |----------|--------------|----------------------|
@@ -95,7 +95,7 @@ The single most broadly validated control. Addresses the widest range of attack 
 | Incident | How This Control Helps |
 |----------|----------------------|
 | INC-04: LangChain Experimental | Only explicitly approved tools and functions available to the LLM; all others denied by default |
-| INC-06: Claude Code Interpreter | Capability segmentation — file read capabilities and network capabilities operate under separate permission grants |
+| INC-06: Claude Code Interpreter | Capability segmentation: file read capabilities and network capabilities operate under separate permission grants |
 
 ### Structured Query Enforcement / Deterministic Query Builder
 
@@ -103,7 +103,7 @@ The single most broadly validated control. Addresses the widest range of attack 
 
 | Incident | How This Control Helps |
 |----------|----------------------|
-| INC-03: LangChain SQLi | LLM selects from parameterised query templates rather than composing raw queries — eliminates arbitrary query composition entirely |
+| INC-03: LangChain SQLi | LLM selects from parameterised query templates rather than composing raw queries, eliminating arbitrary query composition entirely |
 
 **Why this is deterministic:** This control doesn't depend on probabilistic detection. The LLM physically cannot compose arbitrary SQL/Cypher because the architecture only allows parameterised queries. This is the gold standard for AI-to-database interaction security.
 
@@ -113,7 +113,7 @@ The single most broadly validated control. Addresses the widest range of attack 
 
 | Incident | How This Control Helps |
 |----------|----------------------|
-| INC-03: LangChain SQLi | Database connection uses minimum required permissions (read-only where possible) — limits blast radius even if a query escapes validation |
+| INC-03: LangChain SQLi | Database connection uses minimum required permissions (read-only where possible). Limits blast radius even if a query escapes validation |
 
 ### Execution Sandboxing
 
@@ -121,7 +121,7 @@ The single most broadly validated control. Addresses the widest range of attack 
 
 | Incident | How This Control Helps |
 |----------|----------------------|
-| INC-04: LangChain Experimental | Code execution occurs in an isolated sandbox with no access to the host system — even if code execution is triggered, blast radius is contained |
+| INC-04: LangChain Experimental | Code execution occurs in an isolated sandbox with no access to the host system. Even if code execution is triggered, blast radius is contained |
 
 ### LLM-as-Judge Gate (Various Specialisations)
 
@@ -135,10 +135,10 @@ The second most broadly validated control category. Deployed as specialised judg
 | INC-02: Copilot Reprompt | Exfiltration detection judge | Evaluates outbound requests for signs of data leakage |
 | INC-05: HackerOne exfil | Dual-control (Judge as second factor) | Actions involving sensitive data transmission require Judge confirmation |
 | INC-06: Claude Code Interpreter | Sensitive data exfil judge | Evaluates code interpreter actions for patterns consistent with data exfiltration |
-| INC-07: Air Canada hallucination | Citation verification judge | Checks that cited policies match the actual source documents — catches hallucinated citations |
-| INC-08: NYC MyCity | Regulatory output validator | Evaluates legal/regulatory outputs against source law — catches contradictions |
+| INC-07: Air Canada hallucination | Citation verification judge | Checks that cited policies match the actual source documents and catches hallucinated citations |
+| INC-08: NYC MyCity | Regulatory output validator | Evaluates legal/regulatory outputs against source law and catches contradictions |
 
-**Important distinction:** For injection-based incidents (INC-01, 02, 05, 06), the Judge provides High-confidence defence as an independent second layer. For hallucination incidents (INC-07, 08), the Judge significantly reduces risk but can't fully eliminate it — subtle hallucinations that are semantically close to the source material may evade verification.
+**Important distinction:** For injection-based incidents (INC-01, 02, 05, 06), the Judge provides High-confidence defence as an independent second layer. For hallucination incidents (INC-07, 08), the Judge significantly reduces risk but can't fully eliminate it. Subtle hallucinations that are semantically close to the source material may evade verification.
 
 ### Grounded Response Requirement / Mandatory Source Citation
 
@@ -149,7 +149,7 @@ The second most broadly validated control category. Deployed as specialised judg
 | INC-07: Air Canada hallucination | Constrains chatbot to cite verified policy documents rather than generating interpretations |
 | INC-08: NYC MyCity | Constrains chatbot to retrieve and cite actual regulatory text, not generate interpretations |
 
-**Why Moderate confidence:** Grounding eliminates the most egregious hallucinations — the Air Canada chatbot couldn't have invented a non-existent policy if it was constrained to citing the actual policy document. But generative models can still produce subtle misinterpretations of grounded content. The framework's position is that policy and regulatory advice should use retrieval-only architectures where possible.
+**Why Moderate confidence:** Grounding eliminates the most egregious hallucinations. The Air Canada chatbot couldn't have invented a non-existent policy if it was constrained to citing the actual policy document. But generative models can still produce subtle misinterpretations of grounded content. The framework's position is that policy and regulatory advice should use retrieval-only architectures where possible.
 
 ### Human Escalation for High-Impact Outputs
 
@@ -166,7 +166,7 @@ The second most broadly validated control category. Deployed as specialised judg
 
 | Incident | How This Control Helps |
 |----------|----------------------|
-| INC-09: Chevrolet $1 | The LLM can suggest prices and offers but has no ability to make binding commitments — all commitments flow through a deterministic approval system |
+| INC-09: Chevrolet $1 | The LLM can suggest prices and offers but has no ability to make binding commitments. All commitments flow through a deterministic approval system |
 
 **Why this is deterministic:** Authority separation isn't a probabilistic control. The LLM physically cannot make binding commercial commitments because the architecture separates proposal from commitment. The $1 car offer would never have been confirmable because no approval workflow would have validated it.
 
@@ -176,7 +176,7 @@ The second most broadly validated control category. Deployed as specialised judg
 
 | Incident | How This Control Helps |
 |----------|----------------------|
-| INC-09: Chevrolet $1 | All pricing and offer responses validated against current business rules before being served — selling a $50K vehicle for $1 fails policy validation |
+| INC-09: Chevrolet $1 | All pricing and offer responses validated against current business rules before being served. Selling a $50K vehicle for $1 fails policy validation |
 
 ### Outbound Data Classification / Egress Anomaly Detection
 
@@ -238,31 +238,31 @@ The second most broadly validated control category. Deployed as specialised judg
 
 | Category | Controls Validated | Coverage Pattern |
 |----------|--------------------|-----------------|
-| Input controls (guardrails, sanitisation, isolation) | 3 | Broad — address 7+ incidents |
-| Execution controls (tool scoping, sandboxing, query enforcement) | 5 | Moderate — address 1–5 incidents each |
-| Judge / evaluation controls | 3 specialisations | Broad — address 6 incidents across specialisations |
-| Output controls (grounding, authority separation) | 3 | Moderate — address 1–2 incidents each |
-| Detection controls (anomaly, egress, audit) | 3 | Broad — address 3–5 incidents each |
-| Containment controls (circuit breaker) | 2 | Broad — address 5 incidents |
+| Input controls (guardrails, sanitisation, isolation) | 3 | Broad: addresses 7+ incidents |
+| Execution controls (tool scoping, sandboxing, query enforcement) | 5 | Moderate: addresses 1–5 incidents each |
+| Judge / evaluation controls | 3 specialisations | Broad: addresses 6 incidents across specialisations |
+| Output controls (grounding, authority separation) | 3 | Moderate: addresses 1–2 incidents each |
+| Detection controls (anomaly, egress, audit) | 3 | Broad: addresses 3–5 incidents each |
+| Containment controls (circuit breaker) | 2 | Broad: addresses 5 incidents |
 
 ### Confidence Distribution
 
 | Confidence | Incident Count | Pattern |
 |------------|---------------|---------|
-| **High** | 7 of 9 | Injection, exfiltration, unauthorised agency — deterministic controls directly prevent |
-| **Moderate** | 2 of 9 | Both hallucination incidents — inherently probabilistic failure class |
+| **High** | 7 of 9 | Injection, exfiltration, unauthorised agency. Deterministic controls directly prevent |
+| **Moderate** | 2 of 9 | Both hallucination incidents. Inherently probabilistic failure class |
 
 ### What's Not Yet Validated
 
 Controls in these categories are based on threat modelling and architectural reasoning, not observed incidents:
 
-- **Epistemic integrity** (claim provenance enforcement, self-referential evidence prohibition, uncertainty preservation) — These address multi-agent amplification of misinformation. No public incident reports exist because organisations either aren't detecting them or aren't disclosing them. The threat model is strong, but the evidence is research-based, not incident-based.
+- **Epistemic integrity** (claim provenance enforcement, self-referential evidence prohibition, uncertainty preservation). These address multi-agent amplification of misinformation. No public incident reports exist because organisations either aren't detecting them or aren't disclosing them. The threat model is strong, but the evidence is research-based, not incident-based.
 
-- **Inter-agent communication controls** (message source tagging, inter-agent injection detection) — These address the AI worm attack class (Morris II proof-of-concept). The PoC is documented but no production incident has been reported yet.
+- **Inter-agent communication controls** (message source tagging, inter-agent injection detection). These address the AI worm attack class (Morris II proof-of-concept). The PoC is documented but no production incident has been reported yet.
 
-- **Advanced identity and access** (zero-trust agent credentials, non-human identity lifecycle) — These extend standard NHI patterns to AI agents. The patterns are proven in traditional service-to-service authentication; the extension to AI agents is logical but not yet documented in public incidents.
+- **Advanced identity and access** (zero-trust agent credentials, non-human identity lifecycle). These extend standard NHI patterns to AI agents. The patterns are proven in traditional service-to-service authentication; the extension to AI agents is logical but not yet documented in public incidents.
 
-- **Tier 3 autonomous controls** (self-healing PACE, adversarial testing suites, independent kill switch) — These are designed for fully autonomous multi-agent systems, which are still rare in production. The controls are architecturally sound but won't be incident-validated until autonomous systems are common enough to be attacked.
+- **Tier 3 autonomous controls** (self-healing PACE, adversarial testing suites, independent kill switch). These are designed for fully autonomous multi-agent systems, which are still rare in production. The controls are architecturally sound but won't be incident-validated until autonomous systems are common enough to be attacked.
 
 ## How This Page Evolves
 

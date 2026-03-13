@@ -1,5 +1,5 @@
 ---
-description: "MASO data protection controls — classifying and controlling data flows between agents, securing shared knowledge bases, and preventing cross-agent data leakage."
+description: "MASO data protection controls: classifying and controlling data flows between agents, securing shared knowledge bases, and preventing cross-agent data leakage."
 ---
 
 # MASO Control Domain: Data Protection

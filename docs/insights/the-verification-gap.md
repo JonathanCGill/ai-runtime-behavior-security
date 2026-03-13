@@ -1,5 +1,5 @@
 ---
-description: "Why current AI safety approaches cannot confirm ground truth — and what emerging techniques like formal verification and runtime proofs may fill the gap."
+description: "Why current AI safety approaches cannot confirm ground truth, and what emerging techniques like formal verification and runtime proofs may fill the gap."
 ---
 
 # The Verification Gap

@@ -109,7 +109,7 @@ Every AI deployment must answer these before production:
 4. **What's the fallback path?**
 5. **Has it been tested?**
 6. **Is this multi-agent?** If yes → apply [MASO controls](maso/) on top of the foundation.
-7. **What happens when context fills up?** Token exhaustion degrades guardrails, increases hallucinations, and weakens instruction-following — and degrades the Judge monitoring it at the same time. Define context rotation strategy, alerting thresholds (70/85/95%), and fail-closed behavior. See [MASO OP-04](maso/controls/risk-register.md).
+7. **What happens when context fills up?** Token exhaustion degrades guardrails, increases hallucinations, and weakens instruction-following, and it degrades the Judge monitoring it at the same time. Define context rotation strategy, alerting thresholds (70/85/95%), and fail-closed behavior. See [MASO OP-04](maso/controls/risk-register.md).
 
 If you can answer all seven, you're ready. If you can't, you're not.
 

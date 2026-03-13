@@ -1,5 +1,5 @@
 ---
-description: Runtime behavioral security controls for single-model AI deployments. Guardrails, LLM-as-Judge, and human oversight scaled to risk tiers.
+description: Runtime security controls for single-model AI deployments. A structured approach to reducing AI risk through layered controls scaled to risk tiers.
 ---
 
 # AI Runtime Security - Single-Agent Controls

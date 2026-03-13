@@ -1,5 +1,5 @@
 ---
-description: "The Multi-Agent Security Operations (MASO) framework — a PACE-driven approach to securing multi-model agent orchestration with layered defence and inter-agent controls."
+description: "The Multi-Agent Security Operations (MASO) framework: a PACE-driven approach to securing multi-model agent orchestration with layered defence and inter-agent controls."
 ---
 
 # Multi-Agent Security Operations (MASO) Framework
@@ -74,9 +74,9 @@ Orchestrators, planners, and meta-agents hold disproportionate authority - they 
 
 ### 7. [Objective Intent](controls/objective-intent.md)
 
-Every agent, judge, and workflow operates against a developer-declared Objective Intent Specification (OISpec) — a structured, version-controlled contract defining what the agent should accomplish and within what parameters. Tactical judges evaluate individual agents against their OISpecs. A strategic evaluation agent assesses whether combined agent actions satisfy the workflow's aggregated intent. Judges are themselves monitored against their own OISpecs. This is the bridge from fault detection to behavioral assurance: from catching things that go wrong to verifying that things go right.
+Every agent, judge, and workflow operates against a developer-declared Objective Intent Specification (OISpec), a structured, version-controlled contract defining what the agent should accomplish and within what parameters. Tactical judges evaluate individual agents against their OISpecs. A strategic evaluation agent assesses whether combined agent actions satisfy the workflow's aggregated intent. Judges are themselves monitored against their own OISpecs. This is the bridge from fault detection to behavioral assurance: from catching things that go wrong to verifying that things go right.
 
-*Covers: Intent alignment at all levels — individual agent compliance (tactical), aggregate workflow compliance (strategic), and judge behavioral monitoring (lateral). Most critical at HIGH and CRITICAL risk tiers.*
+*Covers: Intent alignment at all levels: individual agent compliance (tactical), aggregate workflow compliance (strategic), and judge behavioral monitoring (lateral). Most critical at HIGH and CRITICAL risk tiers.*
 
 ## OWASP Risk Coverage
 
@@ -274,7 +274,7 @@ Three-phase roadmap: Extend (0–6 months) → Architect (6–18 months) → Par
 
 <p class="learning-callout__title">Learn the MASO Framework</p>
 
-<p class="learning-callout__desc">AIruntimesecurity.co.za provides structured learning paths for the Multi-Agent Security Operations framework — from core concepts through to implementation.</p>
+<p class="learning-callout__desc">AIruntimesecurity.co.za provides structured learning paths for the Multi-Agent Security Operations framework, from core concepts through to implementation.</p>
 
 [Explore AIruntimesecurity.co.za](https://airuntimesecurity.co.za){ .md-button }
 

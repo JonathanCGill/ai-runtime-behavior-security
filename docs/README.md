@@ -1,6 +1,6 @@
 ---
 title: AI Runtime Security (AIRS)
-description: "AI Runtime Security (AIRS) is the framework for monitoring, controlling, and constraining AI system behaviour in production environments. The AIRS Framework provides reference architecture and controls for implementing runtime AI security."
+description: "AI Runtime Security (AIRS) is a framework for reducing risk in production AI systems through structured identification, assessment, and treatment of threats to confidentiality, integrity, and availability. It provides reference architecture and controls for implementing runtime AI security."
 template: home.html
 hide:
   - toc
@@ -13,10 +13,11 @@ comments: false
 
 <div class="home-subtitle" markdown>
 
-**A framework for controlling AI behaviour in production.**
+**A structured approach to reducing AI risk in production.**
 
-A framework for monitoring, validating, and controlling
-AI system behaviour during live operation.
+A framework for identifying, assessing, and treating threats
+to the confidentiality, integrity, and availability of AI systems
+during live operation.
 
 </div>
 
@@ -28,7 +29,7 @@ AI system behaviour during live operation.
 
 ## The Framework
 
-[AI Runtime Security](what-is-ai-runtime-security.md) is the practice of monitoring, constraining, and governing AI system behaviour in production environments. It applies defence-in-depth principles at the point of execution, treating deployment as the beginning of the risk lifecycle rather than the end of it.
+[AI Runtime Security](what-is-ai-runtime-security.md) is the practice of identifying, assessing, and treating threats to the confidentiality, integrity, and availability of AI systems during live operation. It applies defence-in-depth principles at the point of execution, treating deployment as the beginning of the risk lifecycle rather than the end of it.
 
 This is not a vendor product or a proprietary methodology. It is a field of practice, comparable to how disciplines like Zero Trust, DevSecOps, and Security Chaos Engineering emerged to address gaps that existing security models did not cover.
 
@@ -42,7 +43,7 @@ Enterprises are deploying large language models into production at pace. Custome
 
 This misses the point. The risk that actually matters in a regulated enterprise is not what the model can do. It is what the model does do, at runtime, in production, when it is interacting with real data, real users, and real business processes. A model that passed every benchmark can still hallucinate a regulatory disclosure, leak PII through a poorly scoped tool call, or take an action in a multi-agent chain that no human authorised.
 
-Most enterprises have no runtime behavioral controls. They deploy. They monitor logs. They hope.
+Most enterprises have no runtime behavioral controls. They deploy, they monitor logs, and they rely on the model behaving as tested.
 
 ### Why existing approaches fall short
 
@@ -68,7 +69,7 @@ Each layer operates independently. If guardrails miss something, the judge catch
 
 Banking supervisors, data protection authorities, and AI regulators are all converging on the same expectation: you must be able to demonstrate that your AI systems behave within defined boundaries, and that you have controls to detect and respond when they do not.
 
-The AIRS Framework maps directly to EU AI Act requirements for high-risk AI systems, NIST AI RMF functions, ISO 42001 controls, and sector-specific expectations from banking regulators. It is not a compliance checkbox. It is an operational architecture that produces the evidence compliance requires. The controls are the compliance. That is the point.
+The AIRS Framework maps directly to EU AI Act requirements for high-risk AI systems, NIST AI RMF functions, ISO 42001 controls, and sector-specific expectations from banking regulators. It is not a compliance checkbox. It is an operational architecture that produces the evidence compliance requires. Effective controls generate compliance evidence as a by-product of their normal operation.
 
 ### Where to go from here
 
@@ -112,7 +113,7 @@ Securing autonomous agent coordination in multi-agent systems.
 
 <p class="learning-callout__title">New to the MASO Framework?</p>
 
-<p class="learning-callout__desc">AIruntimesecurity.co.za is a dedicated learning site for the Multi-Agent Security Operations framework — structured guides, walkthroughs, and practical examples to help you get started.</p>
+<p class="learning-callout__desc">AIruntimesecurity.co.za is a dedicated learning site for the Multi-Agent Security Operations framework, with structured guides, walkthroughs, and practical examples to help you get started.</p>
 
 [Explore AIruntimesecurity.co.za](https://airuntimesecurity.co.za){ .md-button }
 

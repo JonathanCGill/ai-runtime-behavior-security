@@ -1,5 +1,5 @@
 ---
-description: "Tool access controls for agentic AI — declaring, mediating, constraining, and logging all agent tool invocations through a deterministic authorisation gateway."
+description: "Tool access controls for agentic AI: declaring, mediating, constraining, and logging all agent tool invocations through a deterministic authorisation gateway."
 ---
 
 # Tool Access Controls

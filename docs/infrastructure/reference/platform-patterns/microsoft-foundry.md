@@ -1,5 +1,5 @@
 ---
-description: "Microsoft Azure and Foundry implementation patterns for AI security controls — zone-by-zone architecture mapping with Entra ID, Content Safety, and Sentinel."
+description: "Microsoft Azure and Foundry implementation patterns for AI security controls: zone-by-zone architecture mapping with Entra ID, Content Safety, and Sentinel."
 ---
 
 # Microsoft Foundry Implementation Patterns

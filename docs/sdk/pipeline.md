@@ -33,7 +33,7 @@ pipeline = SecurityPipeline(
 
 ## Evaluation Flow
 
-The pipeline does **not** call your AI model. It provides two methods — `evaluate_input()` and `evaluate_output()` — that you call *around* your own model call. This keeps AIRS model-agnostic: it works with any provider, framework, or architecture.
+The pipeline does **not** call your AI model. It provides two methods, `evaluate_input()` and `evaluate_output()`, that you call *around* your own model call. This keeps AIRS model-agnostic: it works with any provider, framework, or architecture.
 
 ```python
 from airs.core.models import AIRequest, AIResponse
@@ -72,17 +72,17 @@ return ai_output
 
 `evaluate_input()` runs these checks in order:
 
-1. **Circuit breaker** — if OPEN, immediately return blocked
-2. **Input guardrails** — run the guardrail chain on input text
+1. **Circuit breaker**: if OPEN, immediately return blocked
+2. **Input guardrails**: run the guardrail chain on input text
 3. If blocked by guardrails → record failure on circuit breaker, return blocked
 
 ### Output Evaluation
 
 `evaluate_output()` runs these checks in order:
 
-1. **Output guardrails** — run the guardrail chain on output text
-2. **Judge** — if PACE sampling triggers (or guardrail flagged), evaluate with judge
-3. **Human approval** — if PACE state requires human approval, return pending
+1. **Output guardrails**: run the guardrail chain on output text
+2. **Judge**: if PACE sampling triggers (or guardrail flagged), evaluate with judge
+3. **Human approval**: if PACE state requires human approval, return pending
 4. If all pass → record success on circuit breaker, return allowed
 
 ## Pipeline Result
@@ -92,11 +92,11 @@ Both methods return a `PipelineResult`:
 ```python
 result = await pipeline.evaluate_output(request, response)
 
-result.allowed          # bool — should this be delivered?
-result.pace_state       # PACEState — current PACE posture
-result.blocked_by       # ControlLayer | None — which layer blocked
-result.layer_results    # list[LayerResult] — each layer's result
-result.total_latency_ms # float — total evaluation time
+result.allowed          # bool - should this be delivered?
+result.pace_state       # PACEState - current PACE posture
+result.blocked_by       # ControlLayer | None - which layer blocked
+result.layer_results    # list[LayerResult] - each layer's result
+result.total_latency_ms # float - total evaluation time
 
 # Convenience accessors
 result.guardrail_result  # LayerResult for guardrails
@@ -140,8 +140,8 @@ if not result.allowed:
 
 ### Choosing `block_on_review`
 
-- **`False` (default)** — REVIEW verdicts are logged but the response is delivered. Appropriate for most deployments. Review flagged items asynchronously.
-- **`True`** — REVIEW verdicts block the response until a human reviews it. Appropriate for HIGH/CRITICAL risk tiers where any uncertainty should halt delivery.
+- **`False` (default)**: REVIEW verdicts are logged but the response is delivered. Appropriate for most deployments. Review flagged items asynchronously.
+- **`True`**: REVIEW verdicts block the response until a human reviews it. Appropriate for HIGH/CRITICAL risk tiers where any uncertainty should halt delivery.
 
 ## Callbacks
 
@@ -171,9 +171,9 @@ pipeline = SecurityPipeline(
 
 When `pace_enabled=True`, the PACE state controls:
 
-- **Judge sampling rate** — Primary samples 5%, Alternate evaluates 100%
-- **Human approval** — Contingency and Emergency require human approval for all outputs
-- **Automatic escalation** — Judge `ESCALATE` verdicts trigger PACE escalation
+- **Judge sampling rate**: Primary samples 5%, Alternate evaluates 100%
+- **Human approval**: Contingency and Emergency require human approval for all outputs
+- **Automatic escalation**: Judge `ESCALATE` verdicts trigger PACE escalation
 
 ```python
 # Pipeline automatically escalates PACE on judge escalation:

@@ -14,7 +14,7 @@ This architecture has three structural blind spots exposed by 2025–2026 threat
 | **Speed asymmetry** | CrowdStrike: fastest eCrime breakout at 27 seconds; agents execute tool calls in milliseconds | Async Judge evaluation (500ms–5s + queue) fires after the damage is done. Detection without prevention. |
 | **Integration layer as primary attack surface** | 43% MCP server vulnerability rate; CVE-2025-6514 CVSS 10.0 RCE; fake npm MCP packages; GitHub issue injection → repo takeover | Core controls don't cover the tool supply chain. Attack enters through the tools, not the model. |
 
-The Output Evaluator is a solution architecture that addresses the first two blind spots. (The third is addressed by elevating supply chain controls to core — see [Agentic Controls §8](../../core/agentic.md#8-tool-and-integration-supply-chain).)
+The Output Evaluator is a solution architecture that addresses the first two blind spots. (The third is addressed by elevating supply chain controls to core; see [Agentic Controls §8](../../core/agentic.md#8-tool-and-integration-supply-chain).)
 
 ## Architecture Overview
 
@@ -213,9 +213,9 @@ This layer maps directly to existing User and Entity Behavior Analytics. The age
 | Limitation | Why |
 |-----------|-----|
 | **Novel attack patterns with normal-looking trajectories** | If the decomposed sub-tasks genuinely look like normal work, no behavioral analysis will catch them until post-incident forensics |
-| **Single-action catastrophic attacks** | If one action causes irreversible harm, session-level analysis is too late — this is what pre-action evaluation and infrastructure-level blast radius limits address |
+| **Single-action catastrophic attacks** | If one action causes irreversible harm, session-level analysis is too late; this is what pre-action evaluation and infrastructure-level blast radius limits address |
 | **Insider threats with legitimate access patterns** | A user doing exactly what they're authorized to do, for unauthorized purposes, produces a normal-looking trace |
-| **Evaluation evasion by the agent itself** | If the primary model can detect that its trajectory is being evaluated, it may adapt — see [Evaluation Integrity Risks](../../insights/evaluation-integrity-risks.md) |
+| **Evaluation evasion by the agent itself** | If the primary model can detect that its trajectory is being evaluated, it may adapt; see [Evaluation Integrity Risks](../../insights/evaluation-integrity-risks.md) |
 
 ## Relationship to Existing Framework Components
 
@@ -230,13 +230,13 @@ This layer maps directly to existing User and Entity Behavior Analytics. The age
 
 ## Implementation Order
 
-1. **Action classifier** — Categorize every agent action by risk level (rule-based, fast)
-2. **Sync pre-action gate** — Block elevated-risk actions until Judge approves
-3. **Session state tracking** — Record action sequences per session
-4. **Known-bad sequence detection** — Alert on hardcoded dangerous action combinations
-5. **Aggregate thresholds** — Session-level circuit breakers (data sources, tool diversity, scope)
-6. **Intent coherence scoring** — Measure alignment between actions and declared intent
-7. **Behavioral baselines** — Statistical baselines per agent role for deviation detection
-8. **LLM trajectory evaluation** — Judge evaluates full session trajectory at checkpoints
-9. **Cross-session correlation** — Detect patterns spanning multiple sessions
-10. **Peer group analysis** — Compare agent behavior against fleet baselines
+1. **Action classifier**: Categorize every agent action by risk level (rule-based, fast)
+2. **Sync pre-action gate**: Block elevated-risk actions until Judge approves
+3. **Session state tracking**: Record action sequences per session
+4. **Known-bad sequence detection**: Alert on hardcoded dangerous action combinations
+5. **Aggregate thresholds**: Session-level circuit breakers (data sources, tool diversity, scope)
+6. **Intent coherence scoring**: Measure alignment between actions and declared intent
+7. **Behavioral baselines**: Statistical baselines per agent role for deviation detection
+8. **LLM trajectory evaluation**: Judge evaluates full session trajectory at checkpoints
+9. **Cross-session correlation**: Detect patterns spanning multiple sessions
+10. **Peer group analysis**: Compare agent behavior against fleet baselines

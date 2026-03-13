@@ -1,5 +1,5 @@
 ---
-description: "Infrastructure controls for AI data protection — securing sensitive data in prompts, context windows, RAG retrieval, model responses, and training pipelines."
+description: "Infrastructure controls for AI data protection: securing sensitive data in prompts, context windows, RAG retrieval, model responses, and training pipelines."
 ---
 
 # Data Protection for AI Systems

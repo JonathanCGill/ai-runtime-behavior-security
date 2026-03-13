@@ -8,9 +8,9 @@ Get from zero to working controls in 30 minutes.
 
 ## Why You're Here
 
-You're building AI systems and need to answer one question: **"How do we know it's working correctly?"**
+You're deploying AI systems and need to answer one question: **"How do we know this is behaving within acceptable risk boundaries?"**
 
-You can't fully test AI before deployment. It's non-deterministic, it surprises you in production, and adversaries will find edge cases your test suite didn't. You need runtime controls.
+You can't fully test AI before deployment. It's non-deterministic, it surprises you in production, and adversaries will find edge cases your test suite didn't. You need runtime controls that identify, assess, and treat threats to the confidentiality, integrity, and availability of your AI assets as they operate.
 
 ## The Pattern
 

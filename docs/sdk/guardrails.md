@@ -1,4 +1,4 @@
-# Guardrails — Layer 1
+# Guardrails: Layer 1
 
 Guardrails are fast, deterministic checks that block known-bad patterns. They run on both input (before the model) and output (after the model). They're cheap (~1ms), predictable, and catch the obvious stuff.
 
@@ -118,11 +118,11 @@ class TokenLimitGuardrail(Guardrail):
 
 Other ideas for custom guardrails:
 
-- **Language detection** — block non-English inputs if your model only supports English
-- **Topic classifier** — block off-topic requests using a lightweight classifier
-- **Code execution detection** — flag outputs containing executable code patterns
-- **URL validation** — block or flag outputs containing URLs not on an allow-list
-- **Rate limiting** — use `kwargs["user_id"]` to enforce per-user rate limits
+- **Language detection**: block non-English inputs if your model only supports English
+- **Topic classifier**: block off-topic requests using a lightweight classifier
+- **Code execution detection**: flag outputs containing executable code patterns
+- **URL validation**: block or flag outputs containing URLs not on an allow-list
+- **Rate limiting**: use `kwargs["user_id"]` to enforce per-user rate limits
 
 ## Chaining Guardrails
 
@@ -155,10 +155,10 @@ assert result.metadata["guardrail"] == "content_policy"
 
 Guardrails execute in the order they're added. Put the cheapest, most likely to match checks first:
 
-1. **Rate limits / length checks** — instant, catches abuse
-2. **Regex patterns** — fast, catches known attacks
-3. **Content policy** — keyword matching, catches policy violations
-4. **Custom ML classifiers** — slower, catches sophisticated attacks
+1. **Rate limits / length checks**: instant, catches abuse
+2. **Regex patterns**: fast, catches known attacks
+3. **Content policy**: keyword matching, catches policy violations
+4. **Custom ML classifiers**: slower, catches sophisticated attacks
 
 ## FLAG Mode
 
@@ -174,9 +174,9 @@ assert result.verdict == "flag"  # detected, but not blocked
 
 When the pipeline sees a FLAG verdict, it routes the request to the Judge regardless of the PACE sampling rate. This is useful for:
 
-- **Shadow mode** — deploy new guardrails in flag-only mode to measure false positives before enabling blocking
-- **Soft enforcement** — flag borderline cases for async review without blocking users
-- **Judge training** — collect flagged cases to evaluate and improve your Judge prompts
+- **Shadow mode**: deploy new guardrails in flag-only mode to measure false positives before enabling blocking
+- **Soft enforcement**: flag borderline cases for async review without blocking users
+- **Judge training**: collect flagged cases to evaluate and improve your Judge prompts
 
 ## Layer Result
 

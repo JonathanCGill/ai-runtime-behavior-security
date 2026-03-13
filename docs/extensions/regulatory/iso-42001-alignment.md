@@ -1,5 +1,5 @@
 ---
-description: "AI governance operating model aligned with ISO 42001 — centralised policy, federated execution, and unified assurance across enterprise AI platforms."
+description: "AI governance operating model aligned with ISO 42001: centralised policy, federated execution, and unified assurance across enterprise AI platforms."
 ---
 
 # AI Governance Operating Model - ISO 42001 Alignment

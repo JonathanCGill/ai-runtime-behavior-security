@@ -2,7 +2,7 @@
 
 Complete working examples that demonstrate the AIRS SDK in action.
 
-## Quick Start — All Layers in 60 Lines
+## Quick Start: All Layers in 60 Lines
 
 This example demonstrates the full three-layer pipeline with no external dependencies:
 
@@ -86,7 +86,7 @@ Judge mode: all
 Circuit breaker blocked: True
 ```
 
-## FastAPI App — Protected AI Service
+## FastAPI App: Protected AI Service
 
 A complete FastAPI application with AIRS middleware and operational endpoints:
 
@@ -97,7 +97,7 @@ uvicorn examples.fastapi_app:app --reload
 
 See [FastAPI Integration](fastapi.md) for the full source and testing instructions.
 
-## Risk Assessment — Programmatic Classification
+## Risk Assessment: Programmatic Classification
 
 ```python
 from airs.core.risk import RiskClassifier, DeploymentProfile
@@ -131,7 +131,7 @@ for i, c in enumerate(controls, 1):
     print(f"     {c.implementation_hint}")
 ```
 
-## Custom Guardrail — Domain-Specific
+## Custom Guardrail: Domain-Specific
 
 ```python
 from airs.runtime.guardrail import Guardrail, GuardrailResult

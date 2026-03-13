@@ -1,8 +1,10 @@
 ---
-description: "AIRS Framework architecture — layered runtime controls for single-agent and multi-agent AI systems."
+description: "AIRS Framework architecture: layered runtime controls for single-agent and multi-agent AI systems."
 ---
 
 # Architecture Overview
+
+The goal of this architecture is to reduce risk to an acceptable level through layered controls that identify, assess, and treat threats to the confidentiality, integrity, and availability of AI systems at runtime. Everything described here serves that goal.
 
 ![Three-layer runtime security: Guardrails, LLM-as-Judge, Human Oversight](images/three-layer-simple.svg){ .arch-diagram }
 

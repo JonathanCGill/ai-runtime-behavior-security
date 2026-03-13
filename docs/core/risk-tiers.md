@@ -1,5 +1,5 @@
 ---
-description: "Risk tier definitions for AI systems — from LOW to CRITICAL — with control requirements scaled to impact, autonomy, and data sensitivity."
+description: "Risk tier definitions for AI systems, from LOW to CRITICAL, with control requirements scaled to impact, autonomy, and data sensitivity."
 ---
 
 # Risk Tiers and Control Selection

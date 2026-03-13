@@ -13,7 +13,7 @@ Without structured telemetry, security events end up as unstructured log strings
 
 ## Event Schema
 
-Every security-relevant action emits an `AISecurityEvent` — a typed, self-contained record:
+Every security-relevant action emits an `AISecurityEvent`, a typed, self-contained record:
 
 ```python
 from airs.telemetry import AISecurityEvent, EventType
@@ -76,7 +76,7 @@ Every event includes:
 
 ## Audit Sinks
 
-Events are sent to **audit sinks** — pluggable destinations. Register one or more:
+Events are sent to **audit sinks**, pluggable destinations. Register one or more:
 
 ### Log Sink (structured JSON to Python logging)
 
@@ -180,7 +180,7 @@ audit_logger.setLevel(logging.INFO)
 handler = logging.handlers.SysLogHandler(address="/dev/log")
 audit_logger.addHandler(handler)
 
-# Register the sink — all pipeline events now go to syslog
+# Register the sink - all pipeline events now go to syslog
 register_sink(LogAuditSink(logger_name="airs.audit"))
 ```
 

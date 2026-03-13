@@ -1,5 +1,5 @@
 ---
-description: "Infrastructure controls for AI identity and access management — authentication, authorisation, and session management across human users, agents, and model endpoints."
+description: "Infrastructure controls for AI identity and access management: authentication, authorisation, and session management across human users, agents, and model endpoints."
 ---
 
 # Identity & Access Management for AI Systems

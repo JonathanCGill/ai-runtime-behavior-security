@@ -1,5 +1,5 @@
 ---
-description: "Mapping AI Runtime Security controls to EU AI Act requirements for high-risk AI systems — article-by-article alignment with the three-layer control model."
+description: "Mapping AI Runtime Security controls to EU AI Act requirements for high-risk AI systems: article-by-article alignment with the three-layer control model."
 ---
 
 # EU AI Act Crosswalk

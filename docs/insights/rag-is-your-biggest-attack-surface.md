@@ -1,5 +1,5 @@
 ---
-description: "RAG creates a new data access path that bypasses existing access controls — the security implications of retrieval-augmented generation in enterprise AI."
+description: "RAG creates a new data access path that bypasses existing access controls. The security implications of retrieval-augmented generation in enterprise AI."
 ---
 
 # RAG Is Your Biggest Attack Surface

@@ -1,5 +1,5 @@
 ---
-description: "Why human-in-the-loop oversight fails in practice — the readiness paradox, automation bias, and evidence-based solutions from aviation safety research."
+description: "Why human-in-the-loop oversight fails in practice: the readiness paradox, automation bias, and evidence-based solutions from aviation safety research."
 ---
 
 # The Oversight Readiness Problem: Why Human-in-the-Loop Fails and How to Fix It

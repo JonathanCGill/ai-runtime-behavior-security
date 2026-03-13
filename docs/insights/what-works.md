@@ -1,5 +1,5 @@
 ---
-description: "Where AI security controls are measurably reducing harm — evidence from breach data, industry surveys, and operational deployments that defence-in-depth works."
+description: "Where AI security controls are measurably reducing harm: evidence from breach data, industry surveys, and operational deployments that defence-in-depth works."
 ---
 
 # What's Working: Where Controls Are Reducing Harm

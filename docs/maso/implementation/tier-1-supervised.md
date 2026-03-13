@@ -1,5 +1,5 @@
 ---
-description: "Tier 1 MASO implementation — supervised multi-agent deployment with human-in-the-loop approval for all state-changing agent actions."
+description: "Tier 1 MASO implementation: supervised multi-agent deployment with human-in-the-loop approval for all state-changing agent actions."
 ---
 
 # Tier 1 - Supervised Multi-Agent Deployment

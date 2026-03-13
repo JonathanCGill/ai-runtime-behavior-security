@@ -1,5 +1,5 @@
 ---
-description: "A day in the life of an enterprise operating agentic AI under the framework — multiple departments, data classifications, and risk tiers in realistic scenarios."
+description: "A day in the life of an enterprise operating agentic AI under the framework, covering multiple departments, data classifications, and risk tiers in realistic scenarios."
 ---
 
 # A Day in the Life: The Framework in an Enterprise

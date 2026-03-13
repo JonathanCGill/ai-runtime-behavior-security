@@ -1,5 +1,5 @@
 ---
-description: "Tier 3 MASO implementation — autonomous multi-agent deployment with full PACE resilience, adversarial-tested controls, and strategic human governance."
+description: "Tier 3 MASO implementation: autonomous multi-agent deployment with full PACE resilience, adversarial-tested controls, and strategic human governance."
 ---
 
 # Tier 3 - Autonomous Multi-Agent Deployment

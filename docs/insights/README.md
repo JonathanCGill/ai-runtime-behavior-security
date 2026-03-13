@@ -56,7 +56,7 @@ How the framework maps to the broader AI ecosystem and where it fits within the 
 
 | # | Article | One-Line Summary |
 |---|---------|-----------------|
-| 18 | [Review: The Framework Against the AI Lifecycle](ai-lifecycle-review.md) | Systematic assessment of framework coverage across all seven standard AI lifecycle phases — where it leads, where it defers, and where adopters must supplement |
+| 18 | [Review: The Framework Against the AI Lifecycle](ai-lifecycle-review.md) | Systematic assessment of framework coverage across all seven standard AI lifecycle phases: where it leads, where it defers, and where adopters must supplement |
 
 ## Research & Evidence
 

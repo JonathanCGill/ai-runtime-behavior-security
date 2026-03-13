@@ -1,5 +1,5 @@
 ---
-description: "Security controls for multi-agent AI systems — trust topologies, delegation chains, privilege boundaries, and accountability across agent-to-agent interactions."
+description: "Security controls for multi-agent AI systems: trust topologies, delegation chains, privilege boundaries, and accountability across agent-to-agent interactions."
 ---
 
 # Multi-Agent Controls

@@ -1,5 +1,5 @@
 ---
-description: "The three-layer control model for AI runtime security — guardrails for known-bad, LLM-as-Judge for unknown-bad, and human oversight for high-consequence decisions."
+description: "The three-layer control model for AI runtime security: guardrails for known-bad, LLM-as-Judge for unknown-bad, and human oversight for high-consequence decisions."
 ---
 
 # Controls: Guardrails, Judge, and Human Oversight

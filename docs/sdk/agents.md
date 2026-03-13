@@ -8,8 +8,8 @@ In multi-agent architectures, a single user request can flow through an orchestr
 
 - You can't trace an action back to the originating user
 - Agents can delegate without limit, creating unbounded chains
-- Tool access is uncontrolled — any agent can call any tool
-- Scope creep is invisible — permissions widen as delegation deepens
+- Tool access is uncontrolled: any agent can call any tool
+- Scope creep is invisible: permissions widen as delegation deepens
 
 ## Agent Identity
 
@@ -46,7 +46,7 @@ ctx = AgentContext(
     policy_scope={"tools": ["search", "read_file", "calculator"]},
 )
 
-# Orchestrator delegates to retriever — scope narrows
+# Orchestrator delegates to retriever - scope narrows
 child_ctx = ctx.delegate(
     to=retriever,
     policy_scope={"tools": ["search", "read_file"]},  # no calculator
@@ -55,16 +55,16 @@ child_ctx = ctx.delegate(
 print(child_ctx.delegation_depth)   # 1
 print(child_ctx.chain_ids)          # ["orchestrator-1", "retriever-1"]
 print(child_ctx.policy_scope)       # {"tools": ["search", "read_file"]}
-print(child_ctx.correlation_id)     # same as parent — traces the full request
+print(child_ctx.correlation_id)     # same as parent - traces the full request
 ```
 
 Key properties:
 
-- **`delegation_depth`** — increments at each delegation
-- **`agent_chain`** — full list of `AgentIdentity` objects (oldest first)
-- **`chain_ids`** — flat list of agent IDs for logging
-- **`policy_scope`** — narrows at each step, never widens
-- **`correlation_id`** — same across the entire chain for tracing
+- **`delegation_depth`**: increments at each delegation
+- **`agent_chain`**: full list of `AgentIdentity` objects (oldest first)
+- **`chain_ids`**: flat list of agent IDs for logging
+- **`policy_scope`**: narrows at each step, never widens
+- **`correlation_id`**: same across the entire chain for tracing
 
 ### Scope Can Only Narrow
 
@@ -77,13 +77,13 @@ ctx = AgentContext(
     policy_scope={"tools": ["search"]},
 )
 
-# Child tries to add "delete" — but parent doesn't have it
+# Child tries to add "delete" - but parent doesn't have it
 child = ctx.delegate(
     to=retriever,
     policy_scope={"tools": ["search", "delete"]},
 )
 
-print(child.policy_scope["tools"])  # ["search"] — "delete" was excluded
+print(child.policy_scope["tools"])  # ["search"] - "delete" was excluded
 ```
 
 ## Delegation Enforcement
@@ -152,11 +152,11 @@ else:
 
 ### Policy Layers (evaluated in order)
 
-1. **Deny list** — always denied, no exceptions
-2. **Argument size** — rejects oversized payloads
-3. **Per-agent-type** — restricts tools by agent type (from context)
-4. **Delegation scope** — respects `policy_scope["tools"]` from the chain
-5. **Allow list** — if set, anything not on it is denied
+1. **Deny list**: always denied, no exceptions
+2. **Argument size**: rejects oversized payloads
+3. **Per-agent-type**: restricts tools by agent type (from context)
+4. **Delegation scope**: respects `policy_scope["tools"]` from the chain
+5. **Allow list**: if set, anything not on it is denied
 
 ### Integrating with the Pipeline
 

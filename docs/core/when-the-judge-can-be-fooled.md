@@ -1,5 +1,5 @@
 ---
-description: "Adversarial failure modes for LLM-as-Judge evaluation — output crafting, context manipulation, and evaluation gaming — with mitigations for each."
+description: "Adversarial failure modes for LLM-as-Judge evaluation, including output crafting, context manipulation, and evaluation gaming, with mitigations for each."
 ---
 
 # When the Judge Can Be Fooled

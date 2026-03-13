@@ -152,7 +152,7 @@ Agents are typically HIGH or CRITICAL tier. LOW/MEDIUM agents are rare.
 
 ## 6. Session-Level Intent Analysis
 
-Per-interaction controls have a structural blind spot: **task decomposition attacks**. Adversaries — including AI-orchestrated campaigns — break malicious goals into sub-tasks that individually pass every control layer. Each input clears guardrails. Each output passes Judge. No single action triggers a circuit breaker. The malicious intent only exists in the aggregate.
+Per-interaction controls have a structural blind spot: **task decomposition attacks**. Adversaries, including AI-orchestrated campaigns, break malicious goals into sub-tasks that individually pass every control layer. Each input clears guardrails. Each output passes Judge. No single action triggers a circuit breaker. The malicious intent only exists in the aggregate.
 
 > In September 2025, Anthropic disclosed that a state-sponsored group used Claude Code to execute 80–90% of a cyber espionage campaign autonomously by decomposing the campaign into individually benign sub-tasks. CrowdStrike documented adversaries building custom frameworks that decompose malicious tasks into innocent-looking components. Per-interaction controls catch none of this.
 
@@ -187,17 +187,17 @@ Standard circuit breakers use per-action thresholds that decomposition attacks d
 | **Scope surface area** | Session's aggregate data access footprint exceeds role baseline → pause |
 | **Intent coherence** | Session actions don't form a coherent path toward declared goal → flag |
 
-> For the full behavioral anomaly detection architecture — signal collection, aggregation pipeline, ML detection, and UEBA parallels — see [Behavioral Anomaly Detection](../insights/behavioral-anomaly-detection.md). For trace-level evaluation methodology, see [Process-Aware Evaluation](../insights/process-aware-evaluation.md).
+> For the full behavioral anomaly detection architecture (signal collection, aggregation pipeline, ML detection, and UEBA parallels), see [Behavioral Anomaly Detection](../insights/behavioral-anomaly-detection.md). For trace-level evaluation methodology, see [Process-Aware Evaluation](../insights/process-aware-evaluation.md).
 
 ## 7. Synchronous Pre-Action Evaluation
 
-The standard Judge operates **asynchronously** — evaluating actions after they have been taken. For chatbot use cases this is sufficient. For agentic systems with tool access operating at machine speed, async evaluation means damage is done before detection fires.
+The standard Judge operates **asynchronously**, evaluating actions after they have been taken. For chatbot use cases this is sufficient. For agentic systems with tool access operating at machine speed, async evaluation means damage is done before detection fires.
 
 > CrowdStrike documented the fastest eCrime breakout time at 27 seconds. The standard async Judge evaluation cycle (500ms–5s per evaluation, plus queue time) cannot intercept actions within this window. When agents can execute irreversible actions at machine speed, post-action evaluation is a forensic tool, not a prevention layer.
 
 ### When to Evaluate Synchronously
 
-Not every action warrants synchronous evaluation — that would be cost-prohibitive. Use risk-based routing:
+Not every action warrants synchronous evaluation, as that would be cost-prohibitive. Use risk-based routing:
 
 | Action Category | Evaluation Mode | Rationale |
 |----------------|-----------------|-----------|
@@ -237,7 +237,7 @@ The tradeoff is explicit: latency for prevention. For systems where a 27-second 
 
 ## 8. Tool and Integration Supply Chain
 
-The integration layer — MCP servers, tool endpoints, agent frameworks, RAG data sources — is the **primary attack surface** for agentic systems. Cisco's 2025 threat research found that attackers increasingly target the surrounding components that feed information into models rather than the models themselves.
+The integration layer (MCP servers, tool endpoints, agent frameworks, RAG data sources) is the **primary attack surface** for agentic systems. Cisco's 2025 threat research found that attackers increasingly target the surrounding components that feed information into models rather than the models themselves.
 
 > As of 2025–2026: 43% of MCP servers tested had command injection vulnerabilities. CVE-2025-6514 achieved CVSS 10.0 (RCE via MCP). A fake npm MCP package silently copied emails. GitHub issue injection via MCP enabled full repository takeover.
 
@@ -263,7 +263,7 @@ The integration layer — MCP servers, tool endpoints, agent frameworks, RAG dat
 | **Capability restriction** | Restrict MCP server capabilities to declared scope. A calendar MCP server cannot access the filesystem. |
 | **Update verification** | MCP server updates require the same review as application code changes. |
 
-> For the full treatment of MCP as an attack surface — including the AISI 5-level autonomy classification and SLSA-style provenance — see [The MCP Problem](../insights/the-mcp-problem.md) and [Supply Chain Controls](../maso/controls/supply-chain.md).
+> For the full treatment of MCP as an attack surface, including the AISI 5-level autonomy classification and SLSA-style provenance, see [The MCP Problem](../insights/the-mcp-problem.md) and [Supply Chain Controls](../maso/controls/supply-chain.md).
 
 ## Judge for Agents
 

@@ -1,5 +1,5 @@
 ---
-description: "Example prompts for LLM-as-Judge evaluation — policy compliance, safety, quality, hallucination detection, and prompt injection identification templates."
+description: "Example prompts for LLM-as-Judge evaluation: policy compliance, safety, quality, hallucination detection, and prompt injection identification templates."
 ---
 
 # Judge Prompt Examples

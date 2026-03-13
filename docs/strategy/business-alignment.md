@@ -1,5 +1,5 @@
 ---
-description: "Aligning AI investments to business problems — why most AI mismatches are strategic failures, not technical ones, and how to start with the problem."
+description: "Aligning AI investments to business problems: why most AI mismatches are strategic failures, not technical ones, and how to start with the problem."
 ---
 
 # Business Alignment

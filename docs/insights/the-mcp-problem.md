@@ -1,5 +1,5 @@
 ---
-description: "Model Context Protocol creates an uncontrolled tool discovery and execution surface — security implications of MCP adoption for agentic AI systems."
+description: "Model Context Protocol creates an uncontrolled tool discovery and execution surface. Security implications of MCP adoption for agentic AI systems."
 ---
 
 # The MCP Problem
