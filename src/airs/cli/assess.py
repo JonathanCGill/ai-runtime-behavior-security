@@ -140,7 +140,12 @@ def assess_cmd(
     judge_model: str = typer.Option(
         "",
         "--judge-model",
-        help="LLM judge model (e.g. gpt-4o-mini). Enables LLM-as-Judge evaluation with additional test prompts. Requires pip install openai.",
+        help="LLM judge model (e.g. gpt-4o-mini or claude-sonnet-4-20250514). Enables LLM-as-Judge evaluation.",
+    ),
+    judge_provider: str = typer.Option(
+        "",
+        "--judge-provider",
+        help="Judge provider: openai or anthropic",
     ),
 ) -> None:
     """Assess your AI deployment and get a prioritized security implementation plan."""
@@ -222,35 +227,44 @@ def assess_cmd(
             if provider and not judge_model:
                 console.print()
                 use_judge = _ask_bool(
-                    "  Also run LLM-as-Judge tests? (requires pip install openai)"
+                    "  Also run LLM-as-Judge tests?"
                 )
                 if use_judge:
+                    judge_provider = _ask_choice(
+                        "  Judge provider", ["openai", "anthropic"], provider
+                    )
+                    default_judge = _default_judge_model(judge_provider)
                     judge_model = typer.prompt(
-                        "  Judge model name", default="gpt-4o-mini"
+                        "  Judge model name", default=default_judge
                     )
                     # Prompt for judge API key if not already available
-                    judge_api_key = os.environ.get("OPENAI_API_KEY")
+                    judge_env_var = PROVIDER_ENV_VARS[judge_provider]
+                    judge_api_key = os.environ.get(judge_env_var)
                     if not judge_api_key:
+                        key_urls = {
+                            "openai": "https://platform.openai.com/api-keys",
+                            "anthropic": "https://console.anthropic.com/settings/keys",
+                        }
                         console.print()
                         console.print(Panel(
-                            "LLM-as-Judge uses an OpenAI-compatible API.\n\n"
-                            "No [bold]OPENAI_API_KEY[/bold] found in environment.\n"
-                            "Paste your key below, or set it:\n\n"
-                            "  [dim]export OPENAI_API_KEY=sk-...[/dim]",
+                            f"No [bold]{judge_env_var}[/bold] found in environment.\n\n"
+                            f"Get an API key here: [link={key_urls[judge_provider]}]{key_urls[judge_provider]}[/link]\n\n"
+                            f"Paste your key below, or set it:\n\n"
+                            f"  [dim]export {judge_env_var}=sk-...[/dim]",
                             title="Judge API Key Required",
                             border_style="yellow",
                         ))
-                        judge_api_key = typer.prompt("  Paste your OPENAI_API_KEY").strip()
+                        judge_api_key = typer.prompt(f"  Paste your {judge_env_var}").strip()
                         if not judge_api_key:
                             console.print("[yellow]No key provided. Skipping judge tests.[/yellow]")
                             judge_model = ""
                         else:
                             console.print(f"  [green]Key received ({judge_api_key[:8]}...)[/green]")
-                            os.environ["OPENAI_API_KEY"] = judge_api_key
+                            os.environ[judge_env_var] = judge_api_key
 
     if provider:
         live_results = asyncio.run(
-            _run_live_test(provider, model, output_json, judge_model)
+            _run_live_test(provider, model, output_json, judge_model, judge_provider)
         )
         if output_json:
             # Print the live results as a separate JSON object
@@ -338,7 +352,8 @@ def _get_model_caller(provider: str, model: str):
 
 
 async def _run_live_test(
-    provider: str, model: str, output_json: bool, judge_model: str = ""
+    provider: str, model: str, output_json: bool, judge_model: str = "",
+    judge_provider: str = "",
 ) -> dict:
     """Run test prompts against a live model through the AIRS pipeline."""
     model = model or _default_model(provider)
@@ -428,35 +443,58 @@ async def _run_live_test(
     # ── Part 2: Judge tests (only when --judge-model is provided) ─────
     judge_results = []
     if judge_model:
-        try:
-            from openai import AsyncOpenAI  # noqa: F811
-        except ImportError:
-            console.print(
-                "[red]LLM-as-Judge requires the openai package. "
-                "Run: pip install openai[/red]"
-            )
+        # Default judge provider to openai for backwards compatibility
+        jp = (judge_provider or "openai").lower()
+        judge_env_var = PROVIDER_ENV_VARS.get(jp)
+
+        if not judge_env_var:
+            console.print(f"[red]Unknown judge provider: {jp}. Use: openai, anthropic[/red]")
             raise typer.Exit(1)
 
-        from airs.runtime.judge import LLMJudge
-
-        # The judge needs an OpenAI API key (it uses an OpenAI-compatible API)
-        judge_api_key = os.environ.get("OPENAI_API_KEY")
+        judge_api_key = os.environ.get(judge_env_var)
         if not judge_api_key:
+            key_urls = {
+                "openai": "https://platform.openai.com/api-keys",
+                "anthropic": "https://console.anthropic.com/settings/keys",
+            }
             console.print()
             console.print(Panel(
-                "LLM-as-Judge uses an OpenAI-compatible API.\n\n"
-                "No [bold]OPENAI_API_KEY[/bold] found in environment.\n"
-                "Paste your key below, or set it:\n\n"
-                "  [dim]export OPENAI_API_KEY=sk-...[/dim]",
+                f"No [bold]{judge_env_var}[/bold] found in environment.\n\n"
+                f"Get an API key here: [link={key_urls[jp]}]{key_urls[jp]}[/link]\n\n"
+                f"Paste your key below, or set it:\n\n"
+                f"  [dim]export {judge_env_var}=sk-...[/dim]",
                 title="Judge API Key Required",
                 border_style="yellow",
             ))
-            judge_api_key = typer.prompt("  Paste your OPENAI_API_KEY").strip()
+            judge_api_key = typer.prompt(f"  Paste your {judge_env_var}").strip()
             if not judge_api_key:
                 console.print("[red]No key provided. Skipping judge tests.[/red]")
                 raise typer.Exit(1)
 
-        llm_judge = LLMJudge(model=judge_model, api_key=judge_api_key)
+        if jp == "anthropic":
+            try:
+                import anthropic  # noqa: F401
+            except ImportError:
+                console.print(
+                    "[red]Anthropic judge requires the anthropic package. "
+                    "Run: pip install anthropic[/red]"
+                )
+                raise typer.Exit(1)
+
+            from airs.runtime.judge import AnthropicLLMJudge
+            llm_judge = AnthropicLLMJudge(model=judge_model, api_key=judge_api_key)
+        else:
+            try:
+                from openai import AsyncOpenAI  # noqa: F811
+            except ImportError:
+                console.print(
+                    "[red]OpenAI judge requires the openai package. "
+                    "Run: pip install openai[/red]"
+                )
+                raise typer.Exit(1)
+
+            from airs.runtime.judge import LLMJudge
+            llm_judge = LLMJudge(model=judge_model, api_key=judge_api_key)
 
         if not output_json:
             console.print()
@@ -549,6 +587,14 @@ async def _run_live_test(
 def _default_model(provider: str) -> str:
     defaults = {
         "openai": "gpt-4o",
+        "anthropic": "claude-sonnet-4-20250514",
+    }
+    return defaults.get(provider.lower(), "")
+
+
+def _default_judge_model(provider: str) -> str:
+    defaults = {
+        "openai": "gpt-4o-mini",
         "anthropic": "claude-sonnet-4-20250514",
     }
     return defaults.get(provider.lower(), "")
