@@ -131,42 +131,65 @@ class RiskClassifier:
 
     def classify_with_reasons(
         self, profile: DeploymentProfile
-    ) -> tuple[RiskTier, list[str], list[str]]:
-        """Classify and return (tier, risk_factors, mitigations)."""
+    ) -> tuple[RiskTier, list[str], list[str], list[tuple[str, int]]]:
+        """Classify and return (tier, risk_factors, mitigations, score_breakdown).
+
+        score_breakdown is a list of (description, points) showing how the
+        final score was computed.
+        """
         risk_factors: list[str] = []
         mitigations: list[str] = []
+        score_breakdown: list[tuple[str, int]] = []
 
         if profile.external_facing:
             risk_factors.append("External-facing deployment")
+            score_breakdown.append(("External-facing deployment", 2))
         if profile.user_count == "large":
             risk_factors.append("Large user base (10,000+)")
+            score_breakdown.append(("Large user base (10,000+)", 2))
+        elif profile.user_count == "medium":
+            score_breakdown.append(("Medium user base (100-10k)", 1))
         if profile.handles_pii:
             risk_factors.append("Handles personally identifiable information")
+            score_breakdown.append(("Handles PII", 2))
         if profile.handles_regulated_data:
             risk_factors.append("Handles regulated data (HIPAA/SOX/GDPR)")
+            score_breakdown.append(("Regulated data (HIPAA/SOX/GDPR)", 3))
         if profile.handles_financial_data:
             risk_factors.append("Handles financial data")
+            score_breakdown.append(("Handles financial data", 2))
         if profile.can_take_actions:
             risk_factors.append("AI can take autonomous actions")
+            score_breakdown.append(("AI can take autonomous actions", 2))
         if profile.can_take_actions and not profile.actions_are_reversible:
             risk_factors.append("Actions are irreversible")
-        if profile.max_financial_impact in ("medium", "high"):
-            risk_factors.append(f"Financial impact: {profile.max_financial_impact}")
+            score_breakdown.append(("Actions are irreversible", 3))
+        if profile.max_financial_impact == "high":
+            risk_factors.append("Financial impact: high")
+            score_breakdown.append(("High financial impact (>$100k)", 3))
+        elif profile.max_financial_impact == "medium":
+            risk_factors.append("Financial impact: medium")
+            score_breakdown.append(("Medium financial impact (<$100k)", 2))
         if profile.multi_agent:
             risk_factors.append("Multi-agent architecture")
+            score_breakdown.append(("Multi-agent architecture", 2))
         if profile.uses_mcp:
             risk_factors.append("Uses Model Context Protocol (MCP)")
+            score_breakdown.append(("Uses MCP", 1))
         if profile.regulated_industry:
             risk_factors.append("Regulated industry")
+            score_breakdown.append(("Regulated industry", 2))
 
         if profile.human_reviews_all_outputs:
             mitigations.append("Human reviews all outputs")
+            score_breakdown.append(("Human reviews all outputs", -2))
         if profile.has_existing_guardrails:
             mitigations.append("Existing guardrails in place")
+            score_breakdown.append(("Existing guardrails in place", -1))
         if not profile.can_take_actions:
             mitigations.append("Read-only (no autonomous actions)")
         if not profile.external_facing:
             mitigations.append("Internal-only deployment")
 
         tier = self.classify(profile)
-        return tier, risk_factors, mitigations
+        return tier, risk_factors, mitigations, score_breakdown

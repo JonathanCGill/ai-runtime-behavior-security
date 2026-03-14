@@ -70,8 +70,15 @@ class TestRiskClassifier:
             multi_agent=True,
         )
         classifier = RiskClassifier()
-        tier, factors, mitigations = classifier.classify_with_reasons(profile)
+        tier, factors, mitigations, score_breakdown = classifier.classify_with_reasons(profile)
         assert "External-facing deployment" in factors
         assert "Handles personally identifiable information" in factors
         assert "Multi-agent architecture" in factors
         assert any("Read-only" in m for m in mitigations)
+        # Score breakdown should reflect the contributing factors
+        breakdown_descs = [desc for desc, _ in score_breakdown]
+        assert "External-facing deployment" in breakdown_descs
+        assert "Handles PII" in breakdown_descs
+        assert "Multi-agent architecture" in breakdown_descs
+        total = sum(pts for _, pts in score_breakdown)
+        assert total == 2 + 2 + 2  # external + PII + multi-agent
