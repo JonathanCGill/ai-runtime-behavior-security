@@ -1086,48 +1086,47 @@ def _default_judge_model(provider: str) -> str:
 def _gather_profile() -> DeploymentProfile:
     """Interactive questionnaire.
 
-    Defaults are set to the higher-risk answer for each question.
+    Defaults are set to the lower-risk answer for each question.
     This ensures that pressing Enter through the questionnaire produces
-    a conservative (worst-case) assessment rather than an artificially
-    low-risk one.
+    a baseline assessment; users opt-in to higher-risk factors explicitly.
     """
     console.print("[bold]1. Deployment Context[/bold]")
     name = typer.prompt("  Deployment name (optional)", default="")
-    external = _ask_bool("  Is this deployment external-facing (customers/public)?", default=True)
-    user_count = _ask_choice("  Expected user count", ["small", "medium", "large"], "large")
+    external = _ask_bool("  Is this deployment external-facing (customers/public)?")
+    user_count = _ask_choice("  Expected user count", ["small", "medium", "large"], "small")
 
     console.print()
     console.print("[bold]2. Data Sensitivity[/bold]")
-    pii = _ask_bool("  Does it handle PII (names, emails, addresses)?", default=True)
-    regulated = _ask_bool("  Does it handle regulated data (HIPAA, SOX, GDPR)?", default=True)
-    financial = _ask_bool("  Does it handle financial data?", default=True)
+    pii = _ask_bool("  Does it handle PII (names, emails, addresses)?")
+    regulated = _ask_bool("  Does it handle regulated data (HIPAA, SOX, GDPR)?")
+    financial = _ask_bool("  Does it handle financial data?")
 
     console.print()
     console.print("[bold]3. Autonomy & Impact[/bold]")
-    actions = _ask_bool("  Can the AI take actions (write data, call APIs, make transactions)?", default=True)
+    actions = _ask_bool("  Can the AI take actions (write data, call APIs, make transactions)?")
     reversible = True
     impact = "none"
     if actions:
-        reversible = _ask_bool("  Are those actions reversible?")
-        impact = _ask_choice("  Maximum financial impact per action", ["none", "low", "medium", "high"], "high")
+        reversible = _ask_bool("  Are those actions reversible?", default=True)
+        impact = _ask_choice("  Maximum financial impact per action", ["none", "low", "medium", "high"], "none")
 
     console.print()
     console.print("[bold]4. Architecture[/bold]")
-    multi_agent = _ask_bool("  Is this a multi-agent system?", default=True)
-    rag = _ask_bool("  Does it use RAG (retrieval-augmented generation)?", default=True)
-    tools = _ask_bool("  Does it use tools/function calling?", default=True)
+    multi_agent = _ask_bool("  Is this a multi-agent system?")
+    rag = _ask_bool("  Does it use RAG (retrieval-augmented generation)?")
+    tools = _ask_bool("  Does it use tools/function calling?")
     mcp = False
     if tools:
-        mcp = _ask_bool("  Does it use MCP (Model Context Protocol)?", default=True)
+        mcp = _ask_bool("  Does it use MCP (Model Context Protocol)?")
 
     console.print()
     console.print("[bold]5. Existing Controls[/bold]")
-    human_review = _ask_bool("  Does a human review ALL outputs before delivery?")
-    existing_guardrails = _ask_bool("  Do you have existing guardrails in place?")
+    human_review = _ask_bool("  Does a human review ALL outputs before delivery?", default=True)
+    existing_guardrails = _ask_bool("  Do you have existing guardrails in place?", default=True)
 
     console.print()
     console.print("[bold]6. Regulatory[/bold]")
-    regulated_industry = _ask_bool("  Is this in a regulated industry (healthcare, finance, legal)?", default=True)
+    regulated_industry = _ask_bool("  Is this in a regulated industry (healthcare, finance, legal)?")
 
     return DeploymentProfile(
         name=name,
