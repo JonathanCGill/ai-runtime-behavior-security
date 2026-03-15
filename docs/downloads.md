@@ -27,7 +27,7 @@ A position paper on how organisational maturity affects AI security posture. Cov
 
 Grounded in established maturity models (CMMI, NIST CSF, C2M2, ISO 42001) and current industry data, with an honest assessment of which commonly cited statistics are reliable.
 
-[Download PDF](Downloads/AI Security Maturity Model.pdf){ .md-button }
+[Download PDF](Downloads/ai-security-maturity-model.pdf){ .md-button }
 
 > See also: [Maturity Levels](strategy/maturity-levels.md) (online version)
 
