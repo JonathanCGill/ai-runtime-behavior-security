@@ -37,7 +37,7 @@ These controls are referenced across the highest number of documented incidents.
 | Rank | Control | Incidents | Incident Alignment |
 |------|---------|-----------|---------------|
 | 1 | **Input guardrails / context sanitisation** | 7 of 9 | INC-01, 02, 03, 04, 05, 06, 09 |
-| 2 | **LLM-as-Judge gate** (exfiltration, query validation, citation verification) | 6 of 9 | INC-01, 02, 05, 06, 07, 08 |
+| 2 | **Model-as-Judge gate** (exfiltration, query validation, citation verification) | 6 of 9 | INC-01, 02, 05, 06, 07, 08 |
 | 3 | **Circuit breaker** | 5 of 9 | INC-01, 02, 03, 05, 08 |
 | 4 | **Tool scoping / capability constraints** | 5 of 9 | INC-01, 02, 04, 05, 06 |
 | 5 | **Audit logging** | 5 of 9 | INC-01, 04, 06, 07, 09 |

@@ -95,7 +95,7 @@ Rationale: Internal-only tool with no access to sensitive data. Primary risks ar
 
 ### What We Skip (vs. HIGH tier)
 
-- LLM-as-Judge (rules sufficient for internal tool)
+- Model-as-Judge (rules sufficient for internal tool)
 - Real-time SIEM integration
 - Dedicated HITL queue
 

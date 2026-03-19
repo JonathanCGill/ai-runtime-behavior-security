@@ -158,7 +158,7 @@ Not all verification is equal. Approaches vary in their independence from the LL
 | Knowledge Graph | ⬤⬤⬤⬤⬤ | ~92% | +50-100ms | $$$ (build) | Narrow (KG) |
 | Token Detection | ⬤⬤⬤⬤○ | ~96% | +80-160ms | $ | RAG only |
 | Self-Consistency | ⬤⬤⬤○○ | ~80% | +5x | 5x | All |
-| LLM-as-Judge | ⬤○○○○ | ~80% | +500ms-5s | $$ | All |
+| Model-as-Judge | ⬤○○○○ | ~80% | +500ms-5s | $$ | All |
 | Pattern Guardrails | ⬤⬤⬤○○ | ~85% | +10-50ms | $ | Known patterns |
 
 **Legend**: Independence = how much verification relies on LLM reasoning (5 = fully independent)

@@ -27,7 +27,7 @@ AI security controls operate across three layers:
 | AI.5 | Data Governance | Data quality, privacy, protection |
 | AI.6 | Model Security | Model protection, validation, monitoring |
 | AI.7 | Runtime Controls - Guardrails | Inline input/output validation |
-| AI.8 | Runtime Controls - LLM-as-Judge | Async assurance and monitoring |
+| AI.8 | Runtime Controls - Model-as-Judge | Async assurance and monitoring |
 | AI.9 | Human Oversight | HITL, escalation, accountability |
 | AI.10 | Agentic Controls | Agent-specific safeguards |
 | AI.11 | Logging & Monitoring | Observability, alerting, audit |
@@ -1132,7 +1132,7 @@ The behavior of AI systems is shaped by training data you don't control and like
 | AI.5 Data Governance | Full | Full | Standard | Basic |
 | AI.6 Model Security | Full | Full | Standard | Basic |
 | AI.7 Guardrails | Full | Full | Standard | Basic |
-| AI.8 LLM-as-Judge | 100% | 20-50% | 5-10% | Optional |
+| AI.8 Model-as-Judge | 100% | 20-50% | 5-10% | Optional |
 | AI.9 Human Oversight | All decisions | Escalations + sampling | Periodic | Spot checks |
 | AI.10 Agentic Controls | Full (if applicable) | Full | Standard | Basic |
 | AI.11 Logging & Monitoring | Full | Full | Standard | Basic |

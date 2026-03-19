@@ -50,7 +50,7 @@ Guardrails operate on individual transactions. They can't see patterns.
 
 If guardrails are the bouncer, you also need a detective. Someone reviewing the footage, noticing patterns, flagging concerns for investigation.
 
-This is the role of **LLM-as-Judge** - a second AI system that evaluates interactions after they occur. Not blocking. Not deciding. Detecting.
+This is the role of **Model-as-Judge** - a second AI system that evaluates interactions after they occur. Not blocking. Not deciding. Detecting.
 
 The Judge reviews transactions asynchronously. It asks:
 - Did the AI follow its policies?

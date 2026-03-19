@@ -217,7 +217,7 @@ Cross-zone traffic logs feed into the enterprise SIEM alongside AI application l
 
 ## Three-Layer Mapping
 
-| Control | Guardrails | LLM-as-Judge | Human Oversight |
+| Control | Guardrails | Model-as-Judge | Human Oversight |
 |---------|-----------|--------------|-----------------|
 | NET-01 Zones | Guardrails in Zone 2, can't be bypassed | Judge in Zone 3, independent | Control plane in Zone 5, human-only |
 | NET-02 Bypass prevention | Guardrails enforced at network level | Judge receives post-guardrail data for comparison | Humans notified of bypass attempts |

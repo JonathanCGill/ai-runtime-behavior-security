@@ -636,7 +636,7 @@ CreditAssist demonstrates CRITICAL-tier implementation with proper control separ
 | Guardrails | Data validation, format checks | Inline, fast, deterministic |
 | Primary AI | Risk assessment, recommendations | Advisory only |
 | Underwriter (HITL) | Final decision | 100%, always accountable |
-| LLM-as-Judge | Quality assurance, bias detection | Async, 100% sampling |
+| Model-as-Judge | Quality assurance, bias detection | Async, 100% sampling |
 | Bias Monitoring | Statistical analysis | Daily automated |
 | Compliance Review | Review Judge findings | Human action on findings |
 

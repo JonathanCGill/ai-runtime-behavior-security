@@ -45,7 +45,7 @@ The [Judge layer](ARCHITECTURE.md) exists because guardrails will be bypassed. T
 
 **The principle:** Layer multiple independent defensive mechanisms so that an attacker must breach ALL of them to succeed. No single point of failure.
 
-**In this framework:** The [three-layer architecture](ARCHITECTURE.md) (Guardrails → LLM-as-Judge → Human Oversight) is a direct application. Each layer catches what the previous layer misses - by design, not by coincidence:
+**In this framework:** The [three-layer architecture](ARCHITECTURE.md) (Guardrails → Model-as-Judge → Human Oversight) is a direct application. Each layer catches what the previous layer misses - by design, not by coincidence:
 
 | Layer | What it catches | Why the previous layer can't |
 |-------|----------------|------------------------------|

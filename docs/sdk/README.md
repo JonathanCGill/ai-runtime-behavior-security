@@ -36,7 +36,7 @@ AIRS only sees the text going in and the text coming out. It doesn't know or car
 - **Any framework**: LangChain, LlamaIndex, Haystack, raw API calls
 - **Any architecture**: single model, RAG, agents, multi-agent orchestration
 
-The one exception is the optional **LLM-as-Judge**, which does call an OpenAI-compatible API to *evaluate* outputs. This is the judge model, a separate, independent model used for security evaluation, not your production model.
+The one exception is the optional **Model-as-Judge**, which does call an OpenAI-compatible API to *evaluate* outputs. This is the judge model, a separate, independent model used for security evaluation, not your production model.
 
 ## What It Provides
 
