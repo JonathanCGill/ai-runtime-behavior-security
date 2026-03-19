@@ -78,7 +78,9 @@ extra:
       link: https://www.linkedin.com/in/jonathancgill/
       name: Jonathan Gill on LinkedIn
 
-copyright: Copyright &copy; 2026 Jonathan Gill | MIT License
+copyright: >-
+  Copyright &copy; 2026 Jonathan Gill | MIT License<br>
+  Feedback welcome — <a href="mailto:feedback@airuntimesecurity.io">feedback@airuntimesecurity.io</a>
 
 nav:
   - Home: README.md

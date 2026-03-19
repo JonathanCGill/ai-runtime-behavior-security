@@ -56,6 +56,12 @@ Over 30 years across infrastructure, security engineering, consulting, and leade
 - **GitHub**: [@JonathanCGill](https://github.com/JonathanCGill)
 - **LinkedIn**: [Jonathan Gill](https://www.linkedin.com/in/jonathancgill/)
 
+## Feedback
+
+Comments, thoughts, and constructive criticism are welcome. If you have feedback on the framework, the site, or anything else, please get in touch.
+
+**Email**: [feedback@airuntimesecurity.io](mailto:feedback@airuntimesecurity.io)
+
 ## AI Assistance Disclosure
 
 This framework was written with AI assistance (Claude and ChatGPT) for drafting, structuring, and research synthesis. Architecture, control design, risk analysis, and editorial judgment are the author's.
