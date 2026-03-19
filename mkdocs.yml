@@ -193,6 +193,7 @@ nav:
       - Evaluation Integrity Risks: insights/evaluation-integrity-risks.md
       - Model Drift Impact: insights/model-drift-impact.md
       - The Flight Recorder Problem: insights/the-flight-recorder-problem.md
+      - Securing the Connective Tissue: insights/securing-the-connective-tissue.md
       - What Works: insights/what-works.md
     - Reference:
       - EU AI Act Crosswalk: extensions/regulatory/eu-ai-act-crosswalk.md

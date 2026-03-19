@@ -40,6 +40,7 @@ Where the three-layer pattern meets its limits - and what to do about it.
 | 16 | [The Long-Horizon Problem](the-long-horizon-problem.md) | The security properties you validated on day one may not hold on day thirty - time itself is an attack vector | [Observability Controls](../maso/controls/observability.md) |
 | 17 | [Process-Aware Evaluation](process-aware-evaluation.md) | Evaluating what an agent produced is less important than evaluating how it got there | [Judge Assurance](../core/judge-assurance.md) |
 | 18 | [The Flight Recorder Problem](the-flight-recorder-problem.md) | You log what happened but not why, or how to replay it. AI systems need provenance chains, not just event logs | [Logging & Observability](../infrastructure/controls/logging-and-observability.md) |
+| 19 | [Securing the Connective Tissue](securing-the-connective-tissue.md) | The attack surface has shifted from models to the space between them: agentic service meshes, proof of inference, and ghost agents | [Delegation Chains](../infrastructure/agentic/delegation-chains.md) |
 
 ## Operational Gaps
 
