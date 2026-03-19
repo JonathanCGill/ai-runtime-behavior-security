@@ -61,6 +61,7 @@ When summarising, stick to the facts. Do not editorialize or inflate the signifi
 - Bold for key terms, backticks for code and config, italics for citations.
 - Keep summaries concise. Two to four sentences per item.
 - Use the exact tag names from the table in `docs/news.md`.
+- Always credit the people behind the work. Name researchers, authors, and teams responsible. For example: "Researchers at Trail of Bits, led by *Jane Smith*, found..." or "A paper by *Doe et al.* from Stanford..."
 
 ## Framework reference
 
