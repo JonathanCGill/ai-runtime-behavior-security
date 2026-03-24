@@ -159,6 +159,14 @@ Before agent-generated code is executed, scan it for dangerous patterns.
 
 Code scanning catches known dangerous patterns but is inherently incomplete - the sandbox resource limits and isolation are the primary controls. Code scanning is defence in depth, not a replacement for sandboxing.
 
+## Why Container Isolation Alone Is Not Enough
+
+Research from the University of Oxford and the UK AI Security Institute demonstrates that frontier LLMs can escape standard container sandboxes when common misconfigurations are present. Their **SandboxEscapeBench** benchmark tested 18 escape scenarios across orchestration, runtime, and kernel layers and found that frontier models reliably exploit exposed Docker sockets, overprivileged containers, and similar configuration weaknesses.
+
+This means the controls above are not theoretical. Without proper implementation of SAND-01 through SAND-06, a sufficiently capable model with shell access can discover and exploit weaknesses in its own sandbox. Container isolation should be treated as one layer of defence, not the only layer.
+
+For the full analysis, see [The Sandbox Escape Problem](../../insights/the-sandbox-escape-problem.md).
+
 ## Platform-Neutral Implementation Checklist
 
 - [ ] All agent-generated code executes in isolated sandbox environments
