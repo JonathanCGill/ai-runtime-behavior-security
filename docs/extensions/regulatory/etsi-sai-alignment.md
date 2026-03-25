@@ -10,25 +10,96 @@ description: "How ETSI's Securing Artificial Intelligence (SAI) and Experiential
 
 ## Why ETSI Matters for MASO
 
-ETSI has two Industry Specification Groups (ISGs) directly relevant to multi-agent AI security. **ETSI SAI** (Securing Artificial Intelligence) defines the threat landscape, mitigation strategies, and testing methods for AI systems. **ETSI ENI** (Experiential Networked Intelligence) studies multi-agent architectures, collaboration patterns, and agent topology design. Together, they form the most comprehensive European standards body for the security of AI agent systems.
+ETSI has two groups directly relevant to multi-agent AI security. **ETSI TC SAI** (Securing Artificial Intelligence), which transitioned from an Industry Specification Group to a full Technical Committee in December 2023, defines the threat landscape, mitigation strategies, baseline security requirements, and testing methods for AI systems. **ETSI ISG ENI** (Experiential Networked Intelligence) studies multi-agent architectures, collaboration patterns, and agent topology design. Together, they form the most comprehensive European standards body for the security of AI agent systems.
+
+The TC SAI transition matters. As a Technical Committee, SAI can now produce European Standards (ENs) with normative force, directly supporting EU standardisation requests for the EU AI Act and the Cyber Resilience Act.
 
 For organisations operating multi-agent systems under European regulation, ETSI standards sit alongside the EU AI Act as the technical implementation layer. The EU AI Act says *what* must be achieved. ETSI standards say *how* to demonstrate it. MASO provides the operational controls that satisfy both.
 
 ## ETSI SAI: The AI Security Standards
 
-The ETSI SAI group has published a series of Group Reports (GRs) and Group Specifications (GSs) addressing AI security from threat identification through to mitigation and testing. The table below maps each to its MASO relevance.
+ETSI SAI has produced Group Reports (GRs) from its ISG era, plus Technical Specifications (TSs), Technical Reports (TRs), and one European Standard (EN) since becoming a Technical Committee. The table below maps each to its MASO relevance.
 
-| Standard | Title | Status | MASO Relevance |
-|----------|-------|--------|----------------|
-| GR SAI 001 | AI Threat Ontology | Published | High |
-| GR SAI 002 | Data Supply Chain Security | Published | High |
-| GR SAI 004 | Problem Statement on AI Threats | Published | Medium |
-| GR SAI 005 | Mitigation Strategy Report | Published | High |
-| GR SAI 006 | Role of Hardware in AI Security | Published | Low |
-| GR SAI 008 | AI Model Security | Published | High |
-| GR SAI 010 | Automated Testing of AI | Published | High |
-| GR SAI 011 | AI Computing Platform Security | Published | Medium |
-| TR 104 159 | Securing GenAI and LLMs | Published (2025) | Critical |
+### Normative Standards and Technical Specifications
+
+| Standard | Title | Published | MASO Relevance |
+|----------|-------|-----------|----------------|
+| **EN 304 223** | Baseline Cyber Security Requirements for AI | Dec 2025 | **Critical** |
+| **TS 104 223** | Baseline Cyber Security Requirements for AI | Apr 2025 | **Critical** |
+| TS 104 008 | Continuous Auditing-Based Conformity Assessment (CABCA) | 2026 | **Critical** |
+| TS 104 158 | AI Common Incident Expression (AICIE) Framework | Mar 2026 | High |
+| TR 104 159 | Securing AI from Generative AI Harm | Jan 2026 | **Critical** |
+| TR 104 128 | Implementation Guide for EN 304 223 | May 2025 | High |
+| TR 104 048 | Data Supply Chain Security (updated) | Jan 2025 | High |
+
+### Group Reports (ISG Era)
+
+| Standard | Title | Published | MASO Relevance |
+|----------|-------|-----------|----------------|
+| GR SAI 001 | AI Threat Ontology | Jan 2022 | High |
+| GR SAI 002 | Data Supply Chain Security | Aug 2021 | High |
+| GR SAI 004 | Problem Statement on AI Threats | Dec 2020 | Medium |
+| GR SAI 005 | Mitigation Strategy Report | Mar 2021 | High |
+| GR SAI 006 | Role of Hardware in AI Security | Mar 2022 | Low |
+| GR SAI 007 | Explicability and Transparency of AI | Mar 2023 | High |
+| GR SAI 008 | Privacy Aspects of AI/ML Systems | 2023 | High |
+| GR SAI 009 | AI Computing Platform Security Framework | Feb 2023 | Medium |
+| GR SAI 010 | Traceability of AI Models | 2023 | High |
+
+### EN 304 223 / TS 104 223: Baseline Cyber Security Requirements for AI
+
+!!! abstract "The Cornerstone Standard"
+    EN 304 223 is the world's first normative European Standard for AI cybersecurity. It carries legal weight within the EU standards ecosystem and is the standard most likely to be referenced in EU AI Act conformity assessments.
+
+**Scope:** Defines 13 core principles expanding to 72 trackable principles across five AI lifecycle phases. Addresses data poisoning, model obfuscation, indirect prompt injection, and supply chain vulnerabilities. Defines three stakeholder roles: Developers, System Operators, and Data Custodians. Requires documented audit trails, clear role definitions, supply chain transparency, and least-privilege access controls.
+
+**MASO alignment:**
+
+| EN 304 223 Principle Area | MASO Control Domain | Coverage |
+|---------------------------|---------------------|----------|
+| Indirect prompt injection mitigation | Prompt, Goal & Epistemic Integrity (Domain 0) | Cross-agent input sanitisation, system prompt isolation |
+| Least-privilege access controls | Identity & Access (Domain 1) | Per-agent NHI, scoped credentials, no inherited permissions |
+| Audit trails | Observability (Domain 4) | Flight Recorder, immutable decision chain logs |
+| Role definitions (Developer, Operator, Custodian) | Privileged Agent Governance (Domain 6) | Mandatory approval gates, delegation limits |
+| Supply chain transparency | Supply Chain (Domain 5) | AIBOM, model provenance, signed manifests |
+| Data integrity across lifecycle | Data Protection (Domain 2) | RAG integrity, cross-agent data fencing, DLP |
+
+**Assessment:** EN 304 223 touches nearly every MASO control domain through its 72 principles. The standard was designed for AI systems generally, not multi-agent systems specifically. MASO's contribution is applying these principles at each agent boundary, across inter-agent communication, and through the orchestration layer. Organisations that implement MASO at Tier 2 or above will satisfy the majority of EN 304 223 requirements.
+
+### TS 104 008: Continuous Auditing-Based Conformity Assessment (CABCA)
+
+**Scope:** Provides a framework for continuous, automated conformity assessment of dynamic AI systems. Assessment runs in cycles triggered by schedules or events (model updates, data drift, performance anomalies). Translates regulatory requirements into measurable, machine-readable metrics. Aligned with EU AI Act post-market monitoring obligations.
+
+**MASO alignment:**
+
+| CABCA Concept | MASO Equivalent | Notes |
+|---------------|-----------------|-------|
+| Event-triggered assessment cycles | PACE escalation model | Both respond dynamically to system state changes |
+| Machine-readable compliance metrics | OISpec contracts (Domain 7) | Both translate high-level requirements into measurable criteria |
+| Continuous monitoring | Observability (Domain 4) | Flight Recorder, behavioural drift detection |
+| Post-market surveillance | Tier progression model | MASO tiers define ongoing monitoring requirements that increase with autonomy |
+
+**Assessment:** CABCA is essential for multi-agent systems because agents evolve independently. Point-in-time audits cannot capture the dynamic risk profile of a system where agents are updated, retrained, or adapted between assessments. MASO's Observability controls and PACE model provide the runtime infrastructure that CABCA's continuous assessment requires.
+
+### TS 104 158: AI Common Incident Expression (AICIE)
+
+**Scope:** Defines a global framework for AI incident reporting (Part 1) with an information container based on the OECD reporting model (Part 2). Standardises how AI incidents are described, categorised, and shared.
+
+**MASO alignment:**
+
+| AICIE Component | MASO Equivalent | Coverage |
+|-----------------|-----------------|----------|
+| Incident classification taxonomy | [Incident Tracker](../../maso/threat-intelligence/incident-tracker.md) | MASO tracks multi-agent incidents with root cause analysis |
+| Standardised reporting format | Flight Recorder exports | Immutable logs capture full decision chains for incident reconstruction |
+| Cross-organisation incident sharing | Observability (Domain 4) | SIEM/SOAR integration enables correlation with broader security operations |
+
+**Assessment:** AICIE provides the reporting format. MASO provides the data. The Flight Recorder's immutable logs contain exactly the evidence that AICIE-format reports need: agent actions, Judge verdicts, tool invocations, inter-agent messages, and PACE state transitions.
+
+### GR SAI 007: Explicability and Transparency
+
+**Scope:** Defines explicability ("property of an action to be accounted for or understood") and transparency ("property of an action to be open to inspection with no hidden properties"). Identifies steps for designers and implementers to ensure both static and dynamic forms of explicability.
+
+**MASO alignment:** Directly supports Observability (Domain 4) and Objective Intent (Domain 7). In multi-agent systems, the ability to explain and inspect each agent's decision-making process is critical for audit, debugging, and governance. The OISpec contract makes agent intent explicit and verifiable, satisfying SAI 007's transparency requirements. The Flight Recorder provides the dynamic explicability layer by capturing full reasoning chains.
 
 ### GR SAI 001: AI Threat Ontology
 
@@ -78,39 +149,45 @@ The ETSI SAI group has published a series of Group Reports (GRs) and Group Speci
 
 **Assessment:** SAI 005 is the closest ETSI standard to MASO's three-layer defence model. The key difference: SAI 005 treats mitigations as a flat list. MASO arranges them into layers (guardrails, Judge, human) and tiers (Supervised, Managed, Autonomous) that scale controls to demonstrated trustworthiness.
 
-### GR SAI 008: AI Model Security
+### GR SAI 008: Privacy Aspects of AI/ML Systems
 
-**Scope:** Addresses security of AI models themselves, including integrity verification, access controls, and protection against extraction attacks.
+**Scope:** Covers privacy-specific remedies, pre-emptive and reactive responses to adversarial activity targeting AI privacy. Addresses privacy attacks including model inversion, membership inference, and attribute inference.
 
 **MASO alignment:**
 
 | SAI 008 Requirement | MASO Control Domain | Coverage |
 |---------------------|---------------------|----------|
-| Model integrity verification | Supply Chain (Domain 5) | Model provenance, runtime integrity checks |
+| Privacy attack mitigation | Data Protection (Domain 2) | Cross-agent data fencing, output DLP scanning |
 | Model access control | Identity & Access (Domain 1) | Per-agent NHI, scoped credentials, zero-trust |
-| Anti-extraction measures | Execution Control (Domain 3) | Sandboxed execution, rate limiting |
-| Model lifecycle management | Observability (Domain 4) | Behavioural drift detection against baselines |
+| Data leakage prevention | Data Protection (Domain 2) | Message bus DLP, classification-level enforcement |
+| Privacy monitoring | Observability (Domain 4) | Behavioural drift detection against baselines |
 
-**Assessment:** Strong alignment on model access and integrity. SAI 008 does not address the multi-agent dimension where one agent could attempt to extract information from another agent's model through inter-agent messaging. MASO's [Secure Inter-Agent Message Bus](../../maso/README.md) with signed, rate-limited communication addresses this gap.
+**Assessment:** SAI 008 does not address the multi-agent dimension where one agent could attempt to extract private information from another agent's context through inter-agent messaging. MASO's [Secure Inter-Agent Message Bus](../../maso/README.md) with signed, rate-limited communication and cross-agent data fencing addresses this gap.
 
-### GR SAI 010: Automated Testing of AI
+### GR SAI 009: AI Computing Platform Security Framework
 
-**Scope:** Defines methods for automated security testing of AI systems, covering adversarial testing, robustness evaluation, and continuous assessment.
+**Scope:** Describes a security framework for AI computing platforms, covering protection of models and data at runtime and at rest through platform-level security components and mechanisms.
+
+**MASO alignment:** Maps to Execution Control (Domain 3) and Environment Containment. SAI 009 defines the platform security baseline that multi-agent orchestration environments must implement, including resource isolation, secure storage, and runtime protection. MASO's sandboxed execution, tool parameter allow-lists, and blast radius caps operate on top of these platform-level controls.
+
+### GR SAI 010: Traceability of AI Models
+
+**Scope:** Addresses model transferability (re-use across tasks and industries) and watermarking for traceability of AI models.
 
 **MASO alignment:**
 
-| SAI 010 Test Method | MASO Equivalent | Tier Applicability |
+| SAI 010 Concept | MASO Equivalent | Tier Applicability |
 |---------------------|-----------------|--------------------|
-| Adversarial input testing | [Red Team Playbook](../../maso/red-team/red-team-playbook.md) | All tiers |
-| Robustness evaluation | [Stress Testing at Scale](../../maso/stress-test/) | Tier 2+ |
-| Continuous monitoring | Observability (Domain 4), anomaly scoring | All tiers |
-| Regression testing | Judge evaluation baselines | Tier 2+ |
+| Model provenance tracking | Supply Chain (Domain 5), AIBOM | All tiers |
+| Model watermarking | Supply Chain (Domain 5), signed manifests | Tier 2+ |
+| Transferability documentation | Observability (Domain 4), Flight Recorder | Tier 2+ |
+| Traceability chain | Supply Chain (Domain 5), A2A trust chain validation | All tiers |
 
-**Assessment:** SAI 010 provides a useful taxonomy for AI testing but does not cover multi-agent specific scenarios like cascading failure propagation, inter-agent prompt injection, or epistemic degradation across chains. MASO's Red Team Playbook and stress testing documents address these gaps directly.
+**Assessment:** SAI 010 provides a model-level traceability framework. MASO extends this into the multi-agent context where models are deployed across agent boundaries, and where the provenance chain must be verified not just for each model but for the agent system as a whole.
 
-### TR 104 159: Securing Generative AI and LLMs
+### TR 104 159: Securing AI from Generative AI Harm
 
-**Scope:** ETSI's most recent and directly relevant publication. Addresses security risks specific to generative AI and large language models, including prompt injection, hallucination, data leakage, and jailbreaking.
+**Scope:** Domain-specific application of EN 304 223 principles to generative AI. Covers deepfakes, misinformation, confidentiality risks, copyright/IPR concerns, hallucinations, and malicious code generation. Critically, this document explicitly states that threats and mitigations for generative AI are also relevant to **agentic AI**, which it describes as "an evolution of GenAI."
 
 **MASO alignment:**
 
@@ -181,11 +258,13 @@ This is the most directly relevant ETSI standard for MASO.
 
 | ETSI Coverage | MASO Position | Recommendation |
 |---------------|---------------|----------------|
+| EN 304 223 Developer role requirements | Partial | MASO is deployer-focused. Developer-side controls (model training, development security) are upstream. Reference EN 304 223 Developer obligations in vendor assessments. |
 | Hardware-level AI security (SAI 006) | Out of scope | Correct scoping. MASO is a deployer framework. Hardware security is infrastructure. |
 | AI model training security | Out of scope | Correct scoping. MASO secures deployed agents, not the training pipeline. |
 | AI for cybersecurity operations | Out of scope | Correct scoping. MASO secures AI, not AI-for-security. |
 | Telecoms-specific agent topology (ENI 055) | Not addressed | No action needed. Domain-specific applications do not require framework changes. |
-| Formal verification of AI models (SAI 010 advanced) | Partial | [Stress Testing](../../maso/stress-test/) covers runtime verification. Formal methods for model internals are outside MASO scope. |
+| Deepfake detection (SAI 011, TR 104 159) | Partial | Relevant when agents process multimedia inputs. Addressed through Guardrails (Layer 1) input validation. |
+| CABCA conformance testing (TS 104 216) | Not formalised | MASO's observability controls produce the data CABCA needs, but no formal CABCA test suite mapping exists yet. |
 
 ## Compliance Mapping Summary
 
@@ -193,49 +272,60 @@ For organisations needing to demonstrate ETSI alignment, the following table map
 
 | MASO Control Domain | ETSI Standards Addressed | Primary Evidence |
 |---------------------|--------------------------|------------------|
-| 0. Prompt, Goal & Epistemic Integrity | SAI 001, SAI 005, TR 104 159 | Input sanitisation logs, epistemic monitoring alerts, goal integrity reports |
-| 1. Identity & Access | SAI 008, ENI 056 | NHI registry, credential rotation logs, authentication audit trail |
-| 2. Data Protection | SAI 002, TR 104 159 | DLP scan results, data classification tags, RAG integrity checks |
-| 3. Execution Control | SAI 001, SAI 005, SAI 008, TR 104 159 | Sandbox configurations, tool allow-lists, blast radius cap settings |
-| 4. Observability | SAI 005, SAI 010 | Flight Recorder exports, drift detection baselines, SIEM integration |
-| 5. Supply Chain | SAI 002, SAI 008 | AIBOM records, signed manifests, A2A trust chain validations |
-| 6. Privileged Agent Governance | ENI 056, ENI 051 | Approval gate logs, delegation limit configurations, independent monitor reports |
-| 7. Objective Intent | ENI 056 | OISpec version history, tactical/strategic evaluation results |
-| Environment Containment | SAI 001, SAI 005, TR 104 159 | API hardening configs, kill switch test results, WAF/DLP rules |
+| 0. Prompt, Goal & Epistemic Integrity | EN 304 223, SAI 001, SAI 005, TR 104 159 | Input sanitisation logs, epistemic monitoring alerts, goal integrity reports |
+| 1. Identity & Access | EN 304 223, SAI 008, ENI 056 | NHI registry, credential rotation logs, authentication audit trail |
+| 2. Data Protection | EN 304 223, SAI 002, TR 104 048, SAI 008, TR 104 159 | DLP scan results, data classification tags, RAG integrity checks |
+| 3. Execution Control | EN 304 223, SAI 001, SAI 005, SAI 009, TR 104 159 | Sandbox configurations, tool allow-lists, blast radius cap settings |
+| 4. Observability | EN 304 223, SAI 005, SAI 007, SAI 010, TS 104 008, TS 104 158 | Flight Recorder exports, drift detection baselines, SIEM integration, AICIE reports |
+| 5. Supply Chain | EN 304 223, SAI 002, TR 104 048, SAI 010 | AIBOM records, signed manifests, A2A trust chain validations |
+| 6. Privileged Agent Governance | EN 304 223, TS 104 008, ENI 056, ENI 051 | Approval gate logs, delegation limit configurations, independent monitor reports |
+| 7. Objective Intent | TS 104 008, SAI 007, ENI 056 | OISpec version history, tactical/strategic evaluation results |
+| Environment Containment | EN 304 223, SAI 001, SAI 005, SAI 009, TR 104 159 | API hardening configs, kill switch test results, WAF/DLP rules |
 
 ## Practical Implications by MASO Tier
 
 ### Tier 1 (Supervised)
 
-ETSI alignment is straightforward at this tier. Human-in-the-loop oversight satisfies most SAI 005 mitigation requirements without additional tooling. The main ETSI-driven additions:
+ETSI alignment is straightforward at this tier. Human-in-the-loop oversight satisfies most EN 304 223 and SAI 005 mitigation requirements without additional tooling. The main ETSI-driven additions:
 
 - Document agent threat model against SAI 001 ontology
-- Log all agent actions per SAI 010 continuous monitoring requirements
+- Map roles to EN 304 223 stakeholder definitions (Developer, Operator, Data Custodian)
+- Log all agent actions per EN 304 223 audit trail requirements
 - Apply TR 104 159 prompt injection mitigations even for supervised agents
 
 ### Tier 2 (Managed)
 
 ETSI requirements start to bite at this tier. Automated controls must compensate for reduced human oversight:
 
-- Implement SAI 010 automated testing as part of the Judge evaluation pipeline
-- Apply SAI 002 data provenance controls to all inter-agent data flows
+- Implement EN 304 223 least-privilege principles at every agent boundary
+- Apply TR 104 048 data provenance controls to all inter-agent data flows
 - Use ENI 056 topology patterns to validate your multi-agent architecture design
+- Begin CABCA-aligned continuous assessment rather than point-in-time audits
+- Adopt AICIE (TS 104 158) incident reporting format for multi-agent incidents
 
 ### Tier 3 (Autonomous)
 
 Full ETSI alignment becomes essential. Autonomous agents operating without human approval need demonstrable compliance:
 
+- Full EN 304 223 conformity across all 72 trackable principles
 - Full SAI 001 threat ontology mapping in the risk register
-- Continuous automated testing per SAI 010 at runtime, not just pre-deployment
+- CABCA continuous assessment at runtime, event-triggered on model updates and drift
 - ENI 056 architecture validation for all agent topologies
 - TR 104 159 mitigations enforced at every agent boundary, including inter-agent
-- SAI 008 model integrity verification on every model load and update
+- SAI 007 explicability requirements met through OISpec contracts and Flight Recorder
+- AICIE-format incident reporting integrated with SIEM/SOAR
 
 !!! info "References"
-    - [ETSI SAI: Securing Artificial Intelligence](https://www.etsi.org/technologies/securing-artificial-intelligence)
+    - [ETSI TC SAI: Securing Artificial Intelligence](https://www.etsi.org/committee/technical-committee-tc-securing-artificial-intelligence-sai)
+    - [ETSI EN 304 223: Baseline Cyber Security Requirements for AI](https://www.etsi.org/deliver/etsi_en/304200_304299/304223/02.01.01_60/en_304223v020101p.pdf)
+    - [ETSI TS 104 223: Baseline Cyber Security Requirements for AI](https://www.etsi.org/deliver/etsi_ts/104200_104299/104223/01.01.01_60/ts_104223v010101p.pdf)
+    - [ETSI TR 104 128: Implementation Guide for EN 304 223](https://www.etsi.org/deliver/etsi_tr/104100_104199/104128/01.01.01_60/tr_104128v010101p.pdf)
+    - [ETSI TR 104 159: Securing AI from Generative AI Harm](https://www.etsi.org/deliver/etsi_tr/104100_104199/104159/01.01.01_60/tr_104159v010101p.pdf)
+    - [ETSI TS 104 158: AI Common Incident Expression (AICIE)](https://www.etsi.org/deliver/etsi_ts/104100_104199/10415801/01.01.01_60/ts_10415801v010101p.pdf)
     - [ETSI GR SAI 001: AI Threat Ontology](https://www.etsi.org/deliver/etsi_gr/SAI/001_099/001/01.01.01_60/gr_SAI001v010101p.pdf)
     - [ETSI GR SAI 005: Mitigation Strategy Report](https://www.etsi.org/deliver/etsi_gr/SAI/001_099/005/01.01.01_60/gr_SAI005v010101p.pdf)
-    - [ETSI TR 104 159: Securing Generative AI and LLMs](https://www.etsi.org/deliver/etsi_tr/104100_104199/104159/)
+    - [ETSI GR SAI 007: Explicability and Transparency](https://www.etsi.org/deliver/etsi_gr/SAI/001_099/007/01.01.01_60/gr_SAI007v010101p.pdf)
     - [ETSI GR ENI 056: Study on Multi-Agent Systems](https://www.etsi.org/deliver/etsi_gr/ENI/001_099/056/04.01.01_60/gr_ENI056v040101p.pdf)
     - [ETSI ENI: Experiential Networked Intelligence](https://www.etsi.org/technologies/experiential-networked-intelligence)
+    - [NCSC: New ETSI Standard Protects AI Systems](https://www.ncsc.gov.uk/blog-post/new-etsi-standard-protects-ai-systems-from-evolving-cyber-threats)
     - [MASO Framework](../../maso/README.md)
