@@ -9,6 +9,33 @@ This site covers a lot of ground. These curated paths help you find what matters
 !!! tip "Looking for role-based guidance?"
     The [Stakeholder Views](stakeholders/) pages provide tailored entry points for security leaders, risk teams, architects, engineers, product owners, and more. Each one includes a starting path, concrete first actions, and answers to common objections.
 
+## The Golden Thread: Guardrails, Judges, and Why They Work Together
+
+This is the core reading path. It takes you from "why do I need runtime security at all?" through each control layer, how they reinforce each other, and the evidence that the approach works. Each article answers a question the previous one raises.
+
+**Start here if you are new to the framework, or if you want to understand the reasoning behind the architecture before diving into controls and checklists.**
+
+| # | Article | What it argues | What it sets up |
+|---|---------|---------------|-----------------|
+| 1 | [Why AI Security Is a Runtime Problem](insights/why-ai-security-is-a-runtime-problem.md) | AI is non-deterministic. Pre-deployment testing cannot prove future safety. Security must be continuous. | If testing is insufficient, what does continuous security actually look like? |
+| 2 | [Why Your Guardrails Aren't Enough](insights/why-guardrails-arent-enough.md) | Guardrails catch known-bad patterns. Three classes of failure walk past them: novel attacks, semantic violations, emergent behaviour at scale. | If guardrails are necessary but insufficient, what fills the gap? |
+| 3 | [Practical Guardrails](insights/practical-guardrails.md) | Guardrails work in two classes (security, data protection) at five pipeline points. They need to be well-built, not dismissed. | Guardrails are solid for what they do. What catches everything else? |
+| 4 | [The Judge Detects. It Doesn't Decide.](insights/judge-detects-not-decides.md) | The Judge runs asynchronously, detecting unknown-bad without blocking. It informs human decisions rather than replacing them. | If the Judge is this important, how do we know it actually works? |
+| 5 | [Judge Assurance](core/judge-assurance.md) | Validate the Judge against human ground truth. Track agreement, false negatives, drift. Different model family from the generator. Calibrate continuously. | The Judge can be validated, but can it be attacked? |
+| 6 | [When the Judge Can Be Fooled](core/when-the-judge-can-be-fooled.md) | The Judge is itself an LLM. It can be manipulated through output crafting, prompt injection, and shared blind spots. Mitigations exist but perfection does not. | If no single layer is reliable, what holds the system together? |
+| 7 | [Humans Remain Accountable](insights/humans-remain-accountable.md) | Humans own outcomes. The Judge makes oversight scalable, not optional. Regulation requires it. | Humans can't review everything. What else keeps the system honest? |
+| 8 | [Infrastructure Beats Instructions](insights/infrastructure-beats-instructions.md) | Telling agents what not to do fails. Make violations technically impossible through network controls, access restrictions, and action allowlists enforced outside the agent. | We have layers and infrastructure. How do we avoid over-constraining? |
+| 9 | [The Constraint Curve](insights/the-constraint-curve.md) | Early constraints deliver outsized security at minimal cost. Late constraints destroy the value that justified using AI. Proportionality is the design principle. | We know how much to constrain. But how does the system improve over time? |
+| 10 | [The Feedback Loops That Make It Work](insights/feedback-loops.md) | Four feedback loops at different speeds (judge tightens guardrails, humans calibrate the judge, humans update policy, downstream outcomes validate decisions) create a self-improving system. | The loops improve detection. But what anchors all these layers to the same goal? |
+| 11 | [Containment Through Declared Intent](insights/containment-through-intent.md) | Declared intent is the reference point for every layer. Guardrails become purpose-specific. The Judge has alignment criteria. Humans know what to escalate. Without intent, controls are arbitrary. | How does all of this come together as architecture? |
+| 12 | [Architecture Overview](ARCHITECTURE.md) | Guardrails prevent. Judge detects. Humans decide. Circuit breakers contain. Single-agent and multi-agent variants with PACE resilience for graceful degradation. | Does it actually work in practice? |
+| 13 | [What Works](insights/what-works.md) | Organisations using runtime controls detect breaches 108 days faster. Guardrails block millions of attacks daily. Judges catch hallucination in production. The evidence is clear, but adoption is low. | *You are now ready to implement. Start with the [Quick Start](QUICK_START.md) or [Implementation Checklist](core/checklist.md).* |
+
+!!! tip "Reading time"
+    The full path is roughly 90 minutes. Articles 1 through 6 cover the core argument in about 40 minutes. If you stop there, you will understand why the guardrail-plus-judge pattern exists and what keeps it honest.
+
+---
+
 ## By goal
 
 ### "I need to understand the threat landscape"
