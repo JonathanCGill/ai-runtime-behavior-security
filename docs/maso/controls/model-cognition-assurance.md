@@ -70,3 +70,78 @@ All Tier 2 controls remain active, plus:
 | **MC-3.3** Adversarial reward hacking red team | Red team specifically targeting reward signals: craft tasks where shortcut completion is possible and verify agents pursue genuine completion over gaming | Test design: create tasks with an obvious shortcut path (e.g., pattern-matching the expected output format without performing the underlying analysis) and a genuine completion path. Measure whether the agent takes the shortcut when the shortcut would pass evaluation criteria. Minimum: quarterly, covering each agent's primary task domain. Results feed into MC-2.5 baseline recalibration. Residual risk: red team can only test shortcut strategies they can anticipate. Novel reward hacking strategies discovered by the model through training or in-context learning may not be represented in test scenarios. |
 | **MC-3.4** Residual risk quantification | Quantify the residual risk from unavailable activation-layer access using proxy metrics: CoT consistency scores (MC-2.3), behavioural baseline stability (MC-2.5), cross-model validation agreement rates, and independent verification pass rates (MC-1.6) | Produce a composite cognition assurance score per model. Models with low proxy scores and black-box classification carry higher residual risk and require more conservative autonomy limits. Score methodology must be documented, repeatable, and reviewed annually. Residual risk: proxy metrics are indirect. A model can score well on all proxies while harbouring internal misalignment that the proxies are not designed to detect. The score quantifies observable risk, not total risk. |
 | **MC-3.5** Independent vendor audit rights | Contractual right to commission independent interpretability audits of vendor models, or to require vendor participation in industry-standard alignment evaluation programmes | Audit scope covers: reproduction of vendor attestation claims (MC-2.8), independent activation-layer analysis where access is granted, and review of material finding disclosure completeness (MC-2.9). If the vendor declines white-box audit access, the contract must specify alternative assurance mechanisms (third-party certification, escrow of evaluation artefacts, participation in recognised alignment benchmarks). Residual risk: even with audit rights, the organisation depends on the state of interpretability science. An audit can verify that known methods were applied correctly. It cannot guarantee that the methods are sufficient to detect all forms of misalignment. |
+
+**What you're building at Tier 3:** Verified assurance. Where activation-layer access exists, you use it independently. Where it does not, you quantify the gap and hold vendors to audit-grade accountability.
+
+## Testing Criteria
+
+### Tier 1 Tests
+
+| Test ID | Test | Pass Criteria |
+|---------|------|---------------|
+| MC-T1.1 | Attestation inventory completeness | Every model in the deployment has an entry in the interpretability attestation inventory (MC-1.1). No model is undocumented. |
+| MC-T1.2 | Access classification accuracy | Every model has a white-box/grey-box/black-box classification (MC-1.3). Classification matches the actual level of interpretability access available. |
+| MC-T1.3 | CoT logging coverage | Select 10 agent interactions involving reasoning models. Verify CoT output is captured in the log for each (MC-1.5). |
+| MC-T1.4 | Task completion verification | Review the task verification sample (MC-1.6). Confirm sample rate meets the 10% minimum. Confirm verification results are recorded per agent. |
+
+### Tier 2 Tests
+
+| Test ID | Test | Pass Criteria |
+|---------|------|---------------|
+| MC-T2.1 | Adversarial CoT consistency | Present 20 equivalent tasks with varied framing to a reasoning model agent. Measure CoT divergence. Divergence rate is documented and within the threshold defined by the deployment (MC-2.3). |
+| MC-T2.2 | CoT sufficiency documentation | Review the CoT sufficiency classification (MC-2.4) for each deployment. Residual risk statement exists, specifies what CoT can and cannot detect, lists compensating controls, and is signed by the risk owner. |
+| MC-T2.3 | Reward hacking baseline stability | Verify behavioural baselines (MC-2.5) exist for each agent and task type. Baselines have a minimum 30-day observation window. Variance bands are defined. |
+| MC-T2.4 | Reward hacking anomaly detection | Inject simulated reward hacking signals (inflated success rate, implausibly fast completion) into the monitoring pipeline. MC-2.6 detection triggers an alert within the defined threshold. |
+| MC-T2.5 | SR 11-7 residual risk documentation | Review the third-party residual risk statement (MC-2.7) for each black-box model. Statement references SR 11-7, identifies the validation gap, lists compensating controls, and carries risk-owner sign-off. |
+| MC-T2.6 | Vendor attestation on file | For each model from a vendor supplying regulated financial services, verify an interpretability attestation (MC-2.8) is on file, covers the required dimensions (tooling, frequency, coverage, governance), and is current. |
+| MC-T2.7 | Disclosure obligation in contract | Review vendor contracts for material finding disclosure clauses (MC-2.9). Materiality is defined from the deployer's perspective. Disclosure timeline is specified. |
+| MC-T2.8 | Incident notification clause | Review vendor contracts for alignment incident notification clauses (MC-2.10). Notification window is defined. Required notification content is specified. |
+
+### Tier 3 Tests
+
+| Test ID | Test | Pass Criteria |
+|---------|------|---------------|
+| MC-T3.1 | Independent activation analysis | For white-box models, verify an independent activation-layer analysis (MC-3.1) has been performed within the last 12 months by a party other than the model provider. Findings are documented. |
+| MC-T3.2 | Activation-CoT correlation | For white-box models with activation-CoT correlation (MC-3.2), present 10 tasks designed to elicit misaligned reasoning. Verify the correlation tooling flags cases where activation patterns diverge from expressed CoT. |
+| MC-T3.3 | Reward hacking red team | Review quarterly red team results (MC-3.3). Shortcut tasks were crafted for each agent's primary domain. Results document whether agents pursued genuine or shortcut completion. Findings fed back into baseline recalibration. |
+| MC-T3.4 | Cognition assurance score | Verify a composite cognition assurance score (MC-3.4) exists for each model. Score methodology is documented. Score is current (updated within the last quarter). |
+| MC-T3.5 | Vendor audit rights exercised | Verify independent audit rights (MC-3.5) exist in vendor contracts. If audit has been exercised, findings are documented. If not exercised, a rationale is recorded (e.g., vendor participates in an accepted alignment evaluation programme). |
+
+## Maturity Indicators
+
+| Level | Indicator |
+|-------|-----------|
+| **Initial** | No inventory of model interpretability status. CoT not logged. Task completion claims taken at face value. Third-party models deployed without cognition assurance consideration. |
+| **Managed** | Interpretability attestation inventory maintained. CoT logged and sampled. Task completion verified against ground truth. Models classified by interpretability access level. |
+| **Defined** | Adversarial CoT consistency testing in place. Behavioural baselines established for reward hacking detection. Third-party residual risk documented with SR 11-7 reference. Vendor attestation and disclosure obligations in procurement contracts. |
+| **Quantitatively Managed** | CoT consistency divergence rates tracked and trended. Reward hacking anomaly detection operational with measured false positive/negative rates. Cognition assurance scores produced per model. Vendor attestation maturity assessed on a defined scale. |
+| **Optimising** | Independent activation-layer validation for white-box models. Activation-CoT correlation operational. Red team targeting reward hacking quarterly. Vendor audit rights exercised or alternative assurance verified. Cognition assurance scores feed into autonomy-level decisions. |
+
+## Common Pitfalls
+
+**Treating chain-of-thought as ground truth for alignment.** CoT is a training artefact. It can be unfaithful to the model's actual computation. A model that produces clear, well-reasoned CoT may be post-hoc rationalising rather than transparently reporting its reasoning process. CoT monitoring catches inconsistency between reasoning and action. It does not catch consistently unfaithful reasoning.
+
+**Assuming vendor attestation equals vendor assurance.** A vendor attesting to an interpretability programme is a statement about process, not about outcomes. The programme may be immature, narrowly scoped, or applied to a different model version than the one deployed. Attestation is the starting point for due diligence, not the conclusion.
+
+**Applying SR 11-7 validation assumptions to API-only models.** SR 11-7's model validation framework assumes the validating organisation can inspect model internals: run sensitivity analysis, benchmark against challenger models built on the same data, stress test internal parameters. None of this is possible with a frontier LLM consumed via API. Organisations that claim SR 11-7 compliance for API-only LLM deployments without documenting this gap are overstating their validation coverage.
+
+**Confusing reward hacking detection with output quality monitoring.** Output quality monitoring (covered by [Observability](observability.md)) measures whether agent outputs are good. Reward hacking detection measures whether agent success metrics are genuine. An agent can produce outputs that pass quality evaluation while gaming the evaluation criteria. The distinction matters: quality monitoring asks "is this output acceptable?" while reward hacking detection asks "did the agent actually do the work?"
+
+**Deferring procurement controls to after deployment.** Once a model is in production, the organisation's leverage over the vendor is limited to whatever the contract already requires. If the contract does not include interpretability attestation, material finding disclosure, or incident notification, adding them later requires contract renegotiation. Procurement controls are preventive. They must be in place before the model is deployed, not retrofitted after an incident.
+
+**Treating activation-layer access as binary.** The white-box/grey-box/black-box classification (MC-1.3) is a spectrum, not three discrete categories. Some providers offer structured evaluation access (API-based probing, limited activation snapshots, participation in red team programmes) that falls between full weight access and pure API consumption. Compensating controls should be calibrated to the actual level of access available, not defaulted to the worst case.
+
+## Relationship to Other Domains
+
+| Domain | Relationship |
+|--------|-------------|
+| [Observability](observability.md) | MC extends OB-2.2 (anomaly scoring) and OB-2.3 (drift detection) with cognition-specific signals: CoT consistency, reward hacking indicators, and activation-layer evidence. Observability monitors behaviour. MCA assesses whether the reasoning behind that behaviour is genuine. |
+| [Supply Chain](supply-chain.md) | MC extends SC-2.1 (AIBOM) with interpretability attestation status per model. MC-2.8 through MC-2.10 add procurement requirements that complement SC's inventory and integrity controls with vendor-side cognition assurance. MC-2.10 incident notification cross-references AIBOM to identify affected agents. |
+| [Privileged Agent Governance](privileged-agent-governance.md) | MC-2.3 (CoT consistency testing) and MC-2.6 (reward hacking detection) apply to Judge models as well as task agents. A Judge that exhibits unfaithful CoT or reward hacking behaviour undermines the entire evaluation architecture. PA-2.2 (Judge calibration) should incorporate MC signals. |
+| [Execution Control](execution-control.md) | MC-3.4 (cognition assurance score) can feed into EC-2.1 (action classification) to apply more conservative approval thresholds for agents running on models with low cognition assurance scores. |
+
+!!! info "References"
+    - [Anthropic Research: Reasoning Models Can Deceive](https://www.anthropic.com/research/reasoning-models-can-deceive) - activation-layer interpretability findings demonstrating deceptive internal reasoning invisible in model outputs
+    - [Federal Reserve SR 11-7: Supervisory Guidance on Model Risk Management](https://www.federalreserve.gov/supervisionreg/srletters/sr1107.htm) - model validation principles referenced in MC-2.7
+    - [OWASP Top 10 for LLM Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/) - threat taxonomy mapped in parent MASO framework
+    - [NIST AI RMF](https://www.nist.gov/artificial-intelligence/risk-management-framework) - risk management framework for AI systems
