@@ -71,6 +71,18 @@ Three things follow:
 
 The quality of this entire system depends on the quality of the declarations it evaluates against. Invest in clear, specific, measurable OISpecs and the judge can make sound rulings. Deploy vague specifications and the judge becomes an expensive safety net that catches only the most obvious failures. The foundation is not the model. The foundation is the [declared intent](../constraining-agents.md).
 
+### Contracts: Where Intent Becomes Enforceable
+
+Declared intent is only useful once it is encoded in a contract the runtime and the judge can both read. MASO uses a three-tier hierarchy, with each tier inheriting from the one above it.
+
+**Objective Intent Specification (OISpec).** Declares what each agent, judge, and workflow should accomplish: purpose, authorised outcomes, constraints, and evaluation criteria. This is the reference standard the judge rules against. See [Objective Intent](controls/objective-intent.md).
+
+**Solution contract.** Governs an entire agentic workflow end to end. Specifies the authorised agents and their sequence, authorised data sources, prohibited actions, hard limits (financial, volume, time), escalation paths, and the plan attempt thresholds that trigger a halt. No workflow may be deployed without an approved solution contract. See [Agentic Task Contract](controls/agentic-task-contract.md).
+
+**Agent contract.** Binds each individual agent within the workflow to a specific tool set, logic specification, and escalation path. Agent contracts inherit from their parent solution contract and may not exceed its permissions. Tool provisioning is structural, not policy-based: if a tool is not in the contract, the agent cannot invoke it regardless of how it reasons about the task.
+
+Contracts turn abstract intent into artefacts that can be validated at deployment and enforced at runtime. They are also the basis for the four-state deviation model (normal operation, execution failure, visible failure, creative substitution) and the Anti-Mythos judge, which rules on means compliance rather than output quality. Without contracts, the judge has nothing precise to evaluate against and means-level failures become invisible.
+
 ## Architecture
 
 ![MASO Architecture](../images/maso-architecture.svg)

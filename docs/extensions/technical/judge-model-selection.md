@@ -10,11 +10,12 @@ Principles for choosing the right model to evaluate your AI system. These princi
 
 ![Judge Model Selection](../../images/judge-model-selection.svg)
 
-Three principles, in order of priority:
+Four principles, in order of priority:
 
 1. **Different** - Not the same model as your primary AI
 2. **Conservative** - Biased toward flagging, not passing
 3. **Fast** - Throughput matches or exceeds transaction volume
+4. **Least capable** - The smallest model that can rule on the task, not the most powerful one available
 
 ## Principle 1: Use a Different Model
 
@@ -139,6 +140,46 @@ For agentic systems that need inline, real-time evaluation, you can go further b
 | Medium (30-70B) | Moderate | Good | Moderate | General evaluation |
 | Large (>100B) | Slow | Excellent | High | Tier 2, complex judgment |
 
+## Principle 4: Apply the Principle of Least Capability
+
+**Pick the smallest, least capable Judge that can rule on the task. Do not default to the most powerful model available.**
+
+Do not choose a Mythos-class reasoning model when a Haiku-class model will do the job. A Judge that checks whether an output contains PII, whether a tool call matches an allow-list, or whether a value is inside a numeric threshold does not need frontier reasoning. A Judge that evaluates means compliance across a multi-step execution trace does.
+
+### Why This Matters for Judges
+
+Over-capable Judge selection is not a harmless overspend:
+
+- **Cost compounds.** If the Judge evaluates every action, a 10x larger model is a 10x larger bill, multiplied by transaction volume.
+- **Latency compounds.** Frontier models add hundreds of milliseconds to seconds per evaluation. In inline configurations this pushes Judges out of the critical path and forces async sampling.
+- **Attack surface compounds.** A Judge with extensive reasoning capability can itself be manipulated by adversarial context inside the evaluated output. The more reasoning the Judge does, the more room there is for the evaluated content to redirect it.
+- **Auditability drops.** Longer reasoning traces from the Judge are harder to compare, calibrate, and defend in an audit.
+
+A smaller Judge with a precise, structured rubric often outperforms a larger Judge given a vague one. The judgement quality comes from the rubric, not from the model size.
+
+### Match Judge Capability to Evaluation Depth
+
+| Evaluation task | Reasoning depth | Suitable Judge |
+|-----------------|-----------------|----------------|
+| Schema validation, allow-list check, threshold check | Pattern matching | Small/fast, or rules engine (no LLM) |
+| PII, policy, safety classification on single outputs | Single-criterion classification | Small model, or [distilled SLM](distill-judge-slm.md) |
+| Inline evaluation on measurable criteria (security, privacy, compliance) | Rule application with context | Small to mid-tier |
+| Tool-call sequence evaluation against declared contract | Multi-step comparison | Mid-tier |
+| Logic-level means compliance, creative substitution, cross-session drift | Reasoning about reasoning | Reasoning-capable mid-tier or frontier, where warranted |
+| Strategic workflow-level evaluation across multiple agents | Cross-agent aggregation | Reasoning-capable mid-tier or frontier |
+
+### How to Apply This Principle
+
+- **Start at the lower tier.** Deploy the smallest model that plausibly handles the task, calibrate it against your golden dataset, and measure. Escalate only when the smaller model demonstrably fails, not on the suspicion that it might.
+- **Split composite evaluations.** If one Judge is struggling with a multi-criterion prompt, the problem is usually the prompt, not the model. Break the evaluation into separate, single-criterion Judges running in parallel. Small models handle single-criterion tasks reliably.
+- **Distil where volume is high.** For inline evaluation on well-defined criteria, a [distilled SLM sidecar](distill-judge-slm.md) trained on the larger Judge's verdicts gives you the rubric of the large model at the cost and latency of the small one.
+- **Re-evaluate on model refresh.** Smaller models improve faster than frontier models. A Judge that required a frontier model twelve months ago may now run correctly on a mid-tier model. Review on the same cadence as the Judge's own contract.
+- **Document the choice.** Record the Judge model, why it was selected, and the calibration evidence that supports the selection. This belongs in the Judge contract, not in a config file.
+
+### Where This Interacts With Principle 1 (Different)
+
+The Different principle forbids sharing the *same* model between agent and Judge. Least Capability says pick the smallest model that works. These can conflict: the smallest Judge in the agent's own family may be cheaper than a different-family equivalent. Resolve in favour of Different. Capability coupling between agent and Judge produces shared blind spots, which is a worse failure than moderate overspend.
+
 ## Known Biases to Mitigate
 
 Research has identified several biases in Model-as-Judge that affect reliability:
@@ -232,6 +273,8 @@ Watch for:
 **Conservative:** Configure the Judge to flag when uncertain. False positives are recoverable; false negatives cause harm.
 
 **Fast:** Ensure throughput matches volume. Use two-tier architecture if needed: fast filter + thorough review.
+
+**Least capable:** Pick the smallest Judge that can rule on the task. Frontier reasoning models are for frontier reasoning problems, not for schema checks. Do not choose a Mythos-class model when a Haiku-class one will do.
 
 The Judge is an assurance mechanism, not a gatekeeper. Its job is to surface concerns for human review, not to make final decisions. Optimise for catching issues, not for throughput alone.
 
