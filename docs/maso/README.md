@@ -409,20 +409,24 @@ It extends into multi-agent territory by addressing multi-model orchestration se
 ```
 README.md                              # This document
 environment-containment.md             # Environment containment strategy
+maso-2.0-anticipated-changes.md        # Forward-looking roadmap
 controls/
 ├── prompt-goal-and-epistemic-integrity.md
 ├── identity-and-access.md
 ├── data-protection.md
+├── extraction-integrity.md
 ├── execution-control.md
 ├── observability.md
 ├── supply-chain.md
+├── privileged-agent-governance.md
 ├── model-cognition-assurance.md
 ├── agentic-task-contract.md
 ├── objective-intent.md
 └── risk-register.md
 threat-intelligence/
 ├── incident-tracker.md
-└── emerging-threats.md
+├── emerging-threats.md
+└── threat-intelligence-review.md
 red-team/
 └── red-team-playbook.md
 integration/
@@ -434,7 +438,10 @@ implementation/
 ├── tier-2-managed.md
 └── tier-3-autonomous.md
 stress-test/
-└── 100-agent-stress-test-overview.md
+├── 100-agent-stress-test-overview.md
+└── ecommerce-10k-stress-test.md
+reviews/
+└── stakeholder-review-judge-proliferation.md
 ```
 
 ## MASO 2.0: Anticipated Changes

@@ -14,6 +14,54 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Judge accuracy benchmarks from real deployments
 - Epistemic risk detection algorithm specifications
 
+## [0.10.0] - 2026-04-15
+
+Reorganised the site into a product-shaped structure with five top-level tabs (**Home**, **Start**, **Framework**, **For Your Role**, **Library**), added colour affordances across risk tables, wired up missing maintenance features (edit links, last-updated stamps, per-page social cards), and added an April news batch covering Anthropic Claude Mythos, CVE-2026-32211 in the Azure MCP Server, and the OpenClaw supply chain crisis.
+
+### Added
+
+- **Start landing page** (`start.md`) as a 30-second triage for five entry points: AIRSLite, Fast Lane, Quick Start, Reading Paths, FAQ. Chosen by reader situation, not feature name.
+- **Library landing page** (`library.md`) indexing Insights, Implementation (Infrastructure, Strategy, SDK), Reference (Regulatory, Technical Reference, Templates, Examples, Downloads), and Project (Changes, About) as a scannable shelf index.
+- **Find Your Role cards on Home.** All nine stakeholder roles visible as cards with their core question in italics, directly on the landing page.
+- **Golden Thread context chrome** on 14 reading-path articles. Each carries a "Part of the Golden Thread (N of 14)" admonition with Previous / Next links.
+- **Risk-tier pill styling** across 107 table cells in 27 files. Green Low, amber Medium, orange High, red Critical, with dark-mode variants.
+- **Four Control Layers colour accents** on the Home page: Guardrails green (prevention), Judge blue (detection), Human Oversight amber (accountability), Circuit Breakers red (failsafe).
+- **Header tab icons**: flag (Start), hexagon (Framework), person (For Your Role), book stack (Library). Rendered as inline SVG mask-image so they inherit text colour in both light and dark schemes.
+- **Edit on GitHub links.** `repo_url`, `repo_name`, and `edit_uri: edit/main/docs/` wired up so the previously dormant `content.action.edit` and `content.action.view` theme features now work.
+- **Automatic "Last updated" dates** per page via `mkdocs-git-revision-date-localized-plugin`. Workflow uses `fetch-depth: 0` so CI has full history.
+- **Per-page social cards** via Material's `social` plugin. Each page now gets a unique OG / Twitter card image instead of the single static `architecture-overview.png`.
+- **MASO File Structure block** updated to reflect all promoted documents (extraction-integrity, privileged-agent-governance, threat-intelligence-review, ecommerce stress test, judge-proliferation review, MASO 2.0 roadmap).
+
+### Changed
+
+- **Top navigation** consolidated from 10 tabs to 5: Home, Start, Framework, For Your Role, Library. The four non-Home tabs are now visible (the old `.md-tabs { display: none }` rule was hiding everything).
+- **Home page** rewritten with Three Doors matching the core user questions (how to run AI securely, how to secure AI at runtime, how to get the most out of AI safely), followed by Find Your Role, Framework at a Glance, and Four Control Layers. Trimmed "The Problem AIRS Solves" section (duplicated the hero framing).
+- **Stakeholder page** converted from a dense 9-row table to three themed card groups (Security and risk, Technology and architecture, Product and business). Page title changed from "Stakeholder Views" to "For Your Role" so the H1 matches the nav label.
+- **Foundations landing** (`foundations/README.md`) rewritten as a concise 74-line Single-Agent Overview that hands off to Core Controls for the control reference, rather than duplicating it.
+- **Architecture Overview** tightened: the three-layer pattern is now defined once in the headline table rather than twice; bullets in Single-Agent section reworked to lead with practical choices rather than restating the table; Circuit Breaker added as a fourth bullet so the list matches the table.
+- **Regulatory section** grouped by jurisdiction: International Standards, EU, Sector-Specific, Operational. Same shape as Technical Reference.
+- **Technical Reference** landing page regrouped into Judge Internals, Detection and SOC, Control Catalogues, and Economics and Identity.
+- **Changelog** older entries (0.8.4 and below) collapsed into a single `<details>` block so the top of the page shows only the current release.
+- **MASO risk register** fixed: added the missing EP-09 "Task ambiguity as silent failure" row, corrected the frontmatter count (34 → 35), changed four US spellings to UK English, and rewrote seven hyphen-as-dash violations.
+- **AI Engineers stakeholder page** wording: Judge described as "an independent model (SLM or LLM)" instead of "an independent LLM", for consistency with the rest of the site.
+
+### Removed
+
+- **Hand-maintained `docs/sitemap.xml`** (1,054 lines). It was overwritten on every build by MkDocs' auto-generated sitemap and missed 56 pages including the new Start and Library landings.
+- **Dead CSS** (~120 lines): `.home-subtitle`, `.home-tldr`, `.home-primary-cta`, `.home-paths`, `.home-path`, `.pull-quote`. All leftover from the pre-reorganisation Home page and not referenced anywhere.
+
+### Fixed
+
+- **117 "unrecognized relative link" notices** in the MkDocs build log. All directory-style links (`../maso/`, `../infrastructure/`, `./`) rewritten to explicit README targets across 45 files so IDE link resolvers and MkDocs both see an explicit target.
+- **Orphan pages** promoted into nav: PACE-RESILIENCE, FAST-LANE, MATURITY, VALIDATED-AGAINST, IMPLEMENTATION_GUIDE, CHANGELOG, REFERENCES, strategy orphans (the-thread, use-case-definition, platform-and-patterns, data-reality, progression), MASO orphans (objective-intent, emerging-threats, threat-intelligence-review, stress tests, judge-proliferation review, MASO 2.0 roadmap), infrastructure orphans (session-and-scope, csf-2.0, nist-sp800-218a, controls-to-three-layers, agentic supply-chain), and the `core/pace-*-section` fragments.
+- **ABOUT author image** path (preserved the original `../images/` path after investigating a false-positive audit report).
+- **Octicons shortcodes** on Home that rendered as literal text because the `pymdownx.emoji` extension was not configured.
+- **`.cache/`** added to `.gitignore` to stop the mkdocs-material social plugin cache from being committed.
+
+### News
+
+Three news items added for April 3-15 2026: Anthropic's Claude Mythos Preview and Project Glasswing consortium (autonomous zero-day discovery); CVE-2026-32211, a CVSS 9.1 missing-authentication flaw in the Azure MCP Server; and the ongoing OpenClaw supply chain crisis (135,000 exposed instances, 824+ malicious skills on ClawHub, Snyk's ToxicSkills study finding 36% prompt injection rate).
+
 ## [0.9.1] - 2026-03-09
 
 ### Added
