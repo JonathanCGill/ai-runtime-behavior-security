@@ -539,13 +539,21 @@ function ts() {
 function addLog(tag, text) {
   const el = document.createElement("div");
   el.className = "log-entry";
-  el.innerHTML = `<span class="log-ts">${ts()}</span><span class="log-tag ${tag}">[${tag.toUpperCase()}]</span> ${text}`;
+  const tsSpan = document.createElement("span");
+  tsSpan.className = "log-ts";
+  tsSpan.textContent = ts();
+  const tagSpan = document.createElement("span");
+  tagSpan.className = `log-tag ${tag}`;
+  tagSpan.textContent = `[${tag.toUpperCase()}]`;
+  el.appendChild(tsSpan);
+  el.appendChild(tagSpan);
+  el.appendChild(document.createTextNode(` ${text}`));
   logBody.appendChild(el);
   logBody.scrollTop = logBody.scrollHeight;
 }
 
 function buildPipeline(scenario) {
-  pipeline.innerHTML = "";
+  pipeline.replaceChildren();
   scenario.steps.forEach((step, i) => {
     if (i > 0) {
       const conn = document.createElement("div");
@@ -556,14 +564,32 @@ function buildPipeline(scenario) {
     const div = document.createElement("div");
     div.className = "step";
     div.id = `step-${step.id}`;
-    div.innerHTML = `
-      <div class="step-header">
-        <div class="step-icon">${step.icon}</div>
-        <div class="step-title">${step.title}</div>
-        <div class="step-badge" id="badge-${step.id}"></div>
-      </div>
-      <div class="step-body" id="body-${step.id}"></div>
-    `;
+
+    const header = document.createElement("div");
+    header.className = "step-header";
+
+    const icon = document.createElement("div");
+    icon.className = "step-icon";
+    icon.textContent = step.icon;
+
+    const title = document.createElement("div");
+    title.className = "step-title";
+    title.textContent = step.title;
+
+    const badge = document.createElement("div");
+    badge.className = "step-badge";
+    badge.id = `badge-${step.id}`;
+
+    header.appendChild(icon);
+    header.appendChild(title);
+    header.appendChild(badge);
+
+    const body = document.createElement("div");
+    body.className = "step-body";
+    body.id = `body-${step.id}`;
+
+    div.appendChild(header);
+    div.appendChild(body);
     pipeline.appendChild(div);
   });
 
@@ -591,7 +617,7 @@ async function runScenario(key) {
   elapsed = 0;
   runBtn.disabled = true;
   scenarioSelect.disabled = true;
-  logBody.innerHTML = "";
+  logBody.replaceChildren();
   buildPipeline(scenario);
 
   addLog("info", `Starting scenario: ${scenario.title}`);
