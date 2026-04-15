@@ -9,7 +9,7 @@ hide:
 
 **Your AI passed every test. It still hallucinated in production.**
 
-Most organisations have no controls between the model and the damage it can do. AIRS gives you four layers of runtime defence -- guardrails, a judge model, human oversight, and circuit breakers -- so you can match controls to your actual risk, not a compliance checklist.
+Most organisations have no controls between the model and the damage it can do. AIRS gives you four layers of runtime defence: guardrails, a judge model, human oversight, and circuit breakers, so you can match controls to your actual risk, not a compliance checklist.
 
 Vendor-neutral. Risk-proportionate. Built for regulated industries.
 
