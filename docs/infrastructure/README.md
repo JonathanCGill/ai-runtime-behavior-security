@@ -202,6 +202,8 @@ Every control maps to the three-layer behavioral model and to established standa
 | [Controls → Three Layers](mappings/controls-to-three-layers.md) | All 80 controls × Guardrails, Judge, and Human Oversight |
 | [ISO 42001 Annex A](mappings/iso42001-annex-a.md) | Full Annex A technical infrastructure mapping |
 | [NIST AI RMF](mappings/nist-ai-rmf.md) | 51 subcategories across Govern, Map, Measure, Manage |
+| [NIST SP 800-218A](mappings/nist-sp800-218a.md) | Secure software development practices applied to AI |
+| [NIST CSF 2.0](mappings/csf-2.0.md) | Cybersecurity Framework 2.0 applied to AI runtime controls |
 | [OWASP LLM Top 10](mappings/owasp-llm-top10.md) | All 10 risks + OWASP Agentic Top 10 |
 
 ## Platform Implementation Patterns
