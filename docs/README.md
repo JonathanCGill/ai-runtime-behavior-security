@@ -116,7 +116,7 @@ The *why* before the *how*. Each article identifies a specific problem that the 
 
 The framework maps to EU AI Act (Articles 9, 14, 15), NIST AI RMF, ISO 42001, OWASP LLM Top 10 (2025), OWASP Agentic Top 10 (2026), DORA, and APRA CPS 234. Effective controls generate compliance evidence as a by-product of normal operation.
 
-[:octicons-arrow-right-24: EU AI Act crosswalk](extensions/regulatory/eu-ai-act-crosswalk.md)
+[EU AI Act crosswalk](extensions/regulatory/eu-ai-act-crosswalk.md)
 
 ---
 
