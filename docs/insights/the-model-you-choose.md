@@ -72,6 +72,33 @@ Every model will produce outputs you didn't anticipate. The question is whether 
 - **Rollback capability.** If a new version introduces a security regression, can you revert to the previous version? How quickly?
 - **Shared responsibility model.** Does the provider clearly define what they are responsible for vs. what you are responsible for? Or is the boundary ambiguous?
 
+## The Principle of Least Capability
+
+Once a model clears the security bar, the next question is whether it is the right size for the job. The principle of least capability says: pick the smallest, least capable model that can complete the task successfully. Do not default to the most powerful option available.
+
+Every agent role has a reasoning depth that it actually needs. A document classifier, a schema-constrained router, or a structured tool caller does not need the same model as a multi-step planner solving novel problems. Do not choose a Mythos-class reasoning model when a Haiku-class model will do the job.
+
+Over-capable model selection is not a harmless overspend:
+
+- **More latency.** Larger reasoning models take longer per action, which accumulates across multi-agent workflows.
+- **More tokens.** Longer chains of thought cost more and produce more output to audit, store, and review.
+- **More attack surface.** Excess reasoning capacity is excess room to be redirected by prompt injection, goal hijack, or creative substitution. A model that *can* plan a multi-step workaround is a model that *will* attempt one when its declared path is blocked.
+- **Harder auditability.** Longer reasoning traces make it harder for humans and judges to spot the step where behaviour went wrong.
+
+The practical rule: match model capability to action risk and reasoning depth, not to organisational preference, vendor marketing, or convenience.
+
+| Role | Typical reasoning depth | Suitable model class |
+|------|-------------------------|----------------------|
+| **Guardrails, classifiers, routers** | Pattern matching, schema validation | Small, fast model (Haiku-class) |
+| **Structured tool callers, extractors** | Constrained generation, single step | Small to mid-tier |
+| **Task agents, routine workflows** | Multi-step with clear structure | Mid-tier |
+| **Planners, orchestrators** | Novel decomposition, delegation | Reasoning-capable mid-tier or frontier |
+| **Logic-level means-compliance judges** | Cross-agent, cross-session reasoning at HIGH/CRITICAL tier | Frontier reasoning model where warranted |
+
+Start at the lower tier. Escalate only when the smaller model demonstrably fails the task under representative load, not on the suspicion that it might struggle. Document the chosen model for each agent and judge in the agent or judge contract, with the evidence that supported the selection, and review the choice on the same cadence as the contract. Models get cheaper and smaller models get better. A choice that was right six months ago may now be over-specified.
+
+For the matching principle applied specifically to Judges, see [Judge Model Selection](../extensions/technical/judge-model-selection.md).
+
 ## The Asymmetry You Cannot Eliminate
 
 With traditional software, you can audit the source code. With models, you cannot.

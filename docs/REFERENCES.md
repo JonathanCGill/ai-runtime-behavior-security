@@ -205,7 +205,7 @@ These papers and reports directly inform MASO's treatment of multi-agent risks. 
 
 The first Trust, Risk, and Security Management framework for agentic AI, specifically for systems where multiple LLM-powered agents collaborate. Organised around pillars of Explainability, ModelOps, Security, Privacy, and Governance for autonomous decision-making. Gartner reports 35% of enterprises now use autonomous agents for business-critical workflows.
 
-MASO's seven control domains cover similar ground but are structured around operational implementation tiers rather than capability pillars.
+MASO's ten control domains cover similar ground but are structured around operational implementation tiers rather than capability pillars.
 
 - [TRiSM for Agentic AI (arXiv)](https://arxiv.org/html/2506.04133v3)
 
@@ -327,7 +327,7 @@ These incidents are referenced throughout the framework to ground controls in de
 
 ### Air Canada Chatbot - Moffatt v. Air Canada (February 2024)
 
-Air Canada's chatbot gave incorrect bereavement fare information. The airline argued the chatbot was "a separate legal entity responsible for its own actions." The BC Civil Resolution Tribunal ruled against Air Canada: *"It makes no difference whether the information comes from a static page or a chatbot."* Ordered to pay $812.02.
+Air Canada's chatbot gave incorrect bereavement fare information. The airline argued the chatbot was "a separate legal entity responsible for its own actions." The BC Civil Resolution Tribunal ruled against Air Canada: *"It makes no difference whether the information comes from a static page or a chatbot."* Ordered to pay CAD $812.02.
 
 Established legal precedent that organisations are liable for AI-generated misinformation. Maps to: Guardrails, Human Oversight, Model-as-Judge.
 

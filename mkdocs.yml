@@ -1,7 +1,7 @@
 site_name: AI Runtime Security
 site_url: https://airuntimesecurity.io/
 site_description: >-
-  AI Runtime Security (AIRS) — the discipline of monitoring, controlling,
+  AI Runtime Security (AIRS) | the discipline of monitoring, controlling,
   and constraining AI system behaviour in production environments.
 site_author: Jonathan Gill
 
@@ -83,12 +83,13 @@ extra:
 
 copyright: >-
   Copyright &copy; 2026 Jonathan Gill | MIT License<br>
-  Feedback welcome — <a href="mailto:feedback@airuntimesecurity.io">feedback@airuntimesecurity.io</a>
+  Feedback welcome | <a href="mailto:feedback@airuntimesecurity.io">feedback@airuntimesecurity.io</a>
 
 nav:
   - Home: README.md
   - About: what-is-ai-runtime-security.md
   - Start Here: reading-paths.md
+  - Minimum Viable AIRS: minimum-viable-airs.md
 
   - Framework:
     - Anatomy of an Agent: agentic-agent-anatomy.md
@@ -120,10 +121,13 @@ nav:
     - Prompt, Goal & Epistemic Integrity: maso/controls/prompt-goal-and-epistemic-integrity.md
     - Identity & Access: maso/controls/identity-and-access.md
     - Data Protection: maso/controls/data-protection.md
+    - Document Extraction Integrity: maso/controls/extraction-integrity.md
     - Execution Control: maso/controls/execution-control.md
     - Observability: maso/controls/observability.md
     - Supply Chain: maso/controls/supply-chain.md
     - Privileged Agent Governance: maso/controls/privileged-agent-governance.md
+    - Model Cognition Assurance: maso/controls/model-cognition-assurance.md
+    - Agentic Task Contract: maso/controls/agentic-task-contract.md
     - Emergent Risk Register: maso/controls/risk-register.md
     - Environment Containment: maso/environment-containment.md
     - Tier 1 - Supervised: maso/implementation/tier-1-supervised.md
@@ -133,6 +137,18 @@ nav:
     - Red Team Playbook: maso/red-team/red-team-playbook.md
     - Integration Guide: maso/integration/integration-guide.md
     - Worked Examples: maso/examples/worked-examples.md
+
+  - SDK:
+    - sdk/README.md
+    - Guardrails: sdk/guardrails.md
+    - Judge: sdk/judge.md
+    - Circuit Breaker & PACE: sdk/resilience.md
+    - Pipeline: sdk/pipeline.md
+    - Agent Security: sdk/agents.md
+    - Telemetry & Audit: sdk/telemetry.md
+    - FastAPI Integration: sdk/fastapi.md
+    - Examples: sdk/examples.md
+    - What the Tests Prove: sdk/tests.md
 
   - Stakeholders:
     - stakeholders/README.md
@@ -164,6 +180,7 @@ nav:
       - AWS Bedrock: infrastructure/reference/platform-patterns/aws-bedrock.md
       - Microsoft Foundry: infrastructure/reference/platform-patterns/microsoft-foundry.md
       - Databricks: infrastructure/reference/platform-patterns/databricks.md
+      - Microsoft Agent Governance Toolkit: infrastructure/reference/platform-patterns/microsoft-agent-governance-toolkit.md
     - Strategy:
       - strategy/README.md
       - Business Alignment: strategy/business-alignment.md
@@ -203,6 +220,7 @@ nav:
       - Evaluation Integrity Risks: insights/evaluation-integrity-risks.md
       - You Don't Know What You're Deploying: insights/you-dont-know-what-youre-deploying.md
       - The Sandbox Escape Problem: insights/the-sandbox-escape-problem.md
+      - The Agent Supply Chain Crisis: insights/the-agent-supply-chain-crisis.md
     - Agentic AI:
       - When Agents Talk to Agents: insights/when-agents-talk-to-agents.md
       - Agentic Drift: insights/agentic-drift.md
@@ -219,6 +237,8 @@ nav:
       - Temporal Decay: insights/temporal-decay.md
       - You Can't Validate Unfinished: insights/you-cant-validate-unfinished.md
       - Risk Tier Is Use Case: insights/risk-tier-is-use-case.md
+      - When Learning Goes Wrong: insights/when-learning-goes-wrong.md
+      - Beyond Language Models: insights/beyond-language-models.md
     - Evidence & Analysis:
       - State of Reality: insights/state-of-reality.md
       - What Works: insights/what-works.md

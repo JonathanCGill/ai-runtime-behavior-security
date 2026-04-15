@@ -28,7 +28,7 @@ MASO secures the agent. You secure everything the agent touches. Both are necess
 
 MASO is designed for **AI agent systems your organisation operates**, whether you build them from scratch or deploy them on a managed platform. If you are building custom multi-agent systems (using LangGraph, AutoGen, CrewAI, or your own orchestration), MASO provides both the security requirements and the architectural patterns. If you are using a cloud platform's agent orchestration (AWS Bedrock Agents, Azure AI Agent Service), MASO provides the mental model for what security controls should be in place; the platform provides the implementation mechanisms.
 
-The seven control domains, three implementation tiers, and PACE resilience model describe **what needs to be true** for multi-agent AI to be safe. The technical implementation varies by platform and approach. The security model does not.
+The ten control domains, three implementation tiers, and PACE resilience model describe **what needs to be true** for multi-agent AI to be safe. The technical implementation varies by platform and approach. The security model does not.
 
 For AI you consume as a service (copilots, productivity tools, SaaS with embedded AI), MASO's control domains are not directly applicable. Those systems are covered by vendor-side controls and your organisation's data governance. See [Maturity Levels](../strategy/maturity-levels.md) for how the framework addresses consumed AI differently from AI you operate.
 
@@ -71,6 +71,18 @@ Three things follow:
 
 The quality of this entire system depends on the quality of the declarations it evaluates against. Invest in clear, specific, measurable OISpecs and the judge can make sound rulings. Deploy vague specifications and the judge becomes an expensive safety net that catches only the most obvious failures. The foundation is not the model. The foundation is the [declared intent](../constraining-agents.md).
 
+### Contracts: Where Intent Becomes Enforceable
+
+Declared intent is only useful once it is encoded in a contract the runtime and the judge can both read. MASO uses a three-tier hierarchy, with each tier inheriting from the one above it.
+
+**Objective Intent Specification (OISpec).** Declares what each agent, judge, and workflow should accomplish: purpose, authorised outcomes, constraints, and evaluation criteria. This is the reference standard the judge rules against. See [Objective Intent](controls/objective-intent.md).
+
+**Solution contract.** Governs an entire agentic workflow end to end. Specifies the authorised agents and their sequence, authorised data sources, prohibited actions, hard limits (financial, volume, time), escalation paths, and the plan attempt thresholds that trigger a halt. No workflow may be deployed without an approved solution contract. See [Agentic Task Contract](controls/agentic-task-contract.md).
+
+**Agent contract.** Binds each individual agent within the workflow to a specific tool set, logic specification, and escalation path. Agent contracts inherit from their parent solution contract and may not exceed its permissions. Tool provisioning is structural, not policy-based: if a tool is not in the contract, the agent cannot invoke it regardless of how it reasons about the task.
+
+Contracts turn abstract intent into artefacts that can be validated at deployment and enforced at runtime. They are also the basis for the four-state deviation model (normal operation, execution failure, visible failure, creative substitution) and the Anti-Mythos judge, which rules on means compliance rather than output quality. Without contracts, the judge has nothing precise to evaluate against and means-level failures become invisible.
+
 ## Architecture
 
 ![MASO Architecture](../images/maso-architecture.svg)
@@ -101,7 +113,7 @@ The **Flight Recorder** captures every agent action, judge verdict, tool invocat
 
 ![MASO Tube Map](../images/maso-tube-map.svg)
 
-Seven coloured lines represent seven control domains. Stations are key controls. Zones are implementation tiers. Interchanges mark where domains share control points (Judge Gate, PACE Bridge, Agent Registry). River PACE flows through the centre, mapping resilience phases to tier progression.
+Seven coloured lines represent the original seven control domains. Stations are key controls. Zones are implementation tiers. Interchanges mark where domains share control points (Judge Gate, PACE Bridge, Agent Registry). River PACE flows through the centre, mapping resilience phases to tier progression. Model Cognition Assurance, Agentic Task Contract, and Objective Intent were added after the tube map was created and are not yet represented visually.
 
 ## How the Pieces Fit Together
 
@@ -111,7 +123,7 @@ The logic runs in a chain. **Agents are fragile** because they reason in natural
 
 From there, MASO provides the operational framework:
 
-- **Seven control domains** address specific risk categories: protecting the agent's goals, identity, data, execution, observability, supply chain, and privileged agents. Each domain contains controls that enforce the declarations you made and give the judge the signals it needs.
+- **Ten control domains** address specific risk categories: protecting the agent's goals, identity, data, execution, observability, supply chain, privileged agents, model cognition, agentic task contracts, and objective intent. Each domain contains controls that enforce the declarations you made and give the judge the signals it needs.
 - **Three implementation tiers** scale controls to autonomy level. Tier 1 (supervised) requires human approval for every write. Tier 2 (managed) uses judge evaluation to auto-approve low-risk actions and escalate high-risk ones. Tier 3 (autonomous) operates with minimal human intervention for pre-approved task categories. You choose the tier that matches your risk tolerance.
 - **PACE resilience** defines what happens when controls fail. Every layer has a defined failure mode and a predetermined safe state to transition to, from normal operations through to full shutdown.
 - **OWASP coverage** maps every control to specific, documented threats from both the LLM Top 10 and the Agentic Top 10, so you can trace from a known risk to the controls that address it.
@@ -121,7 +133,7 @@ None of these pieces stand alone. The control domains implement the declarations
 
 ## Control Domains
 
-The framework organises controls into eight domains. The first five map to specific OWASP risks. The sixth, Prompt, Goal & Epistemic Integrity, addresses both the three OWASP risks that require cross-cutting controls and the nine epistemic risks identified in the [Emergent Risk Register](controls/risk-register.md) that have no OWASP equivalent. The seventh, Privileged Agent Governance, addresses the unique risks of orchestrators, planners, and other agents with elevated authority.
+The framework organises controls into ten domains. The first five map to specific OWASP risks. The sixth, Prompt, Goal & Epistemic Integrity, addresses both the three OWASP risks that require cross-cutting controls and the nine epistemic risks identified in the [Emergent Risk Register](controls/risk-register.md) that have no OWASP equivalent. The seventh, Privileged Agent Governance, addresses the unique risks of orchestrators, planners, and other agents with elevated authority. The eighth, Model Cognition Assurance, addresses the gap between a model's expressed reasoning and its internal computational state. The ninth, Agentic Task Contract and Behavioural Governance, enforces means compliance and detects behavioural deviation in agentic workflows. The tenth, Objective Intent, provides the declared intent specifications that the evaluation architecture and contract governance depend on.
 
 ### 0. [Prompt, Goal & Epistemic Integrity](controls/prompt-goal-and-epistemic-integrity.md)
 
@@ -165,17 +177,35 @@ Orchestrators, planners, and meta-agents hold disproportionate authority - they 
 
 *Covers: ASI03, ASI07, LLM06 (elevated controls for high-authority agents)*
 
-### [Environment Containment](environment-containment.md)
+### 7. [Model Cognition Assurance](controls/model-cognition-assurance.md)
 
-Cross-cutting strategy that complements all seven control domains. Instead of relying on the agent to behave correctly, harden every system the agent connects to: strict API input validation, opaque error responses, stored procedures, no-retry enforcement, and infrastructure-level kill switches. Existing enterprise security systems (DLP, fraud detection, WAF, SIEM) apply unchanged to agent traffic. The agent proposes; the infrastructure disposes.
+Controls for assessing whether a model's internal reasoning state aligns with its expressed chain-of-thought and outputs. Activation-layer transparency requirements for model providers. CoT integrity testing as a necessary but not sufficient control. Reward hacking detection through behavioural baselines and anomaly monitoring. Third-party AI risk classification with SR 11-7 gap analysis. Procurement attestation requirements for vendors supplying models to regulated financial services.
 
-*Cross-cuts: All Control Domains · All Implementation Tiers*
+*Covers: Deceptive reasoning alignment, reward hacking, CoT faithfulness, activation-layer transparency, vendor interpretability attestation*
 
-### 7. [Objective Intent](controls/objective-intent.md)
+### 8. [Agentic Task Contract and Behavioural Governance](controls/agentic-task-contract.md)
+
+Formal contract governance for agentic workflows. Solution contracts declare intent, authorised means, outcomes, and escalation paths for entire workflows. Agent contracts bind individual agents to specific tool sets and logic specifications. The four-state deviation model classifies execution outcomes by means compliance and outcome compliance independently, making creative substitution (correct outcome, incorrect means) a named detection category. Plan attempt logging treats blocked tool invocations as behavioural indicators. The Anti-Mythos judge evaluates contract compliance at the tool call, sequence, logic, and cross-session pattern levels.
+
+*Covers: Agentic task contract governance, means compliance, creative substitution detection, plan attempt detection, Anti-Mythos judge architecture*
+
+### 9. [Objective Intent](controls/objective-intent.md)
 
 Every agent, judge, and workflow operates against a developer-declared Objective Intent Specification (OISpec), a structured, version-controlled contract defining what the agent should accomplish and within what parameters. Tactical judges evaluate individual agents against their OISpecs. A strategic evaluation agent assesses whether combined agent actions satisfy the workflow's aggregated intent. Judges are themselves monitored against their own OISpecs. This is the bridge from fault detection to behavioral assurance: from catching things that go wrong to verifying that things go right.
 
 *Covers: Intent alignment at all levels: individual agent compliance (tactical), aggregate workflow compliance (strategic), and judge behavioral monitoring (lateral). Most critical at HIGH and CRITICAL risk tiers.*
+
+### [Document Extraction Integrity](controls/extraction-integrity.md)
+
+Companion control set for pipelines that perform OCR, PDF parsing, or form extraction and feed the results into downstream decisions. Per-field confidence scoring, field-level risk classification, authoritative source cross-referencing, side-by-side human validation, extraction provenance, adversarial document detection, and cumulative uncertainty enforcement across agent handoffs. The core principle: agents must not act on uncertain extracted data as though it were verified fact. Positioned alongside Data Protection because it governs the integrity of data as it enters the orchestration from documents.
+
+*Covers: Misextraction risk in regulated pipelines (KYC/FICA, sanctions screening, POPIA), adversarial document input, uncertainty stripping across handoffs (EP-06), extraction-derived hallucination amplification (EP-03).*
+
+### [Environment Containment](environment-containment.md)
+
+Cross-cutting strategy that complements all ten control domains. Instead of relying on the agent to behave correctly, harden every system the agent connects to: strict API input validation, opaque error responses, stored procedures, no-retry enforcement, and infrastructure-level kill switches. Existing enterprise security systems (DLP, fraud detection, WAF, SIEM) apply unchanged to agent traffic. The agent proposes; the infrastructure disposes.
+
+*Cross-cuts: All Control Domains · All Implementation Tiers*
 
 ## OWASP Risk Coverage
 
@@ -249,7 +279,7 @@ Agents execute read operations and low-consequence writes autonomously. High-con
 
 ### [Tier 3 - Autonomous](implementation/tier-3-autonomous.md) (High Autonomy)
 
-Agents operate with minimal human intervention for pre-approved task categories. Human oversight focuses on exception handling and strategic review. Full PACE cycle operational and tested through regular red-team exercises. All seven control domains fully implemented.
+Agents operate with minimal human intervention for pre-approved task categories. Human oversight focuses on exception handling and strategic review. Full PACE cycle operational and tested through regular red-team exercises. All ten control domains fully implemented.
 
 **Required controls:** Everything in Tier 2, plus kill switch tested and auditable, drift detection with baseline comparison, blast radius caps enforced, circuit breakers active, full OWASP coverage validated, regular adversarial testing.
 
@@ -377,6 +407,8 @@ controls/
 ├── execution-control.md
 ├── observability.md
 ├── supply-chain.md
+├── model-cognition-assurance.md
+├── agentic-task-contract.md
 ├── objective-intent.md
 └── risk-register.md
 threat-intelligence/
@@ -419,7 +451,7 @@ Three-phase roadmap: Extend (0–6 months) → Architect (6–18 months) → Par
 
 <p class="learning-callout__title">Learn the MASO Framework</p>
 
-<p class="learning-callout__desc">AIruntimesecurity.co.za provides structured learning paths for the Multi-Agent Security Operations framework, from core concepts through to implementation.</p>
+<p class="learning-callout__desc">AIruntimesecurity.co.za is a dedicated learning site for the Multi-Agent Security Operations framework. Structured guides, walkthroughs, and practical examples to help you get started.</p>
 
 [Explore AIruntimesecurity.co.za](https://airuntimesecurity.co.za){ .md-button }
 
