@@ -46,6 +46,10 @@ try:
             protected_paths: URL path prefixes to protect (default: ["/ai", "/chat", "/completion"]).
             input_field: JSON field name containing user input (default: "input").
             output_field: JSON field name containing AI output (default: "output").
+            max_response_bytes: Maximum response body size to buffer and evaluate,
+                in bytes (default: 1 MiB). Responses exceeding this limit are rejected
+                with HTTP 502 instead of being buffered into memory, so a malicious or
+                misbehaving upstream cannot balloon the middleware's footprint.
         """
 
         def __init__(
@@ -55,12 +59,16 @@ try:
             protected_paths: list[str] | None = None,
             input_field: str = "input",
             output_field: str = "output",
+            max_response_bytes: int = 1024 * 1024,
         ) -> None:
             super().__init__(app)
             self.pipeline = pipeline or SecurityPipeline()
             self.protected_paths = protected_paths or ["/ai", "/chat", "/completion"]
             self.input_field = input_field
             self.output_field = output_field
+            if max_response_bytes <= 0:
+                raise ValueError("max_response_bytes must be positive")
+            self.max_response_bytes = max_response_bytes
 
         async def dispatch(
             self, request: Request, call_next: RequestResponseEndpoint
@@ -108,13 +116,37 @@ try:
             # Call the actual handler
             response = await call_next(request)
 
-            # Read response body for output evaluation
+            # Read response body for output evaluation, bounded by max_response_bytes
+            # to keep memory use predictable under adversarial or buggy handlers.
             response_body = b""
+            oversized = False
             async for chunk in response.body_iterator:
                 if isinstance(chunk, str):
-                    response_body += chunk.encode()
-                else:
-                    response_body += chunk
+                    chunk = chunk.encode()
+                response_body += chunk
+                if len(response_body) > self.max_response_bytes:
+                    oversized = True
+                    break
+
+            if oversized:
+                logger.warning(
+                    "AIRS rejected oversized response: request_id=%s bytes>%d path=%s",
+                    ai_request.request_id,
+                    self.max_response_bytes,
+                    request.url.path,
+                )
+                return JSONResponse(
+                    status_code=502,
+                    content={
+                        "error": "response_too_large_for_evaluation",
+                        "request_id": ai_request.request_id,
+                        "max_response_bytes": self.max_response_bytes,
+                    },
+                    headers={
+                        "x-airs-request-id": ai_request.request_id,
+                        "x-airs-blocked": "true",
+                    },
+                )
 
             try:
                 response_data = json.loads(response_body)
