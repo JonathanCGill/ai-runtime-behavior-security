@@ -289,6 +289,7 @@ Agents operate with minimal human intervention for pre-approved task categories.
 |----------|---------|
 | [Incident Tracker](threat-intelligence/incident-tracker.md) | Real-world AI security incidents mapped to framework controls, with confidence ratings and prevention mechanisms |
 | [Emerging Threats](threat-intelligence/emerging-threats.md) | 8 forward-looking threat patterns: cross-agent worms, agent collusion, transitive authority exploitation, MCP supply chain, epistemic cascading failure, memory poisoning, A2A protocol attacks, AI vs AI defences |
+| [Threat Intelligence Review](threat-intelligence/threat-intelligence-review.md) | Comprehensive review of 2025-2026 threat landscape against the framework, with 18 priority recommendations |
 
 ### Threat Intelligence Grounding
 
@@ -315,7 +316,15 @@ Every control in MASO is grounded in observed or demonstrated attack patterns:
 
 | Document | Purpose |
 |----------|---------|
-| [Stress Testing MASO at Scale](stress-test/100-agent-stress-test-overview.md) | Tabletop methodology for identifying framework breakpoints as agent count grows from single digits to 100+. Eight stress dimensions covering epistemic cascade depth, delegation graph complexity, cross-cluster PACE cascades, observability volume, provider concentration, data boundary enforcement, kill switch practicality, and compound attack surfaces |
+| [100-Agent Stress Test](stress-test/100-agent-stress-test-overview.md) | Tabletop methodology for identifying framework breakpoints as agent count grows from single digits to 100+. Eight stress dimensions covering epistemic cascade depth, delegation graph complexity, cross-cluster PACE cascades, observability volume, provider concentration, data boundary enforcement, kill switch practicality, and compound attack surfaces |
+| [E-commerce 10k Stress Test](stress-test/ecommerce-10k-stress-test.md) | Scenario-specific stress test: MASO under an e-commerce deployment with 10,000 concurrent agents |
+
+## Reviews and Roadmap
+
+| Document | Purpose |
+|----------|---------|
+| [Judge Proliferation Review](reviews/stakeholder-review-judge-proliferation.md) | Stakeholder review of whether the framework risks "judge hell", and the governance mechanisms that prevent it |
+| [MASO 2.0 Roadmap](maso-2.0-anticipated-changes.md) | Anticipated changes to AI and the framework: where MASO breaks, what MASO 2.0 must address |
 
 ## Regulatory Alignment
 
