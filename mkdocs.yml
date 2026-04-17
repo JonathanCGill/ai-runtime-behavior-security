@@ -115,12 +115,12 @@ nav:
   - Home: README.md
 
   - Start:
-    - Where to Begin: start.md
-    - "Walkthrough: Chevrolet $1 Chatbot": walkthrough-chevrolet-1-dollar.md
-    - Reading Paths: reading-paths.md
-    - AIRSLite: minimum-viable-airs.md
-    - Quick Start: quick-start.md
-    - Fast Lane: fast-lane.md
+    - Choose Your Path: start.md
+    - "See It Fail: Chevrolet $1 Chatbot": walkthrough-chevrolet-1-dollar.md
+    - Learn the Framework: reading-paths.md
+    - "AIRSLite: Seven Controls to Ship": minimum-viable-airs.md
+    - Working Code in 30 Minutes: quick-start.md
+    - Skip the Security Review: fast-lane.md
     - FAQ: faq.md
 
   - Framework:
