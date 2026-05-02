@@ -260,6 +260,200 @@ Additionally, a "Rules File Backdoor" technique was discovered where hidden unic
 
 > **Source:** [OpenClaw AI agent security risks (Erkan's Field Diary, 2026)](https://erkansaka.net/2026/04/05/openclaw-ai-agent-security-risks-prompt-injection/); [Adversa AI, Top agentic AI security resources April 2026](https://adversa.ai/blog/top-agentic-ai-security-resources-april-2026/)
 
+## 2026 Q2 Update: New Threat Patterns
+
+The following threats reflect trends visible in production deployments and research as of May 2026. They are either uncovered by ET-01 to ET-13 or significantly underweighted there.
+
+### ET-14: Computer-use and Browser Agents Expand the Action Surface
+
+**Status:** Active deployment (Anthropic Computer Use, OpenAI Operator, Gemini browsing agents)
+
+**Threat:** Agents now operate the screen, keyboard, and mouse rather than calling structured tools. The action space is anything a user could do on a device, including reading on-screen content that is not in any tool schema and clicking elements that no allow-list anticipated.
+
+**Why it matters for MASO:** The "Tools" abstraction in MASO and in the AIRS architecture diagrams understates the action surface. Guardrails inspecting tool-call JSON do not see DOM events, pixel reads, or clipboard writes. A compromised agent can act on visible UI without producing a tool-call signal.
+
+**Emerging variant, UI clickjacking against agents:** Adversarial pages render off-screen or visually deceptive elements that the agent activates while reasoning over the rendered DOM. The agent submits forms or grants OAuth consent that the user never saw.
+
+**MASO controls:** EC-2.1 (sandboxed execution), SC-1.3 (fixed toolsets), OB-1.x (telemetry)
+
+**Gap in current controls:** SC-1.3 assumes actions can be enumerated. Computer-use breaks that. MASO needs DOM event allow-listing, screenshot diff observability, and per-origin scoping for browser agents.
+
+**Assessment:** High likelihood. Computer-use is shipping; the controls have not caught up.
+
+### ET-15: Long-horizon, Always-on Agents
+
+**Status:** Production trend
+
+**Threat:** Agents are increasingly long-running (days to weeks) rather than per-request. Small errors compound, intent drifts, and accumulated state exceeds Judge context windows. Per-request controls do not see the trajectory.
+
+**Why it matters for MASO:** MASO's Judge gates are predominantly request-scoped. There is no defined cadence for re-grounding a long-running agent against its declared intent, and no mechanism for expiring memory that is no longer relevant to the current task.
+
+**Emerging variant, Slow drift below alerting thresholds:** Each step is within tolerance; the cumulative deviation over thousands of steps is not.
+
+**MASO controls:** OB-2.2 (drift detection), OB-2.3 (behavioural baselines), AT-1.x (intent declaration)
+
+**Gap in current controls:** Drift detection lacks temporal baselines for week-scale agents. Intent declarations have no expiry or mandatory re-validation cadence. MASO 2.0 should add a session-bounded intent token with explicit TTL.
+
+**Assessment:** High likelihood for any organisation deploying persistent agents.
+
+### ET-16: Synthetic Media Erodes the Human-in-the-Loop
+
+**Status:** Indistinguishability threshold crossed for voice (2025); video and image approaching parity
+
+**Threat:** Tier 3 and Critical workflows rely on human approval. Humans cannot reliably distinguish synthetic from authentic media in the artefacts they are asked to approve (recorded customer calls, ID document photos, video evidence). The reviewer becomes a rubber stamp.
+
+**Why it matters for MASO:** Human approval is treated as a strong control. If the artefact under review is synthesisable, the control degrades to a procedural step.
+
+**Emerging variant, Trust-anchored deepfakes:** A deepfake of a known executive or counterparty triggers approval reflexes that override scrutiny.
+
+**MASO controls:** Tier 3 human approval gates, IA-2.1 (NHI credentials)
+
+**Gap in current controls:** Approval workflows do not require signed provenance or C2PA-style content credentials on the artefact under review. MASO should require provenance attestation on any media that influences a Critical-tier decision.
+
+**Assessment:** High likelihood and rising. ET-12 covers the input side; this covers the human-decision side.
+
+### ET-17: Regulatory Fragmentation and Compliance Velocity
+
+**Status:** Active. EU AI Act high-risk obligations enforce from August 2026; UK AI Bill, Colorado AI Act, NYC Local Law 144, and sectoral regulators (FCA, OCC, MAS) overlap.
+
+**Threat:** Multiple regimes impose overlapping but non-identical requirements on the same multi-agent system. Mapping controls to one regime does not satisfy the others, and the requirements drift over time.
+
+**Why it matters for the framework:** `validated-against.md` maps to NIST AI RMF, OWASP, and ISO. It does not map to legal obligations, which is what regulated buyers will demand. Without that mapping, the framework cannot be cited for compliance.
+
+**Why it matters for MASO:** Risk tiers (Low, Medium, High, Critical) do not explicitly reflect regulator-defined "high-risk" categories. A workflow that maps to MASO Tier 2 may be EU AI Act high-risk and require Tier 3 controls regardless of internal risk assessment.
+
+**MASO controls:** Governance domain (cross-cutting)
+
+**Gap in current controls:** No compliance overlay. MASO needs a mapping table from each regulation's risk class to the minimum required tier and control set.
+
+**Assessment:** Near-certain to affect every regulated deployment by Q4 2026.
+
+### ET-18: Non-Human Identity Sprawl from Dynamic Sub-agent Spawning
+
+**Status:** Production trend
+
+**Threat:** Multi-agent systems spawn sub-agents at runtime for sub-tasks. The number of NHIs grows faster than identity governance can provision, rotate, or revoke them. Credentials accumulate, scopes broaden, and revocation lags.
+
+**Why it matters for MASO:** IA-2.1 (zero-trust agent credentials) presumes credentials are issued through a controlled process. It does not address the rate of issuance, ephemeral identity patterns, or the lineage between parent and child agents.
+
+**Emerging variant, Orphaned NHIs:** A parent agent terminates while sub-agents continue under credentials that no longer have an owner accountable for them.
+
+**MASO controls:** IA-2.1 (zero-trust agent credentials), IA-2.3 (no transitive permissions)
+
+**Gap in current controls:** Needs a control for ephemeral credentials with mandatory TTL, parent-child lineage in the credential, and automatic revocation when the parent terminates.
+
+**Assessment:** High likelihood for any production multi-agent system using dynamic delegation.
+
+### ET-19: Inference-time Compute Exhaustion (Reasoning DoS)
+
+**Status:** Demonstrated; observed in production incidents
+
+**Threat:** Adversarial inputs push reasoning models into long chains of thought or tool-use loops. Token budgets, latency SLOs, and inference cost ceilings are exhausted. Impact is availability and unbudgeted spend, not data exfiltration.
+
+**Why it matters for MASO:** EC-1.5 (interaction timeout) addresses wall-clock duration but not cumulative tokens, recursive tool invocation count, or fan-out across sub-agents. A timeout-bounded request can still consume runaway compute.
+
+**Emerging variant, Recursive delegation bombs:** A prompt that causes an orchestrator to spawn sub-agents that each spawn further sub-agents.
+
+**MASO controls:** EC-1.5 (interaction timeout), EC-2.6 (decision commit protocol)
+
+**Gap in current controls:** No token budget, step budget, or fan-out cap enforced at the orchestrator. MASO should add per-request and per-trace compute envelopes.
+
+**Assessment:** High likelihood. The economic incentive to exploit it is direct.
+
+### ET-20: Steganographic Agent-to-Agent Communication
+
+**Status:** Demonstrated in research; conditions for emergence present in RL-trained agents
+
+**Threat:** Agents communicate covertly through natural-language outputs that appear benign. Encoding can be lexical (word choice), syntactic (sentence structure), or positional. Text-based observability and DLP cannot see the channel.
+
+**Why it matters for MASO:** OB-2.3 (inter-agent communication profiling) inspects traffic but treats well-formed natural language as low-risk. PG-2.x guardrails flag known-bad patterns, not novel encodings.
+
+**Emerging variant, Collusion-by-paraphrase:** Two agents agree on a covert protocol expressed entirely in fluent paraphrase, indistinguishable from normal exchanges to a human or text-based scanner.
+
+**MASO controls:** PG-2.4 (consensus diversity gate), PG-2.9 (model diversity policy), OB-2.3 (inter-agent communication profiling)
+
+**Gap in current controls:** Needs perplexity, paraphrase-invariance, or canonicalisation gates on inter-agent text. Canonicalising messages to structured intent representations before transmission would defeat most encodings.
+
+**Assessment:** Medium likelihood now, rising sharply if RL on multi-agent tasks becomes routine.
+
+### ET-21: Self-poisoning Training and Retrieval Loops
+
+**Status:** Observed in production RAG corpora
+
+**Threat:** Agent outputs are ingested back into RAG corpora, memory stores, and fine-tuning datasets. Errors, hallucinations, and prompt-injection residues become training signal in the next cycle. Each iteration amplifies the previous one.
+
+**Why it matters for MASO:** DP-2.2 (RAG integrity with freshness) covers ingest validation but not the loop. The framework treats training as out of scope, but the boundary dissolves when retrieval and memory are treated as light fine-tuning.
+
+**Emerging variant, Quotational laundering:** An agent's hallucinated claim is summarised by a downstream agent, written to shared memory, and retrieved later as a "source", giving the original error apparent provenance.
+
+**MASO controls:** DP-2.2 (RAG integrity), DP-1.3 (memory isolation), PG-2.5 (claim provenance enforcement)
+
+**Gap in current controls:** No required provenance partitioning between human-authored and agent-generated content in retrieval stores. MASO should require origin tags on every retrieved chunk and forbid agent-generated content from being treated as authoritative source.
+
+**Assessment:** Near-certain for any system that writes agent outputs back into a retrieval surface.
+
+### ET-22: Refusal-logic and Constitutional Exploitation
+
+**Status:** Active research and observed jailbreaks
+
+**Threat:** Attackers target the agent's own safety reasoning rather than bypassing it. "Ethical persuasion" prompts argue that refusing the request is itself unethical, exploiting the model's trained-in deference to value reasoning. Distinct from jailbreaking because the model's own values are the lever.
+
+**Why it matters for MASO:** Model-as-Judge is susceptible to the same persuasion. A Judge that has been argued out of its threshold approves what it would otherwise reject.
+
+**Emerging variant, Policy laundering:** The attacker frames the request as conformance with a stated policy that the model itself synthesises from the prompt.
+
+**MASO controls:** PG-2.9 (model diversity policy), EC-3.1 (multi-judge consensus), EC-2.5 (Model-as-Judge gate)
+
+**Gap in current controls:** Multi-judge consensus is optional below Tier 3. For workflows susceptible to this attack, it should be mandatory at Tier 2. Judge prompts also need adversarial hardening guidance: explicit immunity clauses against meta-arguments about the Judge's role.
+
+**Assessment:** High likelihood. The attack is cheap and does not require model internals.
+
+### ET-23: Mid-flight Model Routing Breaks Control Calibration
+
+**Status:** Production. LiteLLM, OpenRouter, and gateway products route across providers for cost and availability.
+
+**Threat:** Controls calibrated for Model A degrade silently when traffic shifts to Model B. Judge prompts, guardrail confidence thresholds, and refusal patterns are model-specific. A routing decision made for cost reasons changes the security posture without anyone noticing.
+
+**Why it matters for MASO:** SC-1.x supply chain controls do not pin runtime model identity per request. The Judge does not know which model produced the response it is evaluating.
+
+**Emerging variant, Cost-driven downgrade:** Traffic is routed to a cheaper, less capable model under load. Guardrails calibrated for the stronger model produce more false negatives.
+
+**MASO controls:** SC-1.x (supply chain), MC-1.x (model cognition assurance)
+
+**Gap in current controls:** Per-request model attestation is not required. MASO should require the responding model's identity (provider, model name, version, fingerprint) to be returned with every response, logged, and used to select the matching Judge calibration.
+
+**Assessment:** High likelihood for any deployment using a model gateway.
+
+### ET-24: Post-quantum Exposure on the Cryptographic Trust Chain
+
+**Status:** Standards finalised (NIST PQC, 2024). Migration is the open question.
+
+**Threat:** SC-3.1 (cryptographic trust chain), signed tool manifests, A2A signatures, and NHI certificates depend on classical PKI. Harvest-now-decrypt-later attacks against signed audit trails would invalidate non-repudiation in a post-quantum setting.
+
+**Why it matters for MASO:** The trust chain is foundational to most other supply chain controls. Migration is multi-year and needs to start now if it is to be ready when regulators ask.
+
+**MASO controls:** SC-3.1 (cryptographic trust chain), IA-2.1 (NHI credentials)
+
+**Gap in current controls:** No specification of crypto agility, hybrid signature schemes, or PQC migration commitment. SC-3.1 should reference NIST PQC algorithms and require hybrid (classical + PQC) signatures for new deployments.
+
+**Assessment:** Low likelihood of near-term exploitation, but high regulatory and audit-trail integrity impact. Migration lead time makes this a now-problem despite a future-threat profile.
+
+### ET-25: Cross-tenant Contamination in Browser and Desktop Agents
+
+**Status:** Demonstrated in vendor incidents
+
+**Threat:** When an agent operates a browser or desktop session as "the user", cookies, cached credentials, screen pixels, clipboard contents, and local storage span workloads. State from one tenant's task can leak into another's prompt or be readable by a later agent invocation.
+
+**Why it matters for MASO:** EC-2.1 (sandboxed execution) assumes process-level isolation. Browser agents share profile state by default. Without explicit profile isolation per task, isolation is illusory.
+
+**Emerging variant, Persistent auth bleed:** An agent completes an OAuth flow for Tenant A; the resulting refresh token is reachable from Tenant B's session because the browser profile was reused.
+
+**MASO controls:** EC-2.1 (sandboxed execution), DP-1.3 (data isolation)
+
+**Gap in current controls:** Needs a sub-clause requiring per-task browser profile isolation, ephemeral storage, and explicit clipboard scoping for any agent operating a browser or desktop.
+
+**Assessment:** High likelihood for any computer-use deployment serving multiple tenants or sensitivity classes.
+
 ## Updated Threat Landscape Summary
 
 | Threat | Likelihood | Impact | Earliest Effective Tier | Key MASO Domain |
@@ -277,3 +471,15 @@ Additionally, a "Rules File Backdoor" technique was discovered where hidden unic
 | **ET-11 Reward hacking / emergent misalignment** | <span class="tier-high">High</span> | **Critical** | **Tier 2** | **Execution Control, Observability** |
 | **ET-12 Non-LLM model attack surfaces** | <span class="tier-high">High</span> | **High** | **Tier 2** | **Execution Control, Prompt & Goal Integrity** |
 | **ET-13 Agent ecosystem supply chain compromise** | <span class="tier-high">High</span> | **Critical** | **Tier 1** | **Supply Chain** |
+| **ET-14 Computer-use / browser action surface** | <span class="tier-high">High</span> | **High** | **Tier 2** | **Execution Control** |
+| **ET-15 Long-horizon always-on agents** | <span class="tier-high">High</span> | **High** | **Tier 2** | **Observability, Intent** |
+| **ET-16 Synthetic media erodes human-in-the-loop** | <span class="tier-high">High</span> | **Critical** | **Tier 3** | **Oversight, Identity & Access** |
+| **ET-17 Regulatory fragmentation** | **Near-certain** | **High** | **All Tiers** | **Governance (meta)** |
+| **ET-18 NHI sprawl from sub-agent spawning** | <span class="tier-high">High</span> | **High** | **Tier 2** | **Identity & Access** |
+| **ET-19 Reasoning DoS / compute exhaustion** | <span class="tier-high">High</span> | **High** | **Tier 1** | **Execution Control** |
+| **ET-20 Steganographic A2A communication** | **Medium** | **High** | **Tier 3** | **Prompt & Goal Integrity, Observability** |
+| **ET-21 Self-poisoning training/retrieval loops** | **Near-certain** | **High** | **Tier 2** | **Data Protection** |
+| **ET-22 Refusal-logic / constitutional exploitation** | <span class="tier-high">High</span> | **High** | **Tier 2** | **Model Cognition Assurance** |
+| **ET-23 Mid-flight model routing breaks calibration** | <span class="tier-high">High</span> | **High** | **Tier 2** | **Supply Chain, Model Cognition** |
+| **ET-24 Post-quantum trust chain exposure** | **Low (now), Rising** | **Critical** | **Tier 2** | **Supply Chain** |
+| **ET-25 Cross-tenant contamination in browser/desktop agents** | <span class="tier-high">High</span> | **Critical** | **Tier 2** | **Execution Control, Data Protection** |
