@@ -171,6 +171,37 @@ When evaluation reliability drops, tighten constraints. When oversight capacity 
 
 The framework's job is not to solve this tradeoff. It is to make organizations see it clearly and manage it deliberately.
 
+## 2026 Q2 Threat-Driven Additions
+
+The [Emerging Threats](threat-intelligence/emerging-threats.md) review for Q2 2026 (ET-14 to ET-25) surfaced twelve trends visible in production deployments and research. The architecture stacks up: none invalidate a domain or tier. Most require extensions to existing controls, two require cross-cutting policy changes, and one points to a genuinely new control class (action-surface enumeration for computer-use agents).
+
+Each addition below names the source threat, the MASO change required, and the existing control or domain it extends.
+
+| Source | MASO 2.0 Change | Type | Extends |
+|--------|----------------|------|---------|
+| **ET-14** Computer-use / browser agents | Action-surface enumeration: allow-listed DOM selectors, per-origin scoping, screenshot-diff observability, OAuth-consent gating. Action space is no longer enumerable through tool schemas alone. | New control class | Execution Control (sits alongside SC-1.3, EC-2.1) |
+| **ET-15** Long-horizon agents | Session-bounded intent token with explicit TTL and mandatory re-validation cadence; temporal baselines (1h, 24h, 7d, 30d) for drift detection on persistent agents. | Extension | AT-1.x (intent declaration), OB-2.2 (drift) |
+| **ET-16** Synthetic media erodes oversight | Require signed provenance (C2PA-style content credentials) on any media artefact feeding a Tier 3 or Critical human approval gate. Reviewer cannot meaningfully verify what they cannot authenticate. | Workflow change | Tier 3 approval workflow |
+| **ET-17** Regulatory fragmentation | Compliance overlay on the tier model: mapping table from each regulation's risk class (EU AI Act high-risk, Colorado AI Act, FCA/OCC) to the minimum required MASO tier and control set. | Governance overlay | `validated-against.md`, tier model |
+| **ET-18** NHI sprawl from sub-agent spawning | Ephemeral credentials with mandatory TTL, parent-child lineage embedded in the credential, and automatic revocation when the parent terminates. | Extension | IA-2.1 (zero-trust agent credentials), IA-2.3 |
+| **ET-19** Reasoning DoS | Per-request and per-trace compute envelopes: token budget, step budget, fan-out cap. Enforced at the orchestrator, distinct from wall-clock timeout. | Extension | EC-1.5 (interaction timeout) |
+| **ET-20** Steganographic A2A communication | Canonicalise inter-agent messages to a typed intent representation before transmission, removing free-text channels where possible. Where free text remains, add perplexity / paraphrase-invariance gates. | Architectural addition | PG-2.x, OB-2.3 (inter-agent communication profiling) |
+| **ET-21** Self-poisoning training/retrieval loops | Origin tags on every retrieved chunk; provenance partitioning between human-authored and agent-generated content; prohibit treating agent-generated content as authoritative source. | Extension | DP-2.2 (RAG integrity), DP-1.3 |
+| **ET-22** Refusal-logic / constitutional exploitation | Make multi-judge consensus mandatory at Tier 2 (not just Tier 3) for workflows that handle policy-evaluated decisions. Add Judge-prompt hardening: explicit immunity clauses against meta-arguments about the Judge's role. | Cross-cutting policy change | EC-3.1 (multi-judge), EC-2.5 (Judge gate) |
+| **ET-23** Mid-flight model routing | Per-request model attestation: provider, name, version, and fingerprint of the responding model returned with every response, logged, and used to select matching Judge calibration. | Extension | SC-1.x (supply chain), MC-1.x |
+| **ET-24** Post-quantum trust chain | Crypto agility specification; hybrid (classical + PQC) signatures for new deployments; migration commitment for signed audit trails to preserve non-repudiation. | Extension | SC-3.1 (cryptographic trust chain) |
+| **ET-25** Cross-tenant contamination in browser/desktop agents | Per-task browser profile isolation, ephemeral storage, explicit clipboard scoping, and OAuth-token scoping for any agent operating a browser or desktop session. | Extension | EC-2.1 (sandboxed execution) sub-clause |
+
+### Mapping to Existing Evolution Vectors
+
+Several Q2 threats reinforce vectors already in this document rather than introducing new ones:
+
+- **ET-15, ET-21** sharpen *Session Boundaries Dissolve* (vector 3): persistent agents and self-poisoning loops are concrete failure modes of session dissolution.
+- **ET-16** sharpens *Human Oversight Becomes Untenable* (vector 2): synthetic media is a specific mechanism by which the third layer degrades.
+- **ET-22** sharpens *AI-vs-AI Adversarial Dynamics* (vector 5): refusal-logic exploitation is a concrete attack class against the Judge layer.
+- **ET-17** sharpens *Regulatory Divergence* (vector 6): the compliance overlay is the specific deliverable.
+- **ET-14, ET-19, ET-20, ET-23, ET-24, ET-25** are not adequately covered by the original six vectors. They justify a seventh vector: **the action and trust surface is expanding faster than the controls that scope it.**
+
 ## MASO 2.0 Priority Roadmap
 
 ### Phase 1: Extend Current Architecture (0–6 months)
@@ -182,6 +213,14 @@ The framework's job is not to solve this tradeoff. It is to make organizations s
 | Ensemble Judge with disagreement detection | Judge ceiling | Judge Assurance, model independence |
 | Automated escalation triage | Oversight scaling | HITL queue design, risk-based routing |
 | Composition constraints for agent interactions | Emergent behaviors | Inter-agent message bus, NHI scoping |
+| **Per-request compute envelopes (token, step, fan-out budgets)** | **ET-19 Reasoning DoS** | **EC-1.5 (interaction timeout)** |
+| **Multi-judge mandatory at Tier 2 for policy-evaluated workflows + Judge-prompt hardening** | **ET-22 Refusal-logic exploitation** | **EC-3.1, EC-2.5** |
+| **Per-request model attestation (provider, name, version, fingerprint)** | **ET-23 Mid-flight model routing** | **SC-1.x supply chain** |
+| **Origin tags and provenance partitioning in retrieval stores** | **ET-21 Self-poisoning loops** | **DP-2.2 RAG integrity** |
+| **Browser profile isolation, ephemeral storage, clipboard scoping** | **ET-25 Browser cross-tenant** | **EC-2.1 sub-clause** |
+| **Session-bounded intent token with TTL and re-validation cadence** | **ET-15 Long-horizon agents** | **AT-1.x intent declaration** |
+| **Ephemeral NHI credentials with TTL and parent-child lineage** | **ET-18 NHI sprawl** | **IA-2.1, IA-2.3** |
+| **Compliance overlay mapping (regulation → minimum tier and controls)** | **ET-17 Regulatory fragmentation** | **`validated-against.md`, tier model** |
 
 ### Phase 2: Architectural Additions (6–18 months)
 
@@ -192,6 +231,9 @@ The framework's job is not to solve this tradeoff. It is to make organizations s
 | Continuous adversarial simulation | AI-vs-AI | Persistent red-team agent finding bypasses before external adversaries |
 | Adaptive guardrails with human-approved auto-deployment | AI-vs-AI | Machine-speed defense updates within human-defined policy bounds |
 | Outcome-based oversight model | Oversight scaling | Audit completed workflows statistically instead of reviewing individual actions |
+| **Action-surface enumeration for computer-use agents** | **ET-14 Computer-use** | **DOM allow-listing, per-origin scoping, screenshot-diff observability, OAuth-consent gating; first-class control alongside SC-1.3 and EC-2.1** |
+| **Signed provenance (C2PA) requirement on Tier 3 approval artefacts** | **ET-16 Synthetic media** | **Reviewers approve only artefacts with verifiable content credentials** |
+| **Canonicalised typed intent representation for inter-agent messages** | **ET-20 Steganographic A2A** | **Removes free-text covert channels where possible; perplexity gates where free text remains** |
 
 ### Phase 3: Paradigm Shifts (18–36 months)
 
@@ -202,6 +244,7 @@ The framework's job is not to solve this tradeoff. It is to make organizations s
 | Emergent behavior simulation (automated fleet stress testing) | Emergent behaviors | Testing interaction dynamics, not just individual agents |
 | Jurisdiction-aware control profiles | Regulatory divergence | Parameterized compliance across multiple regulatory regimes |
 | Constraint-utility equilibrium metrics | All vectors | Making the fundamental tradeoff visible and manageable |
+| **Hybrid classical + PQC signatures across the trust chain** | **ET-24 Post-quantum exposure** | **Preserves non-repudiation of signed audit trails and tool manifests in a post-quantum setting** |
 
 ## What MASO 2.0 Does NOT Attempt
 
